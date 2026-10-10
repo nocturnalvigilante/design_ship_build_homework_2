@@ -1,11 +1,12 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import DesignSystemPage from "@/components/dsPage";
+
+export const metadata: Metadata = {
+  title: "Design system 01 · Rajasthan",
+  description:
+    "Six colour roles with measured contrast, four type roles, a spacing and shape scale, fourteen components in six control states, and four UI states.",
+};
 
 export default function Page() {
-  return (
-    <main className="p-10">
-      <Link href="/" className="font-mono text-xs underline">&larr; Hub</Link>
-      <h1 className="mt-6 text-2xl tracking-tight">rajasthan</h1>
-      <p className="mt-2 text-sm opacity-60">In progress.</p>
-    </main>
-  );
+  return <DesignSystemPage mood="rajasthan" />;
 }

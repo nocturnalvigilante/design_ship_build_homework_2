@@ -1,0 +1,473 @@
+/* ===========================================================================
+   The three design systems, as CSS.
+
+   The markup for the fourteen components is written once (components/ds.tsx)
+   and each system supplies a skin. That is deliberate: it is the only way to
+   guarantee that all three systems really do cover all fourteen components in
+   all six control states and all four UI states, with nothing quietly missing
+   from one of them. What makes the three different is everything below —
+   shape, rule weight, shadow, spacing, how a state is signalled — not colour.
+
+   Every control is written twice over: once against the live pseudo-classes
+   (:hover, :focus-visible, :active) and once against a forced class
+   (.is-hover, .is-focus, .is-pressed, .is-selected, .is-disabled) so the state
+   strips on each page show the real appearance rather than a mock-up of it.
+   =========================================================================== */
+
+.ds {
+  --focus-ring: 2px;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--body);
+}
+
+/* --------------------------------------------------------------- skin: raj */
+.ds-raj {
+  --bg: #fdf4ea;
+  --surface: #ffffff;
+  --ink: #2d1b18;
+  --muted: #6b4a3f;
+  --line: #e0c6ae;
+  --accent: #a8291f;
+  --accent-hi: #8d1f18;
+  --accent-ink: #ffffff;
+  --sunk: #f3e4d2;
+  --r: 3px;
+  --display: var(--f-raj-display), Georgia, serif;
+  --body: var(--f-raj-body), Georgia, serif;
+  --ctl-pad: 10px 16px;
+  --ctl-size: 15px;
+}
+/* --------------------------------------------------------------- skin: lll */
+.ds-lll {
+  --bg: #171033;
+  --surface: #241a4b;
+  --ink: #f7f0e8;
+  --muted: #b3a8d2;
+  --line: #3f3074;
+  --accent: #f2b544;
+  --accent-hi: #ffd07a;
+  --accent-ink: #171033;
+  --sunk: #1d1340;
+  --r: 999px;
+  --display: var(--f-lll-display), Didot, serif;
+  --body: var(--f-lll-body), system-ui, sans-serif;
+  --ctl-pad: 11px 22px;
+  --ctl-size: 14.5px;
+}
+/* -------------------------------------------------------------- skin: loki */
+.ds-loki {
+  --bg: #e5dcc5;
+  --surface: #f4efe0;
+  --ink: #241c13;
+  --muted: #6b5940;
+  --line: #9a8a66;
+  --accent: #b4441a;
+  --accent-hi: #8f3514;
+  --accent-ink: #f4efe0;
+  --sunk: #d9cfb4;
+  --r: 0px;
+  --display: var(--f-loki-display), Helvetica, sans-serif;
+  --body: var(--f-loki-body), "Courier New", monospace;
+  --ctl-pad: 8px 14px;
+  --ctl-size: 14px;
+}
+
+/* ======================================================= 1. buttons + link */
+.ds .btn {
+  font-family: var(--body);
+  font-size: var(--ctl-size);
+  padding: var(--ctl-pad);
+  border-radius: var(--r);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+  transition: background-color .14s, color .14s, box-shadow .14s, transform .08s;
+}
+.ds .btn-primary { background: var(--accent); color: var(--accent-ink); }
+.ds .btn-primary:hover, .ds .btn-primary.is-hover { background: var(--accent-hi); }
+.ds .btn-primary:active, .ds .btn-primary.is-pressed { transform: translateY(1px); }
+.ds .btn-secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
+.ds .btn-secondary:hover, .ds .btn-secondary.is-hover { background: var(--sunk); }
+.ds .btn-secondary:active, .ds .btn-secondary.is-pressed { transform: translateY(1px); }
+.ds .btn.is-selected { box-shadow: inset 0 0 0 2px var(--accent); }
+.ds .btn:disabled, .ds .btn.is-disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+.ds .lnk {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+.ds .lnk:hover, .ds .lnk.is-hover { color: var(--accent); text-decoration-color: var(--accent); }
+.ds .lnk:active, .ds .lnk.is-pressed { color: var(--accent-hi); }
+.ds .lnk.is-selected { text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.ds .lnk.is-disabled { opacity: .45; text-decoration-style: dotted; cursor: not-allowed; }
+
+/* Raj: the primary button is flat ink on plaster, with a single hairline lift. */
+.ds-raj .btn-primary:hover, .ds-raj .btn-primary.is-hover {
+  box-shadow: 0 1px 0 #e0c6ae, 0 8px 18px -14px rgba(45,27,24,.8);
+}
+/* LLL: the primary button is a light source. */
+.ds-lll .btn { letter-spacing: .06em; text-transform: uppercase; font-size: 12.5px; font-weight: 500; }
+.ds-lll .btn-primary:hover, .ds-lll .btn-primary.is-hover {
+  box-shadow: 0 0 0 1px rgba(242,181,68,.35), 0 14px 40px -18px rgba(242,181,68,.8);
+}
+.ds-lll .btn-secondary { border-color: var(--line); color: var(--muted); }
+.ds-lll .btn-secondary:hover, .ds-lll .btn-secondary.is-hover { color: var(--ink); border-color: var(--accent); background: transparent; }
+/* Loki: the primary button is a key you press, and the paper moves. */
+.ds-loki .btn {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-family: var(--f-loki-display), Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 11.5px;
+  box-shadow: 2px 2px 0 var(--line);
+  border: 1px solid var(--ink);
+}
+.ds-loki .btn:hover, .ds-loki .btn.is-hover { box-shadow: 3px 3px 0 var(--line); }
+.ds-loki .btn:active, .ds-loki .btn.is-pressed { box-shadow: 0 0 0 var(--line); transform: translate(2px, 2px); }
+.ds-loki .btn:disabled, .ds-loki .btn.is-disabled { box-shadow: none; border-style: dashed; }
+
+/* ================================================ 2. focus, every component */
+.ds .btn:focus-visible, .ds .lnk:focus-visible, .ds .fld:focus-visible,
+.ds .tab:focus-visible, .ds .chip:focus-visible, .ds .sw:focus-visible,
+.ds .row:focus-visible, .ds .card-a:focus-visible {
+  outline: var(--focus-ring) solid var(--accent);
+  outline-offset: 3px;
+}
+.ds .is-focus {
+  outline: var(--focus-ring) solid var(--accent);
+  outline-offset: 3px;
+}
+.ds-lll .btn:focus-visible, .ds-lll .lnk:focus-visible, .ds-lll .fld:focus-visible,
+.ds-lll .tab:focus-visible, .ds-lll .chip:focus-visible, .ds-lll .sw:focus-visible,
+.ds-lll .row:focus-visible, .ds-lll .card-a:focus-visible, .ds-lll .is-focus {
+  box-shadow: 0 0 0 1px var(--accent), 0 0 34px -4px rgba(242,181,68,.75);
+}
+.ds-loki .is-focus, .ds-loki .btn:focus-visible { outline-offset: 2px; outline-width: 2px; }
+
+/* ============================================ 3. text input, select, fields */
+.ds .fld {
+  font-family: var(--body);
+  font-size: var(--ctl-size);
+  padding: var(--ctl-pad);
+  width: 100%;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: border-color .14s, box-shadow .14s;
+}
+.ds select.fld { appearance: none; padding-right: 36px; }
+.ds .fld::placeholder { color: var(--muted); opacity: .8; }
+.ds .fld:hover, .ds .fld.is-hover { border-color: var(--ink); }
+.ds .fld.is-selected { border-color: var(--accent); }
+.ds .fld:disabled, .ds .fld.is-disabled { opacity: .45; cursor: not-allowed; background: var(--sunk); }
+.ds .fld.is-pressed { background: var(--sunk); }
+.ds-lll .fld { border-radius: 6px; }
+.ds-loki .fld { border-radius: 0; border-width: 1px; border-color: var(--line); background: #fffdf5; }
+.ds-loki .fld:hover, .ds-loki .fld.is-hover { border-color: var(--ink); }
+.ds .fld-err { border-color: var(--accent); border-width: 2px; }
+
+/* ============================================ 4. checkbox, radio, toggle */
+.ds .pick { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: var(--ctl-size); }
+.ds .box, .ds .dot {
+  width: 18px; height: 18px; flex: none;
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  display: grid; place-items: center;
+  transition: background-color .12s, border-color .12s, box-shadow .12s;
+}
+.ds .dot { border-radius: 999px; }
+.ds .box { border-radius: 2px; }
+.ds-lll .box { border-radius: 4px; border-color: var(--muted); }
+.ds-lll .dot { border-color: var(--muted); }
+.ds-loki .box { border-radius: 0; border-width: 1.5px; }
+.ds .pick:hover .box, .ds .pick:hover .dot,
+.ds .pick.is-hover .box, .ds .pick.is-hover .dot { border-color: var(--accent); }
+.ds .pick.is-pressed .box, .ds .pick.is-pressed .dot { background: var(--sunk); }
+.ds .pick.is-selected .box, .ds .pick.is-selected .dot { background: var(--accent); border-color: var(--accent); }
+.ds .pick.is-selected .box .mark { opacity: 1; }
+.ds .pick.is-selected .dot .mark { opacity: 1; }
+.ds .box .mark, .ds .dot .mark { opacity: 0; color: var(--accent-ink); }
+.ds .dot .mark { width: 7px; height: 7px; border-radius: 999px; background: var(--accent-ink); }
+.ds .pick.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds .pick.is-focus { outline: var(--focus-ring) solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+.ds .sw {
+  width: 46px; height: 24px; flex: none; position: relative; cursor: pointer;
+  background: var(--sunk); border: 1.5px solid var(--ink); border-radius: 999px;
+  transition: background-color .14s, border-color .14s;
+}
+.ds .sw .knob {
+  position: absolute; top: 2px; left: 2px; width: 17px; height: 17px;
+  background: var(--ink); border-radius: 999px; transition: transform .14s, background-color .14s;
+}
+.ds .sw.is-selected { background: var(--accent); border-color: var(--accent); }
+.ds .sw.is-selected .knob { transform: translateX(22px); background: var(--accent-ink); }
+.ds .sw:hover, .ds .sw.is-hover { border-color: var(--accent); }
+.ds .sw.is-pressed .knob { width: 22px; }
+.ds .sw.is-disabled { opacity: .45; cursor: not-allowed; }
+/* Loki's switch is a labelled two-position panel switch, not a slider. */
+.ds-loki .sw { border-radius: 0; width: 56px; height: 22px; border-width: 1.5px; background: var(--surface); }
+.ds-loki .sw .knob { border-radius: 0; width: 26px; height: 18px; left: 1px; top: 1px; }
+.ds-loki .sw.is-selected .knob { transform: translateX(26px); }
+.ds-loki .sw::before {
+  content: "OFF"; position: absolute; right: 4px; top: 4px; font-size: 8px; letter-spacing: .1em;
+  font-family: var(--f-loki-display), sans-serif; font-weight: 700; color: var(--muted);
+}
+.ds-loki .sw.is-selected::before { content: "ON"; right: auto; left: 5px; color: var(--accent-ink); }
+/* Rajasthan's switch is a curtain being drawn. */
+.ds-raj .sw { border-radius: 999px 999px 999px 999px; }
+
+/* =============================================================== 5. tabs */
+.ds .tabs { display: flex; align-items: flex-end; gap: 2px; border-bottom: 1px solid var(--line); }
+.ds .tab {
+  font-family: var(--body); font-size: 13px; padding: 9px 16px;
+  color: var(--muted); background: transparent; border: 0; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.ds .tab:hover, .ds .tab.is-hover { color: var(--ink); }
+.ds .tab.is-selected { color: var(--ink); border-bottom-color: var(--accent); }
+.ds .tab.is-pressed { background: var(--sunk); }
+.ds .tab.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds-raj .tab.is-selected { border-bottom: 0; position: relative; }
+.ds-raj .tab.is-selected::after {
+  content: ""; position: absolute; left: 50%; bottom: -1px; transform: translateX(-50%);
+  width: 26px; height: 9px; background: var(--accent); border-radius: 999px 999px 0 0;
+}
+.ds-lll .tabs { border-bottom-color: transparent; gap: 10px; }
+.ds-lll .tab { text-transform: uppercase; letter-spacing: .22em; font-size: 10.5px; border-bottom: 0; }
+.ds-lll .tab.is-selected { color: var(--accent); }
+.ds-lll .tab.is-selected::after {
+  content: ""; display: block; width: 5px; height: 5px; border-radius: 999px;
+  background: var(--accent); margin: 6px auto 0; box-shadow: 0 0 10px var(--accent);
+}
+.ds-loki .tabs { border-bottom: 2px solid var(--ink); gap: 0; }
+.ds-loki .tab {
+  font-family: var(--f-loki-display), sans-serif; font-weight: 700; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .12em; padding: 8px 16px;
+  border: 1px solid var(--line); border-bottom: 0; background: var(--bg); margin-bottom: -2px;
+}
+.ds-loki .tab.is-selected {
+  background: var(--surface); border: 2px solid var(--ink); border-bottom: 2px solid var(--surface);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+/* ============================================================== 6. chips */
+.ds .chip {
+  font-family: var(--body); font-size: 12.5px; padding: 6px 13px;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface); color: var(--ink); cursor: pointer;
+  transition: background-color .12s, border-color .12s, color .12s;
+}
+.ds .chip:hover, .ds .chip.is-hover { border-color: var(--ink); }
+.ds .chip.is-selected { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.ds .chip.is-pressed { background: var(--sunk); }
+.ds .chip.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds-lll .chip { background: transparent; color: var(--muted); border-color: var(--line); }
+.ds-lll .chip:hover, .ds-lll .chip.is-hover { color: var(--ink); border-color: var(--accent); }
+.ds-loki .chip {
+  border-radius: 0; text-transform: uppercase; letter-spacing: .08em; font-size: 11px;
+  font-family: var(--f-loki-display), sans-serif; font-weight: 700;
+}
+
+/* =============================================================== 7. card */
+.ds .card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2, 3px);
+  overflow: hidden; display: block; text-align: left; width: 100%; cursor: pointer;
+  transition: box-shadow .14s, border-color .14s, transform .1s;
+}
+.ds-raj .card { --r2: 3px; }
+.ds-lll .card { --r2: 14px; background: color-mix(in srgb, var(--surface) 72%, transparent); }
+.ds-loki .card { --r2: 0px; }
+.ds .card:hover, .ds .card.is-hover { border-color: var(--ink); }
+.ds-raj .card:hover, .ds-raj .card.is-hover { box-shadow: 0 1px 0 var(--line), 0 12px 26px -20px rgba(45,27,24,.7); }
+.ds-lll .card:hover, .ds-lll .card.is-hover { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(242,181,68,.25), 0 18px 50px -26px rgba(242,181,68,.7); }
+.ds-loki .card:hover, .ds-loki .card.is-hover { box-shadow: 2px 2px 0 var(--line); }
+.ds .card.is-pressed { transform: translateY(1px); }
+.ds-loki .card.is-pressed { transform: translate(2px,2px); box-shadow: none; }
+.ds .card.is-selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.ds .card.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds .card-head { padding: 12px 16px 10px; border-bottom: 1px solid var(--line); }
+.ds-raj .card-head { border-radius: 999px 999px 0 0; background: var(--sunk); padding-top: 18px; text-align: center; border-bottom: 0; }
+.ds-loki .card-head { background: var(--ink); color: var(--surface); padding: 7px 12px; border-bottom: 0; }
+.ds .card-body { padding: 14px 16px 16px; }
+.ds-loki .card-body { padding: 10px 12px 12px; }
+
+/* ============================================================== 8. rows */
+.ds .rows { border: 1px solid var(--line); border-radius: var(--r2, 3px); overflow: hidden; background: var(--surface); }
+.ds .row {
+  display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: baseline;
+  width: 100%; text-align: left; padding: 11px 14px; cursor: pointer;
+  border: 0; border-bottom: 1px solid var(--line); background: transparent; color: inherit;
+  font-family: var(--body); font-size: 14px;
+  transition: background-color .12s, box-shadow .12s;
+}
+.ds .row:last-child { border-bottom: 0; }
+.ds .row:hover, .ds .row.is-hover { background: var(--sunk); }
+.ds .row.is-pressed { background: var(--sunk); transform: translateY(1px); }
+.ds .row.is-selected { background: var(--sunk); box-shadow: inset 3px 0 0 var(--accent); }
+.ds .row.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds-loki .row { padding: 7px 12px; }
+.ds-loki .row.is-selected { box-shadow: inset 0 0 0 2px var(--ink); background: var(--surface); }
+.ds-lll .rows { border-color: var(--line); border-radius: 12px; }
+.ds-lll .row.is-selected { box-shadow: inset 2px 0 0 var(--accent); }
+
+/* ============================================================= 9. badge */
+.ds .badge {
+  display: inline-block; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  padding: 3px 8px; border: 1px solid var(--line); border-radius: var(--r);
+  color: var(--muted); background: transparent; font-family: var(--body);
+}
+.ds .badge-accent { color: var(--accent); border-color: var(--accent); }
+.ds-lll .badge { letter-spacing: .24em; border-radius: 999px; }
+.ds-loki .badge { border-radius: 0; font-family: var(--f-loki-display), sans-serif; font-weight: 700; }
+.ds-loki .badge-accent { border-width: 2px; }
+
+/* ====================================================== 10. detail panel */
+.ds .panel {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r2, 3px); padding: 18px;
+}
+.ds-raj .panel { border-radius: 24px 24px 3px 3px; box-shadow: 0 1px 0 var(--line), 0 20px 40px -32px rgba(45,27,24,.8); }
+.ds-lll .panel { border: 0; border-radius: 14px; box-shadow: 0 0 0 1px rgba(242,181,68,.22), 0 24px 70px -30px rgba(242,181,68,.55); }
+.ds-loki .panel { border-radius: 0; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--line); }
+
+/* ======================================================= 11. UI states */
+.ds .state {
+  border: 1px solid var(--line); border-radius: var(--r2, 3px);
+  padding: 22px 18px; text-align: center; background: var(--surface);
+}
+.ds-lll .state { border-radius: 14px; }
+.ds-loki .state { border-radius: 0; }
+.ds .skel { background: var(--sunk); border-radius: var(--r); height: 11px; }
+.ds-loki .skel {
+  border-radius: 0; background-color: var(--sunk);
+  background-image: radial-gradient(circle, rgba(36,28,19,.35) 0 1.6px, transparent 2.1px);
+  background-size: 11px 11px;
+}
+.ds-raj .skel {
+  background-image: radial-gradient(circle at 50% 50%, rgba(168,41,31,.25) 0 2px, transparent 2.6px);
+  background-size: 14px 11px;
+}
+.ds-lll .skel { background-image: radial-gradient(circle, rgba(242,181,68,.35) 0 1px, transparent 1.6px); background-size: 13px 11px; }
+@media (prefers-reduced-motion: no-preference) {
+  .ds .skel { animation: ds-pulse 1.4s ease-in-out infinite; }
+}
+@keyframes ds-pulse { 0%,100% { opacity: 1 } 50% { opacity: .5 } }
+.ds-loki .skel { animation: none; }
+
+.ds .note { border-left: 3px solid var(--accent); padding: 10px 14px; background: var(--sunk); border-radius: var(--r); }
+.ds .note-ok { border-left-color: var(--ok); }
+.ds-raj { --ok: #2c6e72; }
+.ds-lll { --ok: #4ec5d4; }
+.ds-loki { --ok: #3f5e55; }
+.ds-loki .note { border-left-width: 0; border: 1px solid var(--line); border-radius: 0; }
+.ds-loki .note-ok { border-color: var(--ok); }
+
+/* ======================================================= 12. swatch grid */
+.ds .sw-chip { height: 56px; border: 1px solid var(--line); border-radius: var(--r); }
+.ds-lll .sw-chip { border-radius: 8px; }
+.ds-loki .sw-chip { border-radius: 0; }
+
+/* =========================================================================
+   Typographic and layout classes used by the design-system pages themselves.
+   These are the type roles from section 02 applied to the page that
+   documents them, which is the only honest way to publish a type scale.
+   ========================================================================= */
+.ds .ds-h1 { font-family: var(--display); }
+.ds-raj .ds-h1 { font-size: clamp(38px, 6vw, 62px); line-height: 1.04; letter-spacing: -.01em; }
+.ds-lll .ds-h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1; letter-spacing: .04em; font-weight: 500; }
+.ds-loki .ds-h1 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1; letter-spacing: -.02em; font-weight: 800; text-transform: uppercase; }
+
+.ds .ds-h2 { font-family: var(--display); }
+.ds-raj .ds-h2 { font-size: 28px; line-height: 1.2; }
+.ds-lll .ds-h2 { font-size: 28px; line-height: 1.25; letter-spacing: .02em; font-weight: 500; }
+.ds-loki .ds-h2 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
+
+.ds .ds-h3 { font-family: var(--display); }
+.ds-raj .ds-h3 { font-size: 22px; line-height: 1.2; }
+.ds-lll .ds-h3 { font-size: 24px; letter-spacing: .02em; font-weight: 500; }
+.ds-loki .ds-h3 { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+
+.ds .ds-h4 { font-family: var(--display); font-size: 15px; line-height: 1.3; }
+.ds-raj .ds-h4 { font-size: 17px; }
+.ds-lll .ds-h4 { font-size: 16px; letter-spacing: .02em; }
+.ds-loki .ds-h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
+
+.ds .ds-lede, .ds .ds-body { font-family: var(--body); }
+.ds-raj .ds-lede { font-size: 17px; line-height: 1.62; }
+.ds-lll .ds-lede { font-size: 16.5px; line-height: 1.7; font-weight: 300; }
+.ds-loki .ds-lede { font-size: 15px; line-height: 1.6; }
+.ds-raj .ds-body { font-size: 17px; line-height: 1.62; }
+.ds-lll .ds-body { font-size: 16.5px; line-height: 1.7; font-weight: 300; }
+.ds-loki .ds-body { font-size: 15px; line-height: 1.6; }
+
+.ds .ds-sub { font-family: var(--body); color: var(--muted); }
+.ds-raj .ds-sub { font-size: 15.5px; line-height: 1.6; }
+.ds-lll .ds-sub { font-size: 15px; line-height: 1.7; font-weight: 300; }
+.ds-loki .ds-sub { font-size: 14px; line-height: 1.55; }
+
+.ds .ds-cap { font-family: var(--body); color: var(--muted); font-size: 13px; line-height: 1.5; }
+.ds-lll .ds-cap { font-weight: 300; font-size: 13.5px; }
+.ds-loki .ds-cap { font-size: 12.5px; }
+
+.ds .ds-lab {
+  font-family: var(--body); color: var(--muted); text-transform: uppercase;
+  font-size: 11px; font-weight: 600; letter-spacing: .14em; line-height: 1.1;
+}
+.ds-lll .ds-lab { font-weight: 500; letter-spacing: .26em; }
+.ds-loki .ds-lab {
+  font-family: var(--f-loki-display), sans-serif; font-weight: 700;
+  font-size: 10px; letter-spacing: .18em;
+}
+
+.ds .ds-mono { font-family: var(--f-loki-body), "Courier New", monospace; font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
+
+.ds .ds-figure { font-family: var(--display); font-variant-numeric: tabular-nums; }
+.ds-raj .ds-figure { font-size: 26px; line-height: 1.1; }
+.ds-lll .ds-figure { font-size: 26px; line-height: 1.1; letter-spacing: .01em; }
+.ds-loki .ds-figure { font-family: var(--f-loki-body), monospace; font-size: 19px; line-height: 1.2; }
+
+.ds .ds-eyebrow { font-family: var(--body); color: var(--accent); text-transform: uppercase; font-size: 11px; font-weight: 600; letter-spacing: .2em; }
+.ds-lll .ds-eyebrow { letter-spacing: .3em; font-weight: 500; }
+.ds-loki .ds-eyebrow { font-family: var(--f-loki-display), sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .22em; }
+
+.ds .ds-num { color: var(--accent); font-family: var(--f-loki-body), monospace; font-size: .62em; vertical-align: .18em; letter-spacing: .06em; }
+
+.ds .ds-err { color: var(--accent); font-family: var(--body); font-size: 13px; line-height: 1.5; }
+
+/* component cards on the design-system page */
+.ds .ds-comps { display: grid; gap: 26px; }
+.ds .ds-comp { border: 1px solid var(--line); border-radius: var(--r2, 3px); padding: 20px; background: var(--surface); }
+.ds-lll .ds-comp { border-radius: 14px; background: color-mix(in srgb, var(--surface) 55%, transparent); }
+.ds-loki .ds-comp { border-radius: 0; padding: 14px; }
+.ds .ds-live { padding: 18px; border: 1px dashed var(--line); border-radius: var(--r2, 3px); background: var(--bg); }
+.ds-loki .ds-live { border-radius: 0; }
+.ds-lll .ds-live { border-radius: 12px; }
+
+/* type specimen rows */
+.ds .ds-rule-wrap { border-top: 1px solid var(--line); }
+.ds .ds-typerow { display: grid; gap: 18px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: start; }
+@media (min-width: 900px) { .ds .ds-typerow { grid-template-columns: 260px 1fr; gap: 32px; } }
+.ds .ds-typesample { overflow-wrap: anywhere; }
+
+/* select caret, drawn rather than left to the browser */
+.ds .ds-caret { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--muted); font-size: 12px; }
+
+/* dialog */
+.ds .ds-scrim {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center;
+  padding: 20px; background: rgba(20,14,10,.55); backdrop-filter: blur(2px);
+}
+.ds-lll .ds-scrim { background: rgba(8,5,20,.72); }
+.ds .ds-dialog { width: min(520px, 100%); max-height: 86vh; overflow: auto; }
+
+.ds .ds-foot { border-top: 1px solid var(--line); }
+.ds-loki .ds-foot { border-top-width: 2px; border-top-color: var(--ink); }
