@@ -44,9 +44,9 @@
   --color-loki-bg: #e5dcc5;
   --color-loki-surface: #f4efe0;
   --color-loki-ink: #241c13;
-  --color-loki-muted: #6b5940;
+  --color-loki-muted: #63523a;
   --color-loki-line: #9a8a66;
-  --color-loki-accent: #b4441a;
+  --color-loki-accent: #973413;
   --color-loki-olive: #7d7430;
   --color-loki-mustard: #c9a227;
   --color-loki-brown: #54432c;
@@ -60,7 +60,10 @@
   --font-loki-body: var(--f-loki-body), "Courier New", monospace;
 }
 
-html, body { max-width: 100vw; overflow-x: hidden; }
+/* overflow-x: hidden on html/body makes them scroll containers, which stops
+   position: sticky working anywhere inside. `clip` does the same job for a
+   stray wide child without creating a scroll container. */
+html, body { max-width: 100vw; overflow-x: clip; }
 body { background: var(--color-hub-bg); color: var(--color-hub-ink); }
 
 /* Keyboard focus is graded, and it is the state everyone forgets. One global

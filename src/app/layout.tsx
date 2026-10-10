@@ -17,13 +17,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // The font variables go on <html>, not <body>. Tailwind's @theme block
+  // defines --font-raj-display as `var(--f-raj-display), Georgia, serif` on
+  // :root, and a custom property is resolved where it is declared: if
+  // --f-raj-display is only defined on <body>, the :root declaration resolves
+  // to the guaranteed-invalid value and every font-* utility silently falls
+  // back to the default sans. Putting them on <html> is the fix.
+  const fonts = [rozha, spectral, bodoni, jost, archivo, courier]
+    .map((f) => f.variable)
+    .join(" ");
   return (
-    <html lang="en">
-      <body
-        className={`${rozha.variable} ${spectral.variable} ${bodoni.variable} ${jost.variable} ${archivo.variable} ${courier.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={fonts}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

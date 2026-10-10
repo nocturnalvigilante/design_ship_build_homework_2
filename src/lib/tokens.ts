@@ -172,7 +172,7 @@ export const TOKENS: Record<MoodId, SystemTokens> = {
       { role: "text", hex: PALETTES["loki"].text, job: "Typewriter black. All copy and all figures." },
       { role: "muted", hex: PALETTES["loki"].muted, job: "Carbon copy: field numbers, footnotes, the stamp date.", against: "#e5dcc5" },
       { role: "border", hex: PALETTES["loki"].border, job: "Ruled line. This system separates with rules, so it is used constantly." },
-      { role: "accent", hex: PALETTES["loki"].accent, job: "Stamp-pad orange. The primary action and the active record. Never decorative.", against: "#e5dcc5" },
+      { role: "accent", hex: PALETTES["loki"].accent, job: "Stamp-pad orange, darkened until it clears 4.5:1. Primary action and active record only, never decorative.", against: "#e5dcc5" },
     ],
     type: [
       {

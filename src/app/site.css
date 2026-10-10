@@ -55,12 +55,18 @@
 /* ---- masthead ---- */
 .site .mast { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
 
-/* ---- the sticky control bar ---- */
+/* ---- the control bar. Sticky on a wide screen, where it costs 120px of a
+   900px viewport; static on a phone, where the same bar is 300px tall and
+   sticking it would leave almost nothing to read. ---- */
 .site .controls {
-  position: sticky; top: 0; z-index: 20;
   background: rgba(253,244,234,.94);
-  backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
+}
+@media (min-width: 1024px) {
+  .site .controls {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(6px);
+  }
 }
 
 /* ---- district row ---- */
@@ -111,7 +117,11 @@
   padding: 22px 18px 14px; border-radius: 999px 999px 0 0;
 }
 @media (min-width: 1024px) {
-  .site .detail-wrap { position: sticky; top: 92px; }
+  /* Clears the sticky control bar, which measures 167px at this width. */
+  .site .detail-wrap {
+    position: sticky; top: 182px;
+    max-height: calc(100vh - 200px); overflow: auto;
+  }
 }
 @media (max-width: 1023.98px) {
   .site .detail-wrap {

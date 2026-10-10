@@ -195,6 +195,7 @@ export default function Home() {
               <div
                 className="hidden min-h-[180px] md:block"
                 style={{
+                  backgroundColor: "#fdf4ea",
                   backgroundImage:
                     "linear-gradient(170deg,#ffffff 0%,#fdf4ea 50%,#f3e0cc 100%)",
                 }}

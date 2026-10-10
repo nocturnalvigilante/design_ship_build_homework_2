@@ -33,9 +33,9 @@ export const PALETTES: Record<MoodId, Palette> = {
     background: "#e5dcc5",
     surface: "#f4efe0",
     text: "#241c13",
-    muted: "#6b5940",
+    muted: "#63523a",
     border: "#9a8a66",
-    accent: "#b4441a",
+    accent: "#973413",
   },
 };
 

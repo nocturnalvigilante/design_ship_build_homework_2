@@ -274,8 +274,8 @@ const ARTIFACTS: Artifact[] = [
     take: "Kept for data only: bars, the comparison line, the map fill. Never a button, because that job belongs to vermilion.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#1e3a5f" name="indigo 700" note="data" dark />
-        <Chip hex="#3a79bd" name="indigo 500" note="data" dark />
+        <Chip hex="#1e3a5f" name="indigo 700" note="data" />
+        <Chip hex="#3a79bd" name="indigo 500" note="data" />
         <Chip hex="#8cc0ea" name="indigo 200" note="data" />
       </div>
     ),
@@ -290,7 +290,7 @@ const ARTIFACTS: Artifact[] = [
           <div className="h-20 w-20 rounded-full bg-raj-accent" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-raj-muted">
-          #A8291F · 5.92:1 ON #FDF4EA
+          #A8291F · 6.43:1 ON #FDF4EA
         </p>
       </div>
     ),
@@ -298,11 +298,11 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Marigold and gold leaf",
-    take: "Rejected as the accent. It is beautiful at 20pt and illegible at 13pt, which is most of the interface.",
+    take: "Rejected as the accent. At 2.70:1 on the page background it does not clear the bar even for large text, and large text is not most of an interface.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#c98a24" name="gold" note="3.05:1 — large text only" />
-        <Chip hex="#e8b14a" name="marigold" note="2.01:1 — decorative only" />
+        <Chip hex="#c98a24" name="gold" note="2.70:1 — decorative only" />
+        <Chip hex="#e8b14a" name="marigold" note="1.78:1 — decorative only" />
       </div>
     ),
   },
@@ -312,7 +312,7 @@ const ARTIFACTS: Artifact[] = [
     take: "A cool green that survives next to the warm ground. Held in reserve for the one positive state: a verified figure.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#2c6e72" name="jade" note="success" dark />
+        <Chip hex="#2c6e72" name="jade" note="success" />
         <Chip hex="#d66a8a" name="rose" note="unused — no job" />
       </div>
     ),
@@ -600,6 +600,7 @@ export default function Page() {
   return (
     <BoardShell
       skin={skin}
+      mood="rajasthan"
       name="Pink, Blue and White Cities"
       subtitle="01 · Rajasthan"
       lede={
@@ -622,12 +623,12 @@ export default function Page() {
       sourcing="Nothing on this page is a photograph. Every scene, texture and specimen is drawn in SVG or built from CSS gradients, so the board has no licensing question attached to it and renders identically wherever the repo is checked out. Where a figure appears it is the real 2011 Census figure."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "One vermilion, #A8291F, at 5.92:1 on the page background. It marks the primary action and the selected district and has no other use." },
+        { label: "Accent", detail: "One vermilion, #A8291F, at 6.43:1 on the page background. It marks the primary action and the selected district and has no other use." },
         { label: "Shape", detail: "The cusped arch is reserved for things that open. Everything that holds a number stays square, so precision still looks precise." },
         { label: "Rule", detail: "Section dividers are drawn as an 11px jali lattice rather than a 1px line, taken from artifact 05." },
         { label: "Shadow", detail: "One highlight and one shadow, a pixel each, from the sandstone relief. Hover lifts a card and nothing more." },
         { label: "Numerals", detail: "Lakh-and-crore grouping with tabular figures, from artifact 16, because that is how this data is published." },
-        { label: "Rejected", detail: "Gold as the accent (3.05:1, fails at body size) and the rose from the blue-pottery study, which had no job to do." },
+        { label: "Rejected", detail: "Gold as the accent (2.70:1, fails outright) and the rose from the blue-pottery study, which had no job to do." },
       ]}
     />
   );

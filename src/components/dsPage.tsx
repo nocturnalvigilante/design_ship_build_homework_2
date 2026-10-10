@@ -129,6 +129,10 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
   const m = MOODS[mood];
   const t = TOKENS[mood];
   const p = PALETTES[mood];
+  // Text that sits on top of an accent fill: white on vermilion, the page
+  // background on amber, the paper colour on stamp orange.
+  const accentInk =
+    mood === "rajasthan" ? "#ffffff" : mood === "la-la-land" ? p.background : p.surface;
 
   // Live state for the interactive copies.
   const [tab, setTab] = useState(0);
@@ -221,8 +225,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                 ["Body text on surface", p.text, p.surface],
                 ["Muted text on background", p.muted, p.background],
                 ["Accent text on background", p.accent, p.background],
-                ["Label on accent fill", mood === "la-la-land" || mood === "loki" ? (mood === "loki" ? p.surface : p.background) : "#ffffff", p.accent],
-                ["Border on background", p.border, p.background],
+                ["Label on accent fill", accentInk, p.accent],
               ].map(([label, fg, bg]) => (
                 <li
                   key={label}
@@ -237,11 +240,28 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                   </span>
                 </li>
               ))}
+              <li
+                className="flex items-center justify-between gap-4 px-3 py-2"
+                style={{ background: p.background, border: `1px solid ${p.border}` }}
+              >
+                <span className="ds-cap">Border on background</span>
+                <span className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    style={{ background: p.border }}
+                    className="block h-4 w-12"
+                  />
+                  <span className="ds-mono">
+                    {contrast(p.border, p.background).toFixed(2)}:1
+                  </span>
+                </span>
+              </li>
             </ul>
             <p className="ds-cap mt-3">
-              The border pair is the one that does not reach 4.5:1, and it does
-              not have to: it never carries text. It is listed so the gap is on
-              the record rather than hidden.
+              The border pair is the only one that does not reach 4.5:1, and it
+              does not have to: it never carries text, so it is shown as a rule
+              rather than as a word. It is listed so the gap is on the record
+              rather than hidden.
             </p>
           </div>
         </Section>

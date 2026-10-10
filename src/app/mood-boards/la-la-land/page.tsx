@@ -271,10 +271,10 @@ const ARTIFACTS: Artifact[] = [
       <div className="h-full w-full">
         <div className="h-28 w-full tex-dusk" />
         <div className="grid h-16 grid-cols-4">
-          <Chip hex="#0d0a22" name="top" dark />
-          <Chip hex="#1d1442" name="field" dark />
-          <Chip hex="#40205c" name="horizon" dark />
-          <Chip hex="#7a3a63" name="last light" dark />
+          <Chip hex="#0d0a22" name="top" tone="dark" />
+          <Chip hex="#1d1442" name="field" tone="dark" />
+          <Chip hex="#40205c" name="horizon" tone="dark" />
+          <Chip hex="#7a3a63" name="last light" tone="dark" />
         </div>
       </div>
     ),
@@ -283,14 +283,14 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Streetlamp amber",
-    take: "The accent. 9.46:1 against the background, which is unusually high for a yellow and is the reason this one survived.",
+    take: "The accent. 9.90:1 against the background, which is unusually high for a yellow and is the reason this one survived.",
     visual: (
       <div className="relative h-full bg-lll-bg">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-16 w-16 rounded-full bg-lll-accent shadow-[0_0_60px_18px_rgba(242,181,68,.35)]" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-lll-muted">
-          #F2B544 · 9.46:1 ON #171033
+          #F2B544 · 9.90:1 ON #171033
         </p>
       </div>
     ),
@@ -301,8 +301,8 @@ const ARTIFACTS: Artifact[] = [
     take: "Both beautiful, both demoted. Magenta carries error, aqua carries a secondary series on a chart. Neither is ever a button.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#e0609a" name="neon" note="error only" dark />
-        <Chip hex="#4ec5d4" name="aqua" note="second series" dark />
+        <Chip hex="#e0609a" name="neon" note="error only" tone="dark" />
+        <Chip hex="#4ec5d4" name="aqua" note="second series" tone="dark" />
       </div>
     ),
   },
@@ -322,7 +322,7 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Why the text is not white",
-    take: "Pure white on this background is 15.1:1 and looks like a screen. The cream is 13.3:1 and looks like light. Both pass; the cream fits.",
+    take: "Pure white on this background is 18.13:1 and looks like a screen. The cream is 16.04:1 and looks like light. Both pass comfortably; the cream fits.",
     visual: (
       <div className="grid h-full grid-cols-2">
         <div className="flex flex-col items-center justify-center bg-lll-bg">
@@ -592,6 +592,7 @@ export default function Page() {
   return (
     <BoardShell
       skin={skin}
+      mood="la-la-land"
       name="Twilight and Streetlight"
       subtitle="02 · La La Land"
       lede={
@@ -614,7 +615,7 @@ export default function Page() {
       sourcing="No stills, no stock photography. Every scene here is redrawn in SVG from memory of the film's staging, and every gradient and texture is CSS, so the board carries no licence and ships inside the repo. Figures quoted are the real 2011 Census figures."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Amber #F2B544, 9.46:1 on the background. It is the only light source in the system: primary action, current item, focus ring." },
+        { label: "Accent", detail: "Amber #F2B544, 9.90:1 on the background. It is the only light source in the system: primary action, current item, focus ring." },
         { label: "Separation", detail: "Shadow and distance, not lines. The border role is the least-used colour in the set, which is the opposite of the Loki system." },
         { label: "Shape", detail: "Everything pressable is a pill; everything that holds content is a 14px letterbox. Nothing is square." },
         { label: "Space", detail: "96px page padding and 56px between sections, taken from the planetarium artifact. Air is the main structural device." },

@@ -1,5 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { MOODS, type MoodId } from "@/lib/moods";
+import { TOKENS } from "@/lib/tokens";
+import { ROLE_ORDER } from "@/lib/palette";
 
 // Shared scaffolding for the three mood boards. The shell is identical so the
 // three are comparable; every visible surface is styled by the `skin` the page
@@ -66,6 +69,7 @@ export interface Artifact {
 
 export function BoardShell({
   skin,
+  mood,
   name,
   subtitle,
   lede,
@@ -75,6 +79,7 @@ export function BoardShell({
   children,
 }: {
   skin: Skin;
+  mood: MoodId;
   name: string;
   subtitle: string;
   lede: ReactNode;
@@ -92,11 +97,14 @@ export function BoardShell({
           &larr; Back to the hub
         </Link>
 
-        <header className="mt-8 max-w-[62ch]">
-          <p className={skin.eyebrow}>Mood board {subtitle}</p>
-          <h1 className={`mt-3 ${skin.title}`}>{name}</h1>
-          <div className={`mt-5 ${skin.lede}`}>{lede}</div>
-          <p className={`mt-5 max-w-[58ch] ${skin.small}`}>{sourcing}</p>
+        <header className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14">
+          <div className="max-w-[62ch]">
+            <p className={skin.eyebrow}>Mood board {subtitle}</p>
+            <h1 className={`mt-3 ${skin.title}`}>{name}</h1>
+            <div className={`mt-5 ${skin.lede}`}>{lede}</div>
+            <p className={`mt-5 max-w-[58ch] ${skin.small}`}>{sourcing}</p>
+          </div>
+          <Glance mood={mood} skin={skin} count={artifacts.length} />
         </header>
 
         {children}
@@ -161,34 +169,76 @@ export function BoardShell({
   );
 }
 
-/** A labelled colour chip. Used by all three boards' COLOUR artifacts. */
+/** The summary block beside the standfirst: what this board decided, in the
+    smallest possible space. It is generated from the same tokens the design
+    system publishes, so it cannot disagree with them. */
+function Glance({ mood, skin, count }: { mood: MoodId; skin: Skin; count: number }) {
+  const m = MOODS[mood];
+  const t = TOKENS[mood];
+  return (
+    <aside className="lg:pt-10">
+      <p className={skin.tag}>At a glance</p>
+      <div className="mt-3 flex overflow-hidden" aria-hidden>
+        {ROLE_ORDER.map((r) => (
+          <span key={r} className="h-9 flex-1" style={{ background: m.palette[r] }} />
+        ))}
+      </div>
+      <dl className="mt-4 space-y-3">
+        {[
+          ["Accent", m.palette.accent.toUpperCase()],
+          ["Type", `${t.type[0].family} + ${t.type[2].family}`],
+          ["Corners", t.radii.map((r) => r.name).join(", ")],
+          ["Rules", m.shape.rules],
+          ["Density", m.shape.density],
+          ["Artifacts", `${count}, all drawn here`],
+        ].map(([k, v]) => (
+          <div key={k} className="flex items-baseline justify-between gap-4">
+            <dt className={skin.tag}>{k}</dt>
+            <dd className={`${skin.take} text-right`}>{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className={`mt-4 ${skin.take}`}>
+        <Link href={`/design-systems/${mood}`} className="underline underline-offset-4">
+          The design system this became
+        </Link>
+      </p>
+    </aside>
+  );
+}
+
+/** A labelled colour chip. The label strip carries its own background so the
+    caption contrast is fixed by the component rather than by whatever card it
+    happens to be dropped into. */
 export function Chip({
   hex,
   name,
   note,
-  dark,
+  tone = "light",
+  stripBg,
 }: {
   hex: string;
   name: string;
   note?: string;
-  dark?: boolean;
+  /** Whether the caption strip under the swatch is light or dark. */
+  tone?: "light" | "dark";
+  /** Override the strip colour to match the board it sits on. */
+  stripBg?: string;
 }) {
+  const dark = tone === "dark";
+  const bg = stripBg ?? (dark ? "#241a4b" : "#ffffff");
+  const ink = dark ? "#f7f0e8" : "#241c13";
+  const mut = dark ? "#b3a8d2" : "#63523a";
   return (
     <div className="flex h-full flex-col">
       <div className="flex-1" style={{ background: hex }} />
-      <div className="px-2 pt-2 pb-1 leading-tight">
-        <p
-          className="font-mono text-[10px] tracking-wider"
-          style={{ color: dark ? "#f7f0e8" : "#241c13" }}
-        >
+      <div className="min-h-[38px] px-2 pt-2 pb-1 leading-tight" style={{ background: bg }}>
+        <p className="font-mono text-[10px] tracking-wider" style={{ color: ink }}>
           {hex.toUpperCase()}
         </p>
-        <p
-          className="text-[11px]"
-          style={{ color: dark ? "#b3a8d2" : "#6b5940" }}
-        >
+        <p className="text-[11px]" style={{ color: mut }}>
           {name}
-          {note ? ` · ${note}` : ""}
+          {note ? ` \u00b7 ${note}` : ""}
         </p>
       </div>
     </div>

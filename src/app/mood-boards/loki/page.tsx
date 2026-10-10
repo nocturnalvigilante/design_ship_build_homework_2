@@ -48,8 +48,8 @@ function Lobby() {
       <rect x="0" y="6" width="300" height="14" fill="#8d8060" />
       <circle cx="150" cy="58" r="22" fill="#f4efe0" stroke="#241c13" strokeWidth="2.5" />
       <line x1="150" y1="58" x2="150" y2="44" stroke="#241c13" strokeWidth="2.5" />
-      <line x1="150" y1="58" x2="160" y2="64" stroke="#b4441a" strokeWidth="2.5" />
-      <rect x="118" y="88" width="64" height="11" fill="#b4441a" />
+      <line x1="150" y1="58" x2="160" y2="64" stroke="#973413" strokeWidth="2.5" />
+      <rect x="118" y="88" width="64" height="11" fill="#973413" />
       <g fill="#4a3f2c">
         {[44, 72, 96, 206, 232, 258].map((x, i) => (
           <g key={i}>
@@ -94,12 +94,12 @@ function TimeDoor() {
       <rect width="300" height="176" fill="#3a3326" />
       <rect y="132" width="300" height="44" fill="#2a2419" />
       <g opacity="0.9">
-        <ellipse cx="150" cy="88" rx="56" ry="56" fill="none" stroke="#b4441a" strokeWidth="7" />
+        <ellipse cx="150" cy="88" rx="56" ry="56" fill="none" stroke="#973413" strokeWidth="7" />
         <ellipse cx="150" cy="88" rx="56" ry="56" fill="none" stroke="#f0a04a" strokeWidth="2" />
         <ellipse cx="150" cy="88" rx="50" ry="50" fill="#1c1812" />
       </g>
-      <ellipse cx="150" cy="88" rx="70" ry="70" fill="#b4441a" opacity="0.1" />
-      <ellipse cx="150" cy="148" rx="72" ry="10" fill="#b4441a" opacity="0.18" />
+      <ellipse cx="150" cy="88" rx="70" ry="70" fill="#973413" opacity="0.1" />
+      <ellipse cx="150" cy="148" rx="72" ry="10" fill="#973413" opacity="0.18" />
       <g fill="#c9a227" opacity="0.5">
         {Array.from({ length: 10 }).map((_, i) => (
           <circle key={i} cx={150 + Math.cos(i) * 34} cy={88 + Math.sin(i * 1.7) * 32} r="1.4" />
@@ -121,7 +121,7 @@ function Archive() {
               <rect x={4 + c * 18.6} y={10 + r * 28} width="15" height="18" fill={c % 4 === 0 ? "#d9cba4" : c % 4 === 1 ? "#cbbb90" : c % 4 === 2 ? "#e2d6b4" : "#bfae82"} />
               <rect x={6 + c * 18.6} y={13 + r * 28} width="11" height="4" fill="#f4efe0" />
               {(r * 16 + c) % 11 === 0 && (
-                <rect x={6 + c * 18.6} y={20 + r * 28} width="11" height="3" fill="#b4441a" />
+                <rect x={6 + c * 18.6} y={20 + r * 28} width="11" height="3" fill="#973413" />
               )}
             </g>
           ))}
@@ -145,14 +145,14 @@ function DeskTop() {
         <rect x="42" y="26" width="46" height="6" fill="#241c13" transform="rotate(3 86 86)" />
       </g>
       <g transform="rotate(-10 210 70)">
-        <rect x="170" y="36" width="88" height="62" fill="#fbe7d4" stroke="#b4441a" strokeWidth="2.5" />
-        <rect x="182" y="52" width="64" height="8" fill="#b4441a" />
-        <rect x="182" y="68" width="42" height="5" fill="#b4441a" />
+        <rect x="170" y="36" width="88" height="62" fill="#fbe7d4" stroke="#973413" strokeWidth="2.5" />
+        <rect x="182" y="52" width="64" height="8" fill="#973413" />
+        <rect x="182" y="68" width="42" height="5" fill="#973413" />
       </g>
       <g>
         <rect x="196" y="112" width="34" height="18" fill="#2f2a20" />
         <rect x="204" y="100" width="18" height="14" rx="3" fill="#443c2c" />
-        <rect x="196" y="130" width="34" height="5" fill="#b4441a" />
+        <rect x="196" y="130" width="34" height="5" fill="#973413" />
       </g>
       <g>
         <circle cx="266" cy="138" r="18" fill="#d8cdae" />
@@ -176,9 +176,9 @@ function BranchChart() {
       <line x1="10" y1="88" x2="290" y2="88" stroke="#241c13" strokeWidth="3" />
       {[[64, -1], [118, 1], [172, -1], [222, 1]].map(([x, dir], i) => (
         <g key={i}>
-          <path d={`M${x} 88 Q${x + 26} 88 ${x + 46} ${88 + dir * 44}`} stroke="#b4441a" strokeWidth="2" fill="none" strokeDasharray={i === 2 ? "0" : "5 3"} />
+          <path d={`M${x} 88 Q${x + 26} 88 ${x + 46} ${88 + dir * 44}`} stroke="#973413" strokeWidth="2" fill="none" strokeDasharray={i === 2 ? "0" : "5 3"} />
           {i !== 2 && (
-            <g stroke="#b4441a" strokeWidth="2.5">
+            <g stroke="#973413" strokeWidth="2.5">
               <line x1={x + 34} y1={88 + dir * 26} x2={x + 48} y2={88 + dir * 38} />
               <line x1={x + 48} y1={88 + dir * 26} x2={x + 34} y2={88 + dir * 38} />
             </g>
@@ -186,7 +186,7 @@ function BranchChart() {
         </g>
       ))}
       <text x="12" y="80" fontSize="9" fontFamily="monospace" fill="#241c13">SACRED TIMELINE</text>
-      <text x="214" y="150" fontSize="8" fontFamily="monospace" fill="#b4441a">VARIANT 2011</text>
+      <text x="214" y="150" fontSize="8" fontFamily="monospace" fill="#973413">VARIANT 2011</text>
     </svg>
   );
 }
@@ -245,16 +245,16 @@ const ARTIFACTS: Artifact[] = [
     take: "Three warm neutrals a hair apart. The background is the desk, the surface is the sheet, and that tiny step is all the elevation the system has.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#e5dcc5" name="background" note="the desk" />
-        <Chip hex="#f4efe0" name="surface" note="the sheet" />
-        <Chip hex="#9a8a66" name="border" note="the rule" />
+        <Chip hex="#e5dcc5" name="background" note="the desk" stripBg="#f4efe0" />
+        <Chip hex="#f4efe0" name="surface" note="the sheet" stripBg="#f4efe0" />
+        <Chip hex="#9a8a66" name="border" note="the rule" stripBg="#f4efe0" />
       </div>
     ),
   },
   {
     kind: "COLOUR",
     title: "Stamp-pad orange",
-    take: "The accent at 5.14:1 on the background. It means one thing: this is the action, or this is the record you are on.",
+    take: "The accent at 5.46:1 on the background. It means one thing: this is the action, or this is the record you are on.",
     visual: (
       <div className="relative h-full bg-loki-bg">
         <div className="absolute inset-0 flex items-center justify-center">
@@ -265,7 +265,7 @@ const ARTIFACTS: Artifact[] = [
           </div>
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-loki-muted">
-          #B4441A · 5.14:1 ON #E5DCC5
+          #973413 · 5.46:1 ON #E5DCC5
         </p>
       </div>
     ),
@@ -276,9 +276,9 @@ const ARTIFACTS: Artifact[] = [
     take: "The institution's own colours. Kept for charts, where a second and third series are needed and must not look clickable.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#7d7430" name="olive" note="series 2" dark />
-        <Chip hex="#c9a227" name="mustard" note="series 3" />
-        <Chip hex="#54432c" name="brown" note="series 4" dark />
+        <Chip hex="#7d7430" name="olive" note="series 2" stripBg="#f4efe0" />
+        <Chip hex="#c9a227" name="mustard" note="series 3" stripBg="#f4efe0" />
+        <Chip hex="#54432c" name="brown" note="series 4" stripBg="#f4efe0" />
       </div>
     ),
   },
@@ -288,22 +288,26 @@ const ARTIFACTS: Artifact[] = [
     take: "One cool colour in an entirely warm set, which is exactly how it is used in the show. Reserved for the success state.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#3f5e55" name="teal" note="success" dark />
-        <Chip hex="#8f2f1b" name="brick" note="error" dark />
+        <Chip hex="#3f5e55" name="teal" note="success" stripBg="#f4efe0" />
+        <Chip hex="#8f2f1b" name="brick" note="error" stripBg="#f4efe0" />
       </div>
     ),
   },
   {
     kind: "COLOUR",
     title: "The yellow that did not make it",
-    take: "The cartoon-mascot yellow is 1.6:1 on manila. Unusable for text, and using it as a fill would have made the page cheerful, which it is not.",
+    take: "The cartoon-mascot yellow is 1.10:1 on manila, which is the sample above: the word is there and you cannot read it. Unusable for text, and as a fill it would have made the page cheerful, which it is not.",
     visual: (
-      <div className="flex h-full flex-col items-center justify-center gap-2 bg-loki-bg">
-        <p className="text-[26px] font-bold text-[#f2d13c]">Rejected</p>
-        <p className="font-mono text-[10px] tracking-wider text-loki-muted">
-          #F2D13C · 1.60:1 · FAIL
+      <div className="flex h-full flex-col items-center justify-center gap-3 bg-loki-bg px-5">
+        <div className="relative h-16 w-40 bg-[#f2d13c]">
+          <span aria-hidden className="absolute inset-0 grid place-items-center text-[22px] font-bold text-[#f2d13c]">
+            Aa
+          </span>
+          <span className="absolute inset-x-0 top-1/2 h-0.5 bg-loki-accent" />
+        </div>
+        <p className="font-mono text-[10px] tracking-wider text-loki-ink">
+          #F2D13C ON #E5DCC5 &middot; 1.10:1 &middot; FAIL
         </p>
-        <div className="h-0.5 w-28 bg-loki-accent" />
       </div>
     ),
   },
@@ -440,7 +444,7 @@ const ARTIFACTS: Artifact[] = [
     take: "Hardware you press, with a click. Controls here have a pressed state you can see: the sheet moves 2px and the offset shadow disappears.",
     visual: (
       <div className="flex h-full items-center justify-center gap-3 bg-[#4a4334]">
-        {["#b4441a", "#c9a227", "#7d7430"].map((c, i) => (
+        {["#973413", "#c9a227", "#7d7430"].map((c, i) => (
           <div
             key={c}
             className="flex h-14 w-14 items-center justify-center rounded-[3px] bg-[#2b2620] shadow-[inset_0_1px_0_#6b6252]"
@@ -615,6 +619,7 @@ export default function Page() {
   return (
     <BoardShell
       skin={skin}
+      mood="loki"
       name="Time Variance Authority"
       subtitle="03 · Loki"
       lede={
@@ -637,7 +642,7 @@ export default function Page() {
       sourcing="Every artifact is drawn in SVG or built from CSS gradients and repeating patterns; there are no stills or stock images, so nothing here is borrowed. Figures quoted are the real 2011 Census figures for Rajasthan."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Stamp orange #B4441A at 5.14:1 on manila. Primary action and active record only, always a flat fill, never a gradient." },
+        { label: "Accent", detail: "Stamp orange #973413 at 5.14:1 on manila. Primary action and active record only, always a flat fill, never a gradient." },
         { label: "Separation", detail: "Drawn rules everywhere. This system uses its border colour more than any other token, which is what makes it unmistakable next to La La Land." },
         { label: "Shape", detail: "Square corners throughout, with one exception: the active file tab is chamfered. One cut corner, one meaning." },
         { label: "Shadow", detail: "A hard 2px offset in border colour. No blur anywhere, because a photocopy has no soft edges." },

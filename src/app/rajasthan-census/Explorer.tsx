@@ -9,6 +9,7 @@ import {
   METRIC_BY_KEY,
   STATE,
   rangeOf,
+  comparator,
   type District,
   type Division,
   type MetricKey,
@@ -44,7 +45,7 @@ export default function Explorer() {
 
   const m = METRIC_BY_KEY[metric];
   const { max } = rangeOf(metric);
-  const stateAvg = STATE[metric as keyof typeof STATE] as number;
+  const cmp = comparator(metric);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -193,14 +194,14 @@ export default function Explorer() {
                   type="button"
                   role="switch"
                   aria-checked={showAverage}
-                  aria-label="Show the state average on every bar"
+                  aria-label="Show the comparison tick on every bar"
                   className={`sw ${showAverage ? "is-selected" : ""}`}
                   onClick={() => setShowAverage((v) => !v)}
                 >
                   <span className="knob" />
                 </button>
                 <span className="t-small" style={{ color: "var(--ink)" }}>
-                  State average
+                  Comparison tick
                 </span>
               </label>
 
@@ -282,7 +283,7 @@ export default function Explorer() {
                         {showAverage && (
                           <span
                             className="avg"
-                            style={{ left: `${(stateAvg / max) * 100}%` }}
+                            style={{ left: `${Math.min((cmp.value / max) * 100, 99.6)}%` }}
                           />
                         )}
                       </span>
@@ -298,8 +299,8 @@ export default function Explorer() {
 
             {showAverage && results.length > 0 && (
               <p className="t-small mt-3">
-                The upright tick on every bar is Rajasthan as a whole:{" "}
-                {m.format(stateAvg)}.
+                The upright tick on every bar is {cmp.label}:{" "}
+                {m.format(cmp.value)}.
               </p>
             )}
           </div>
@@ -312,8 +313,7 @@ export default function Explorer() {
                 <div className="detail-wrap">
                   <div
                     className="detail"
-                    role="dialog"
-                    aria-modal="false"
+                    role="region"
                     aria-label={`${open.name} district record`}
                   >
                     <div className="detail-head">
@@ -345,13 +345,11 @@ export default function Explorer() {
 
                       <hr className="rule-jali my-5" />
 
-                      <p className="t-label">Against the state</p>
+                      <p className="t-label">Against Rajasthan</p>
                       <ul className="mt-3 space-y-3">
                         {METRICS.map((mm) => {
-                          const stateV = STATE[
-                            mm.key as keyof typeof STATE
-                          ] as number;
-                          const pct = (open[mm.key] / stateV) * 100;
+                          const c = comparator(mm.key);
+                          const pct = (open[mm.key] / c.value) * 100;
                           return (
                             <li key={mm.key}>
                               <div className="flex items-baseline justify-between gap-3">
@@ -378,7 +376,9 @@ export default function Explorer() {
                         })}
                       </ul>
                       <p className="t-small mt-3">
-                        The tick is the state figure. Green is above it.
+                        The tick is the state figure; for population it is the
+                        average district, because a count cannot be compared
+                        with a state total. Green is above it.
                       </p>
 
                       <div className="mt-6 flex flex-wrap gap-3">
@@ -464,7 +464,7 @@ export default function Explorer() {
 function describe(d: District, key: MetricKey) {
   const all = [...DISTRICTS].sort((a, b) => b[key] - a[key]);
   const rank = all.findIndex((x) => x.id === d.id) + 1;
-  const stateV = STATE[key as keyof typeof STATE] as number;
-  const side = d[key] >= stateV ? "above" : "below";
-  return `Rank ${rank} of 33 · ${side} the state figure`;
+  const c = comparator(key);
+  const side = d[key] >= c.value ? "above" : "below";
+  return `Rank ${rank} of 33 · ${side} ${c.label}`;
 }

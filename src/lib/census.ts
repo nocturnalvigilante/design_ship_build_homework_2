@@ -165,6 +165,21 @@ export function rankOf(d: District, key: MetricKey) {
   return sorted.findIndex((x) => x.id === d.id) + 1;
 }
 
-export function stateValue(key: MetricKey) {
-  return STATE[key as keyof typeof STATE] as number;
+/**
+ * What a district should be compared against.
+ *
+ * Literacy, sex ratio and density are rates, so the published state figure is
+ * the right comparison. Population is a count, and comparing one district
+ * against the state total would only ever say "much smaller". The honest
+ * comparison there is the average district, so that is what is used, and it
+ * is labelled differently on screen.
+ */
+export function comparator(key: MetricKey): { value: number; label: string } {
+  if (key === "population") {
+    return {
+      value: Math.round(STATE.population / STATE.districts),
+      label: "the average district",
+    };
+  }
+  return { value: STATE[key as keyof typeof STATE] as number, label: "Rajasthan" };
 }

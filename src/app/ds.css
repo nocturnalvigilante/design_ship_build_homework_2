@@ -60,10 +60,10 @@
   --bg: #e5dcc5;
   --surface: #f4efe0;
   --ink: #241c13;
-  --muted: #6b5940;
+  --muted: #63523a;
   --line: #9a8a66;
-  --accent: #b4441a;
-  --accent-hi: #8f3514;
+  --accent: #973413;
+  --accent-hi: #7a2a0f;
   --accent-ink: #f4efe0;
   --sunk: #d9cfb4;
   --r: 0px;
@@ -234,7 +234,7 @@
 }
 .ds .tab:hover, .ds .tab.is-hover { color: var(--ink); }
 .ds .tab.is-selected { color: var(--ink); border-bottom-color: var(--accent); }
-.ds .tab.is-pressed { background: var(--sunk); }
+.ds .tab.is-pressed { background: var(--sunk); color: var(--ink); }
 .ds .tab.is-disabled { opacity: .45; cursor: not-allowed; }
 .ds-raj .tab.is-selected { border-bottom: 0; position: relative; }
 .ds-raj .tab.is-selected::after {
@@ -297,6 +297,7 @@
 .ds .card-head { padding: 12px 16px 10px; border-bottom: 1px solid var(--line); }
 .ds-raj .card-head { border-radius: 999px 999px 0 0; background: var(--sunk); padding-top: 18px; text-align: center; border-bottom: 0; }
 .ds-loki .card-head { background: var(--ink); color: var(--surface); padding: 7px 12px; border-bottom: 0; }
+.ds-loki .card-head .ds-cap, .ds-loki .card-head .ds-lab, .ds-loki .card-head .ds-h4 { color: var(--surface); }
 .ds .card-body { padding: 14px 16px 16px; }
 .ds-loki .card-body { padding: 10px 12px 12px; }
 
