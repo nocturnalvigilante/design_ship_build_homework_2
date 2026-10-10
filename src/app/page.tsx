@@ -272,6 +272,12 @@ export default function Home() {
             no external API. Census figures are the published 2011 district
             totals for Rajasthan.
           </p>
+          <p className="mt-3 max-w-[70ch] text-[13px] leading-[1.6] text-hub-muted">
+            This page is the one place in the project set in the system UI
+            face. Each of the six loaded typefaces belongs to one of the three
+            moods, and borrowing one here would have given the hub an opinion
+            it is not supposed to have.
+          </p>
         </footer>
       </div>
     </div>
