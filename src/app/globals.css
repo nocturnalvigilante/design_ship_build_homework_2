@@ -1,24 +1,156 @@
 @import "tailwindcss";
 
-:root {
-  --hub-bg: #11100e;
-  --hub-surface: #1a1917;
-  --hub-edge: #2b2926;
-  --hub-text: #ece9e3;
-  --hub-muted: #918c83;
+/* ---------------------------------------------------------------------------
+   Tailwind v4 theme. Every colour and font the three moods use is registered
+   here as a theme token, so the whole project is written in Tailwind utilities
+   (bg-raj-bg, text-lll-accent, font-loki-body) rather than arbitrary values.
+   The hexes are the same six roles published on each design-system page.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Hub: deliberately neutral so the three moods are the only colour on it. */
+  --color-hub-bg: #100f0d;
+  --color-hub-surface: #1a1917;
+  --color-hub-line: #302d28;
+  --color-hub-ink: #ece9e3;
+  --color-hub-muted: #9c968c;
+
+  /* Rajasthan */
+  --color-raj-bg: #fdf4ea;
+  --color-raj-surface: #ffffff;
+  --color-raj-ink: #2d1b18;
+  --color-raj-muted: #6b4a3f;
+  --color-raj-line: #e0c6ae;
+  --color-raj-accent: #a8291f;
+  --color-raj-indigo: #1e3a5f;
+  --color-raj-gold: #c98a24;
+  --color-raj-jade: #2c6e72;
+  --color-raj-rose: #d66a8a;
+
+  /* La La Land */
+  --color-lll-bg: #171033;
+  --color-lll-surface: #241a4b;
+  --color-lll-ink: #f7f0e8;
+  --color-lll-muted: #b3a8d2;
+  --color-lll-line: #3f3074;
+  --color-lll-accent: #f2b544;
+  --color-lll-neon: #e0609a;
+  --color-lll-aqua: #4ec5d4;
+  --color-lll-violet: #7b5ea7;
+  --color-lll-cream: #ffd9a0;
+
+  /* Loki */
+  --color-loki-bg: #e5dcc5;
+  --color-loki-surface: #f4efe0;
+  --color-loki-ink: #241c13;
+  --color-loki-muted: #6b5940;
+  --color-loki-line: #9a8a66;
+  --color-loki-accent: #b4441a;
+  --color-loki-olive: #7d7430;
+  --color-loki-mustard: #c9a227;
+  --color-loki-brown: #54432c;
+  --color-loki-teal: #3f5e55;
+
+  --font-raj-display: var(--f-raj-display), Georgia, serif;
+  --font-raj-body: var(--f-raj-body), Georgia, serif;
+  --font-lll-display: var(--f-lll-display), Didot, serif;
+  --font-lll-body: var(--f-lll-body), system-ui, sans-serif;
+  --font-loki-display: var(--f-loki-display), Helvetica, sans-serif;
+  --font-loki-body: var(--f-loki-body), "Courier New", monospace;
 }
 
 html, body { max-width: 100vw; overflow-x: hidden; }
-body { background: var(--hub-bg); color: var(--hub-text); }
+body { background: var(--color-hub-bg); color: var(--color-hub-ink); }
 
-/* Every interactive thing gets a visible focus ring. The brief grades states,
-   and keyboard focus is the one people forget. */
-a:focus-visible, button:focus-visible, input:focus-visible,
-select:focus-visible, [tabindex]:focus-visible {
+/* Keyboard focus is graded, and it is the state everyone forgets. One global
+   rule so nothing can ship without it; the design systems then override the
+   colour per mood. */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+summary:focus-visible, [tabindex]:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
+
+/* ---------------------------------------------------------------------------
+   Mood textures. These are patterns, not components, so they live in CSS
+   rather than being repeated as utility strings.
+--------------------------------------------------------------------------- */
+
+/* Rajasthan: jali lattice, block-print ground, cusped arch. */
+.tex-jali {
+  background-color: var(--color-raj-bg);
+  background-image:
+    repeating-linear-gradient(45deg, var(--color-raj-line) 0 1px, transparent 1px 11px),
+    repeating-linear-gradient(-45deg, var(--color-raj-line) 0 1px, transparent 1px 11px);
+}
+.tex-block {
+  background-color: var(--color-raj-bg);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--color-raj-accent) 0 2.5px, transparent 3px),
+    radial-gradient(circle at 0 0, var(--color-raj-indigo) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 100% 100%, var(--color-raj-indigo) 0 2px, transparent 2.5px);
+  background-size: 22px 22px, 22px 22px, 22px 22px;
+}
+.tex-wash {
+  background-image: linear-gradient(170deg, #ffffff 0%, var(--color-raj-bg) 55%, #f6e6d4 100%);
+}
+.arch-top { border-radius: 999px 999px 4px 4px; }
+
+/* La La Land: dusk gradient, bulb marquee, film grain. */
+.tex-dusk {
+  background-image:
+    radial-gradient(120% 90% at 50% 112%, #f2b54433 0%, transparent 55%),
+    linear-gradient(176deg, #0d0a22 0%, #1d1442 48%, #40205c 86%, #7a3a63 100%);
+}
+.tex-bulbs {
+  background-image: radial-gradient(circle, var(--color-lll-accent) 0 2.6px, transparent 3.2px);
+  background-size: 18px 18px;
+}
+.tex-grain {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 4px);
+}
+.glow-lamp { box-shadow: 0 0 0 1px rgba(242,181,68,.22), 0 18px 60px -28px rgba(242,181,68,.6); }
+
+/* Loki: paper grain, ruled form, punch card, stamp. */
+.tex-paper {
+  background-color: var(--color-loki-surface);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(36,28,19,.035) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(90deg, rgba(36,28,19,.025) 0 1px, transparent 1px 3px);
+}
+.tex-ruled {
+  background-color: var(--color-loki-surface);
+  background-image: repeating-linear-gradient(180deg, transparent 0 21px, var(--color-loki-line) 21px 22px);
+}
+.tex-punch {
+  background-color: var(--color-loki-bg);
+  background-image: radial-gradient(circle, var(--color-loki-ink) 0 2px, transparent 2.6px);
+  background-size: 14px 16px;
+}
+.chamfer { clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
+.stamp {
+  transform: rotate(-7deg);
+  border: 2.5px solid var(--color-loki-accent);
+  color: var(--color-loki-accent);
+}
+
+/* ---------------------------------------------------------------------------
+   Forced control states. The brief grades six control states, and four of them
+   (hover, focus, pressed, selected) are invisible in a screenshot unless they
+   can be pinned. Each design system therefore shows a live control AND a strip
+   of the same control with its state forced by one of these classes. The
+   forced look is the real look: the live rules below are written against
+   :hover, :focus-visible, :active and the same .is-* classes together.
+--------------------------------------------------------------------------- */
+.is-disabled { opacity: .45; cursor: not-allowed; }
