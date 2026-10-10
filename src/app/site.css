@@ -1,0 +1,140 @@
+/* ===========================================================================
+   The Rajasthan Census explorer, built with design system 01.
+
+   Everything here is the Rajasthan skin from ds.css: same six colour roles,
+   same four type roles, same spacing scale, same components. The classes
+   below are layout, not new style — if a value appears here that is not on
+   the design-system page, that is a bug in the system, not a feature here.
+   =========================================================================== */
+
+.site {
+  --bg: #fdf4ea;
+  --surface: #ffffff;
+  --ink: #2d1b18;
+  --muted: #6b4a3f;
+  --line: #e0c6ae;
+  --accent: #a8291f;
+  --accent-hi: #8d1f18;
+  --accent-ink: #ffffff;
+  --sunk: #f3e4d2;
+  --indigo: #1e3a5f;
+  --indigo-soft: #9fb5cc;
+  --jade: #2c6e72;
+  --r: 3px;
+  --display: var(--f-raj-display), Georgia, serif;
+  --body: var(--f-raj-body), Georgia, serif;
+  --ctl-pad: 10px 16px;
+  --ctl-size: 15px;
+  --focus-ring: 2px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  background-image: linear-gradient(170deg, #ffffff 0%, #fdf4ea 46%, #f8ead9 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ---- type roles, the same four as the system ---- */
+.site .t-display { font-family: var(--display); font-size: clamp(38px, 6vw, 62px); line-height: 1.04; letter-spacing: -.01em; }
+.site .t-heading { font-family: var(--display); font-size: 22px; line-height: 1.2; }
+.site .t-h3 { font-family: var(--display); font-size: 17px; line-height: 1.3; }
+.site .t-body { font-size: 17px; line-height: 1.62; }
+.site .t-small { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.site .t-label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); line-height: 1.1; }
+.site .t-figure { font-family: var(--display); font-variant-numeric: tabular-nums; line-height: 1.05; }
+.site .t-mono { font-family: var(--f-loki-body), "Courier New", monospace; font-size: 11.5px; letter-spacing: .02em; color: var(--muted); }
+
+/* ---- the jali rule, from artifact 05 of the mood board ---- */
+.site .rule-jali {
+  height: 9px; border: 0;
+  background-image:
+    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 9px);
+}
+
+/* ---- masthead ---- */
+.site .mast { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
+
+/* ---- the sticky control bar ---- */
+.site .controls {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(253,244,234,.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---- district row ---- */
+.site .drow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  color: inherit;
+  transition: background-color .12s, box-shadow .12s;
+}
+@media (min-width: 640px) {
+  .site .drow { grid-template-columns: 170px 1fr 92px; align-items: center; gap: 16px; }
+}
+.site .drow:last-child { border-bottom: 0; }
+.site .drow:hover { background: var(--sunk); }
+.site .drow:active { background: var(--sunk); }
+.site .drow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.site .drow[aria-current="true"] { background: var(--sunk); box-shadow: inset 4px 0 0 var(--accent); }
+
+/* the inset bar, from the parchin-kari artifact: colour sits IN the surface */
+.site .bar {
+  position: relative; height: 12px; background: #ece0d0;
+  box-shadow: inset 0 1px 2px rgba(107,74,63,.32);
+}
+.site .bar > i { display: block; height: 100%; background: var(--indigo); }
+.site .drow[aria-current="true"] .bar > i { background: var(--accent); }
+.site .bar .avg {
+  position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .85;
+}
+
+/* ---- the detail panel ---- */
+.site .detail {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px 24px 3px 3px;
+  box-shadow: 0 1px 0 var(--line), 0 24px 44px -34px rgba(45,27,24,.75);
+  overflow: hidden;
+}
+.site .detail-head {
+  background: var(--accent); color: #fff; text-align: center;
+  padding: 22px 18px 14px; border-radius: 999px 999px 0 0;
+}
+@media (min-width: 1024px) {
+  .site .detail-wrap { position: sticky; top: 92px; }
+}
+@media (max-width: 1023.98px) {
+  .site .detail-wrap {
+    position: fixed; inset: auto 0 0 0; z-index: 40; padding: 0 12px 12px;
+    max-height: 84vh; overflow: auto;
+  }
+  .site .detail { border-radius: 24px 24px 0 0; }
+  .site .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(45,27,24,.4); }
+}
+@media (min-width: 1024px) { .site .scrim { display: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .site .detail { animation: site-wipe .18s ease-out; }
+}
+@keyframes site-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* ---- empty state, drawn as a jali panel ---- */
+.site .empty {
+  border: 1px solid var(--line);
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 13px),
+    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 13px);
+  padding: 44px 18px; text-align: center;
+}
+.site .empty > * { background: var(--bg); display: inline-block; padding: 2px 10px; }

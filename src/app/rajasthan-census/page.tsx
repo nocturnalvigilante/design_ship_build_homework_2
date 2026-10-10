@@ -1,11 +1,12 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import Explorer from "./Explorer";
+
+export const metadata: Metadata = {
+  title: "Rajasthan 2011 · District Explorer",
+  description:
+    "All 33 districts of Rajasthan at the 2011 Census of India: population, literacy, sex ratio and density, filterable by division and comparable against the state.",
+};
 
 export default function Page() {
-  return (
-    <main className="p-10">
-      <Link href="/" className="font-mono text-xs underline">&larr; Hub</Link>
-      <h1 className="mt-6 text-2xl tracking-tight">rajasthan-census</h1>
-      <p className="mt-2 text-sm opacity-60">In progress.</p>
-    </main>
-  );
+  return <Explorer />;
 }
