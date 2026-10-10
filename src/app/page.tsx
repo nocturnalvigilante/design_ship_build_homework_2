@@ -1,103 +1,129 @@
-import Image from "next/image";
+import Link from "next/link";
+import { MOODS, MOOD_ORDER } from "@/lib/moods";
 
-export default function Home() {
+export default function Hub() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="mx-auto max-w-5xl px-6 py-14 sm:px-8 sm:py-20">
+      <header className="border-b border-[var(--hub-edge)] pb-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--hub-muted)]">
+          Design, Build, Ship · MPCS 51238 · Assignment 2
+        </p>
+        <h1 className="mt-4 text-4xl leading-[1.05] tracking-tight sm:text-5xl">
+          Three moods, three systems,
+          <br />
+          one census.
+        </h1>
+        <p className="mt-5 max-w-[58ch] text-[15px] leading-relaxed text-[var(--hub-muted)]">
+          Three unrelated visual worlds explored as mood boards, each built out into a
+          working UI library, and then one of them used to build something real: a
+          district-level explorer for the 2011 Census of Rajasthan.
+        </p>
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--hub-muted)]">
+          Raj Hansini Akara
+        </p>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <Section n="1" title="Mood boards" note="Where each style came from">
+        {MOOD_ORDER.map((id) => {
+          const m = MOODS[id];
+          return (
+            <Card key={id} href={`/mood-boards/${id}`} title={m.name} sub={m.subtitle}>
+              <Swatches colors={m.swatch} />
+            </Card>
+          );
+        })}
+      </Section>
+
+      <Section n="2" title="Design systems" note="Each one built from its mood board">
+        {MOOD_ORDER.map((id) => {
+          const m = MOODS[id];
+          return (
+            <Card key={id} href={`/design-systems/${id}`} title={m.name} sub={m.shape.density}>
+              <div className="flex items-center gap-3">
+                <span
+                  className="text-2xl leading-none"
+                  style={{ color: m.palette.accent }}
+                  aria-hidden
+                >
+                  Aa
+                </span>
+                <Swatches colors={m.swatch.slice(1)} small />
+              </div>
+            </Card>
+          );
+        })}
+      </Section>
+
+      <Section n="3" title="The site" note="Built in the Rajasthan style">
+        <Link
+          href="/rajasthan-census"
+          className="group col-span-full flex items-center justify-between gap-6 rounded-xl border border-[var(--hub-edge)] bg-[var(--hub-surface)] px-6 py-6 transition-colors hover:border-[#b4352a]"
+        >
+          <span>
+            <span className="block text-xl tracking-tight">Rajasthan Census 2011</span>
+            <span className="mt-1 block text-sm text-[var(--hub-muted)]">
+              Thirty-three districts, filterable, with a detail panel for each
+            </span>
+          </span>
+          <span
+            aria-hidden
+            className="shrink-0 rounded-full bg-[#b4352a] px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white transition-transform group-hover:translate-x-1"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+            Open &rarr;
+          </span>
+        </Link>
+      </Section>
+
+      <footer className="mt-20 flex flex-wrap justify-between gap-4 border-t border-[var(--hub-edge)] pt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--hub-muted)]">
+        <span>Next.js · Tailwind · static</span>
+        <span>Census of India 2011, district tables</span>
       </footer>
+    </main>
+  );
+}
+
+function Section({
+  n, title, note, children,
+}: { n: string; title: string; note: string; children: React.ReactNode }) {
+  return (
+    <section className="mt-14">
+      <div className="flex items-baseline gap-3">
+        <span className="font-mono text-[11px] text-[var(--hub-muted)]">{n}</span>
+        <h2 className="text-lg tracking-tight">{title}</h2>
+        <span className="hidden text-sm text-[var(--hub-muted)] sm:inline">· {note}</span>
+      </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">{children}</div>
+    </section>
+  );
+}
+
+function Card({
+  href, title, sub, children,
+}: { href: string; title: string; sub: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="group flex flex-col justify-between gap-5 rounded-xl border border-[var(--hub-edge)] bg-[var(--hub-surface)] p-5 transition-colors hover:border-[var(--hub-muted)]"
+    >
+      {children}
+      <span>
+        <span className="block tracking-tight">{title}</span>
+        <span className="mt-0.5 block text-[13px] text-[var(--hub-muted)]">{sub}</span>
+      </span>
+    </Link>
+  );
+}
+
+function Swatches({ colors, small }: { colors: string[]; small?: boolean }) {
+  return (
+    <div className="flex gap-1.5" aria-hidden>
+      {colors.map((c) => (
+        <span
+          key={c}
+          className={`${small ? "h-4 w-4" : "h-9 w-9"} rounded-[5px] ring-1 ring-black/20`}
+          style={{ background: c }}
+        />
+      ))}
     </div>
   );
 }
