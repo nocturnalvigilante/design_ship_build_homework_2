@@ -1,135 +1,81 @@
 /* ===========================================================================
-   The Rajasthan Census explorer, built with design system 01.
+   The India Census explorer, built with design system 01 (Chittor and Khilji).
 
-   Everything here is the Rajasthan skin from ds.css: same six colour roles,
-   same four type roles, same spacing scale, same components. The classes
-   below are layout, not new style — if a value appears here that is not on
-   the design-system page, that is a bug in the system, not a feature here.
+   The wrapper carries `ds ds-pad site`, so every control on the page is the
+   same component, from the same stylesheet, as the one documented on the
+   design-system page. The rules below are layout and two site-specific
+   devices; if a colour or size appears here that is not in the system, that
+   is a bug here, not a feature.
    =========================================================================== */
 
 .site {
-  --bg: #fdf4ea;
-  --surface: #ffffff;
-  --ink: #2d1b18;
-  --muted: #6b4a3f;
-  --line: #e0c6ae;
-  --accent: #a8291f;
-  --accent-hi: #8d1f18;
-  --accent-ink: #ffffff;
-  --sunk: #f3e4d2;
-  --indigo: #1e3a5f;
-  --indigo-soft: #9fb5cc;
-  --jade: #2c6e72;
-  --r: 3px;
-  --display: var(--f-raj-display), Georgia, serif;
-  --body: var(--f-raj-body), Georgia, serif;
-  --ctl-pad: 10px 16px;
-  --ctl-size: 15px;
-  --focus-ring: 2px;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--body);
-  background-image: linear-gradient(170deg, #ffffff 0%, #fdf4ea 46%, #f8ead9 100%);
+  background-image:
+    radial-gradient(120% 70% at 50% 0%, #fff8ea 0%, transparent 52%),
+    radial-gradient(90% 60% at 8% 100%, #ead5b1 0%, transparent 58%);
   background-attachment: fixed;
   min-height: 100vh;
 }
 
-/* ---- type roles, the same four as the system ---- */
-.site .t-display { font-family: var(--display); font-size: clamp(38px, 6vw, 62px); line-height: 1.04; letter-spacing: -.01em; }
-.site .t-heading { font-family: var(--display); font-size: 22px; line-height: 1.2; }
-.site .t-h3 { font-family: var(--display); font-size: 17px; line-height: 1.3; }
-.site .t-body { font-size: 17px; line-height: 1.62; }
+/* ---- type roles, the same four the system publishes ---- */
+.site .t-display { font-family: var(--display); font-size: clamp(34px, 5.2vw, 56px); font-weight: 600; text-transform: uppercase; letter-spacing: .03em; line-height: 1.08; }
+.site .t-heading { font-family: var(--display); font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; line-height: 1.25; }
+.site .t-h3 { font-family: var(--display); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; line-height: 1.3; }
+.site .t-body { font-size: 17.5px; line-height: 1.6; }
 .site .t-small { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
-.site .t-label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); line-height: 1.1; }
-.site .t-figure { font-family: var(--display); font-variant-numeric: tabular-nums; line-height: 1.05; }
-.site .t-mono { font-family: var(--f-loki-body), "Courier New", monospace; font-size: 11.5px; letter-spacing: .02em; color: var(--muted); }
+.site .t-label { font-size: 11.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); line-height: 1.1; }
+.site .t-figure { font-family: var(--display); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .01em; line-height: 1.08; }
+.site .t-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; letter-spacing: .02em; color: var(--muted); }
 
-/* ---- the jali rule, from artifact 05 of the mood board ---- */
-.site .rule-jali {
-  height: 9px; border: 0;
+/* ---- the inlay rule, from artifact 20 of the mood board ---- */
+.site .rule-inlay {
+  height: 10px; border: 0;
   background-image:
-    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 9px),
-    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 9px);
+    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 10px),
+    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 10px);
 }
 
-/* ---- masthead ---- */
-.site .mast { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
+.site .mast { border-bottom: 1px solid var(--line); background: rgba(255,250,240,.45); }
 
-/* ---- the control bar. Sticky on a wide screen, where it costs 120px of a
-   900px viewport; static on a phone, where the same bar is 300px tall and
-   sticking it would leave almost nothing to read. ---- */
-.site .controls {
-  background: rgba(253,244,234,.94);
-  border-bottom: 1px solid var(--line);
-}
+.site .controls { background: rgba(244,233,214,.95); border-bottom: 1px solid var(--line); }
 @media (min-width: 1024px) {
-  .site .controls {
-    position: sticky; top: 0; z-index: 20;
-    backdrop-filter: blur(6px);
-  }
+  .site .controls { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(6px); }
 }
 
-/* ---- district row ---- */
+/* ---- a district row ---- */
 .site .drow {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
-  width: 100%;
-  text-align: left;
-  padding: 12px 14px;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  cursor: pointer;
-  color: inherit;
+  display: grid; grid-template-columns: 1fr; gap: 6px;
+  width: 100%; text-align: left; padding: 11px 14px;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  cursor: pointer; color: inherit;
   transition: background-color .12s, box-shadow .12s;
 }
-@media (min-width: 640px) {
-  .site .drow { grid-template-columns: 170px 1fr 92px; align-items: center; gap: 16px; }
+@media (min-width: 680px) {
+  .site .drow { grid-template-columns: 34px 200px 1fr 108px; align-items: center; gap: 14px; }
 }
 .site .drow:last-child { border-bottom: 0; }
 .site .drow:hover { background: var(--sunk); }
-.site .drow:active { background: var(--sunk); }
 .site .drow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .site .drow[aria-current="true"] { background: var(--sunk); box-shadow: inset 4px 0 0 var(--accent); }
 
-/* the inset bar, from the parchin-kari artifact: colour sits IN the surface */
-.site .bar {
-  position: relative; height: 12px; background: #ece0d0;
-  box-shadow: inset 0 1px 2px rgba(107,74,63,.32);
-}
-.site .bar > i { display: block; height: 100%; background: var(--indigo); }
-.site .drow[aria-current="true"] .bar > i { background: var(--accent); }
-.site .bar .avg {
-  position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .85;
-}
+/* ---- the warm-and-cold bar, which is the whole point of mood board 01 ----
+   Above its benchmark the fill is Chittor crimson; below it, Khilji
+   green-black. The upright tick is the benchmark itself. No legend, no third
+   colour, and no success-green or error-red invented for the purpose. */
+.site .bar { position: relative; height: 12px; background: #e6d4b4; box-shadow: inset 0 1px 2px rgba(34,20,16,.3); }
+.site .bar > i { display: block; height: 100%; background: var(--accent); }
+.site .bar > i.below { background: var(--cold); }
+.site .bar .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .9; }
 
-/* ---- the detail panel ---- */
-.site .detail {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 24px 24px 3px 3px;
-  box-shadow: 0 1px 0 var(--line), 0 24px 44px -34px rgba(45,27,24,.75);
-  overflow: hidden;
-}
-.site .detail-head {
-  background: var(--accent); color: #fff; text-align: center;
-  padding: 22px 18px 14px; border-radius: 999px 999px 0 0;
-}
+/* ---- the record panel ---- */
+.site .detail { background: var(--surface); border: 1px solid var(--line); border-radius: 26px 26px 2px 2px; overflow: hidden; box-shadow: 0 1px 0 var(--line), 0 22px 44px -34px rgba(34,20,16,.8); }
+.site .detail-head { background: var(--accent); color: var(--accent-ink); text-align: center; padding: 22px 18px 14px; border-radius: 999px 999px 0 0; }
 @media (min-width: 1024px) {
-  /* Clears the sticky control bar, which measures 167px at this width. */
-  .site .detail-wrap {
-    position: sticky; top: 182px;
-    max-height: calc(100vh - 200px); overflow: auto;
-  }
+  .site .detail-wrap { position: sticky; top: 176px; max-height: calc(100vh - 196px); overflow: auto; }
 }
 @media (max-width: 1023.98px) {
-  .site .detail-wrap {
-    position: fixed; inset: auto 0 0 0; z-index: 40; padding: 0 12px 12px;
-    max-height: 84vh; overflow: auto;
-  }
-  .site .detail { border-radius: 24px 24px 0 0; }
-  .site .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(45,27,24,.4); }
+  .site .detail-wrap { position: fixed; inset: auto 0 0 0; z-index: 40; padding: 0 12px 12px; max-height: 84vh; overflow: auto; }
+  .site .detail { border-radius: 26px 26px 0 0; }
+  .site .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(34,20,16,.45); }
 }
 @media (min-width: 1024px) { .site .scrim { display: none; } }
 
@@ -138,13 +84,13 @@
 }
 @keyframes site-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
-/* ---- empty state, drawn as a jali panel ---- */
+/* ---- empty state, drawn as an inlay panel ---- */
 .site .empty {
   border: 1px solid var(--line);
   background-color: var(--bg);
   background-image:
-    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 13px),
-    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 13px);
+    repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 12px),
+    repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 12px);
   padding: 44px 18px; text-align: center;
 }
 .site .empty > * { background: var(--bg); display: inline-block; padding: 2px 10px; }
