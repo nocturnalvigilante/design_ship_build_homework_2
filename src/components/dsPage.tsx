@@ -75,7 +75,7 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="mt-14 scroll-mt-6" id={`s${n}`}>
+    <section className="ds-sec mt-14 scroll-mt-6" id={`s${n}`}>
       <H2 n={n}>{title}</H2>
       <Sub>{sub}</Sub>
       <div className="mt-7">{children}</div>
@@ -173,12 +173,12 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
 
   return (
     <div className={`${SKIN[mood]} min-h-screen`} data-hydrated={ready ? "true" : "false"}>
-      <div className="mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16">
+      <div className="ds-shell mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16">
         <Link href="/" className="lnk ds-cap">
           &larr; Back to the hub
         </Link>
 
-        <header className="mt-8">
+        <header className="ds-head mt-8">
           <p className="ds-eyebrow">Design system {moodIndex(mood)} &middot; after {m.source}</p>
           <h1 className="ds-h1 mt-3">{m.name}</h1>
           <p className="ds-lede mt-5 max-w-[66ch]">{m.blurb}</p>

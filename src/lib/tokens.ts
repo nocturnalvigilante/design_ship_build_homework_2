@@ -166,7 +166,7 @@ export const TOKENS: Record<MoodId, SystemTokens> = {
   hokusai: {
     mood: "hokusai",
     colours: [
-      { role: "background", hex: PALETTES.hokusai.background, job: "Mulberry paper. Most of the page is this, and that is the point." },
+      { role: "background", hex: PALETTES.hokusai.background, job: "Unbleached kozo paper, cool rather than ivory. Most of the page is this, and that is the point." },
       { role: "surface", hex: PALETTES.hokusai.surface, job: "A fresh sheet laid on it. Half a tone lighter, never more." },
       { role: "text", hex: PALETTES.hokusai.text, job: "Sumi ink, which is blue-black rather than black." },
       { role: "muted", hex: PALETTES.hokusai.muted, job: "The lighter pass of the same ink: captions, derivations, scale marks." },

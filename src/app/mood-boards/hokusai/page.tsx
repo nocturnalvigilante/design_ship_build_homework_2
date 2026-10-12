@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BoardShell, Chip, type Artifact, type Skin } from "@/components/board";
+import { BoardShell, Chip, Magnified, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
   title: "Mood board 03 · Prussian Blue on Mulberry Paper",
@@ -25,6 +25,7 @@ const skin: Skin = {
   cardTitle: "font-hok-display text-[16px] font-semibold leading-snug",
   take: "font-hok-body text-[13px] leading-[1.65] text-hok-muted",
   rule: "border-hok-line",
+  shell: "skin-hok",
 };
 
 /* ------------------------------- drawn scenes ------------------------------ */
@@ -36,18 +37,18 @@ function GreatWave() {
         <linearGradient id="hok-sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#8fa6bd" />
           <stop offset="0.5" stopColor="#d6d3c2" />
-          <stop offset="1" stopColor="#ede4ce" />
+          <stop offset="1" stopColor="#e5e8e4" />
         </linearGradient>
       </defs>
       <rect width="300" height="176" fill="url(#hok-sky)" />
-      <path d="M186 132 L222 92 L236 100 L248 88 L262 100 L300 136 Z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.5" />
+      <path d="M186 132 L222 92 L236 100 L248 88 L262 100 L300 136 Z" fill="#f2f4f0" stroke="#141e2e" strokeWidth="1.5" />
       <path d="M222 92 L236 100 L248 88 L240 84 L232 90 Z" fill="#ffffff" />
       <path
         d="M0 150 C30 96 72 64 118 82 C150 94 158 126 142 142 C128 156 100 152 92 138 C104 150 126 150 134 138 C144 124 134 100 110 94 C70 84 34 118 10 162 L0 176 Z"
         fill="#1c4c86" stroke="#141e2e" strokeWidth="1.5"
       />
-      <path d="M96 86 q10 -12 4 -22 q10 10 18 6 q-6 12 2 20 q-12 -8 -24 -4 z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
-      <path d="M58 100 q12 -14 6 -26 q12 12 22 7 q-8 14 1 23 q-14 -10 -29 -4 z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M96 86 q10 -12 4 -22 q10 10 18 6 q-6 12 2 20 q-12 -8 -24 -4 z" fill="#f2f4f0" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M58 100 q12 -14 6 -26 q12 12 22 7 q-8 14 1 23 q-14 -10 -29 -4 z" fill="#f2f4f0" stroke="#141e2e" strokeWidth="1.2" />
       <path d="M0 162 C48 140 96 158 148 148 C200 138 252 158 300 148 L300 176 L0 176 Z" fill="#2e6fae" stroke="#141e2e" strokeWidth="1.2" />
     </svg>
   );
@@ -60,16 +61,16 @@ function RedFuji() {
         <linearGradient id="hok-bok" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#1c4c86" />
           <stop offset="0.55" stopColor="#8aaac8" />
-          <stop offset="1" stopColor="#ede4ce" />
+          <stop offset="1" stopColor="#e5e8e4" />
         </linearGradient>
       </defs>
       <rect width="300" height="176" fill="url(#hok-bok)" />
-      <g fill="#f7f0de" opacity="0.9">
+      <g fill="#f2f4f0" opacity="0.9">
         <path d="M24 30 q26 -8 52 0 q-26 8 -52 0 z" />
         <path d="M212 48 q30 -9 60 0 q-30 9 -60 0 z" />
       </g>
       <path d="M22 150 L150 32 L278 150 Z" fill="#b4452f" stroke="#141e2e" strokeWidth="1.5" />
-      <path d="M118 62 L150 32 L182 62 L170 58 L160 66 L150 56 L138 66 L128 58 Z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M118 62 L150 32 L182 62 L170 58 L160 66 L150 56 L138 66 L128 58 Z" fill="#f2f4f0" stroke="#141e2e" strokeWidth="1.2" />
       <path d="M0 150 h300 v26 h-300 z" fill="#3c5a44" />
       {Array.from({ length: 22 }).map((_, i) => (
         <path key={i} d={`M${6 + i * 14} 150 l6 -11 l6 11 z`} fill="#24402c" />
@@ -131,7 +132,7 @@ function BridgeRain() {
 function Boatmen() {
   return (
     <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A single small boat low in a very large empty expanse of water and sky">
-      <rect width="300" height="176" fill="#ede4ce" />
+      <rect width="300" height="176" fill="#e5e8e4" />
       <rect y="112" width="300" height="64" fill="#cfd9e2" />
       <g stroke="#86a7c6" strokeWidth="1" fill="none">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -155,7 +156,7 @@ function Boatmen() {
 function PineScale() {
   return (
     <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="One enormous pine filling the left of the frame, with a tiny traveller far off to the right">
-      <rect width="300" height="176" fill="#ede4ce" />
+      <rect width="300" height="176" fill="#e5e8e4" />
       <rect y="150" width="300" height="26" fill="#d8cdb2" />
       <g stroke="#141e2e" strokeWidth="1.5" fill="#5e4a30">
         <path d="M30 150 q-6 -70 10 -110 q6 -16 14 -2 q10 18 4 112 z" />
@@ -225,14 +226,14 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Prussian blue",
-    take: "Imported pigment, chemically stable, and the reason these prints look the way they do. It is the accent at 6.83:1, and the whole board is arranged so nothing competes with it.",
+    take: "Imported pigment, chemically stable, and the reason these prints look the way they do. It is the accent at 7.00:1, and the whole board is arranged so nothing competes with it.",
     visual: (
       <div className="relative h-full bg-hok-bg">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-20 w-20 border-[1.5px] border-hok-ink bg-hok-accent" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-hok-muted">
-          #1C4C86 · 6.83:1 ON #EDE4CE
+          #1C4C86 · 7.00:1 ON #E5E8E4
         </p>
       </div>
     ),
@@ -240,12 +241,12 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Mulberry paper",
-    take: "The ground is warm, slightly uneven and never white. Surface is half a tone lighter than background and no more, because a print has no elevation to speak of.",
+    take: "The ground is cool, slightly uneven and never white: unbleached kozo reads grey-green, not ivory. Surface is half a tone lighter than background and no more, because a print has no elevation to speak of.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#ede4ce" name="background" note="washi" stripBg="#f7f0de" />
-        <Chip hex="#f7f0de" name="surface" note="fresh sheet" stripBg="#f7f0de" />
-        <Chip hex="#aebcc8" name="border" note="1.53:1" stripBg="#f7f0de" />
+        <Chip hex="#e5e8e4" name="background" note="kozo paper" stripBg="#f2f4f0" />
+        <Chip hex="#f2f4f0" name="surface" note="fresh sheet" stripBg="#f2f4f0" />
+        <Chip hex="#aebcc8" name="border" note="1.53:1" stripBg="#f2f4f0" />
       </div>
     ),
   },
@@ -255,8 +256,8 @@ const ARTIFACTS: Artifact[] = [
     take: "Never true black. The text role is #141E2E, which keeps the page in one temperature and is why the dark areas feel like ink rather than like a hole.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#000000" name="true black" note="never used" tone="dark" stripBg="#f7f0de" />
-        <Chip hex="#141e2e" name="sumi" note="13.22:1" tone="dark" stripBg="#f7f0de" />
+        <Chip hex="#000000" name="true black" note="never used" tone="dark" stripBg="#f2f4f0" />
+        <Chip hex="#141e2e" name="sumi" note="13.54:1" tone="dark" stripBg="#f2f4f0" />
       </div>
     ),
   },
@@ -266,9 +267,9 @@ const ARTIFACTS: Artifact[] = [
     take: "One warm colour in an entirely cool set, used sparingly and always small. In the system it marks a figure that falls below its benchmark.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#b4452f" name="beni" note="4.33:1" tone="dark" stripBg="#f7f0de" />
-        <Chip hex="#6e8360" name="sage" note="3.27:1 — fill only" tone="dark" stripBg="#f7f0de" />
-        <Chip hex="#c08a3e" name="ochre" note="2.39:1 — fill only" stripBg="#f7f0de" />
+        <Chip hex="#b4452f" name="beni" note="4.46:1" tone="dark" stripBg="#f2f4f0" />
+        <Chip hex="#6e8360" name="sage" note="3.37:1 fill" tone="dark" stripBg="#f2f4f0" />
+        <Chip hex="#c08a3e" name="ochre" note="2.46:1 fill" stripBg="#f2f4f0" />
       </div>
     ),
   },
@@ -366,8 +367,8 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "TEXTURE",
     title: "Washi grain",
-    take: "The fibre runs at a slight angle and is never uniform. A one-pixel repeat at 94 degrees keeps the large empty areas from reading as a blank div.",
-    visual: <div className="h-full w-full tex-washi" />,
+    take: "The fibre runs at a slight angle and is never uniform. A one-pixel repeat at 94 degrees keeps the large empty areas from reading as a blank div. Shown at its own scale and magnified, because at its own scale you are not supposed to notice it.",
+    visual: <Magnified ship="tex-washi" zoom="tex-washi-4x" />,
   },
   {
     kind: "TEXTURE",
@@ -578,7 +579,7 @@ export default function Page() {
       sourcing="Every scene is drawn here in SVG after the compositions of the prints, and every texture is CSS, so nothing on the board is a scan or a reproduction. Figures quoted are the real 2011 Census figures."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Prussian blue #1C4C86 at 6.83:1. Primary action and current item only." },
+        { label: "Accent", detail: "Prussian blue #1C4C86 at 7.00:1. Primary action and current item only." },
         { label: "Separation", detail: "A 1.5px keyblock outline on every component. This system uses its line more than any other token, which is the opposite of La La Land." },
         { label: "Shape", detail: "One radius value, and the value is zero. A block print has no curve a knife could not cut." },
         { label: "Shadow", detail: "None at all. Depth comes from the outline, which is why hover changes the line colour rather than lifting anything." },

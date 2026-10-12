@@ -33,10 +33,10 @@ export const PALETTES: Record<MoodId, Palette> = {
     border: "#3f3074",
     accent: "#f2b544",
   },
-  // Aizuri-e: mulberry paper and Prussian blue, and almost nothing else.
+  // Aizuri-e: unbleached kozo paper, cool grey-green, and Prussian blue.
   hokusai: {
-    background: "#ede4ce",
-    surface: "#f7f0de",
+    background: "#e5e8e4",
+    surface: "#f2f4f0",
     text: "#141e2e",
     muted: "#44576f",
     border: "#aebcc8",
@@ -64,8 +64,8 @@ export const SECONDARY: Record<MoodId, { hex: string; name: string; job: string 
   ],
   hokusai: [
     { hex: "#b4452f", name: "Beni red", job: "The single warm note. Below-benchmark bars." },
-    { hex: "#6e8360", name: "Sage", job: "Second series. 3.27:1, fill only." },
-    { hex: "#c08a3e", name: "Ochre", job: "Third series. 2.39:1, fill only, never near text." },
+    { hex: "#6e8360", name: "Sage", job: "Second series. 3.37:1, fill only." },
+    { hex: "#c08a3e", name: "Ochre", job: "Third series. 2.46:1, fill only, never near text." },
   ],
 };
 

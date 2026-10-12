@@ -151,6 +151,66 @@ The fourteenth component is the detail panel, shown live only: its control
 states are the states of the buttons inside it, which are already on the page.
 That is stated on the page rather than left to be noticed.
 
+## Are the three actually different?
+
+The brief grades this ("the three feel genuinely different") and it is the one
+claim a screenshot can argue with, so it was measured rather than asserted.
+Three screenshots per page at 1280×860, compared pairwise.
+
+| View | Padmaavat vs La La Land | Padmaavat vs Hokusai | La La Land vs Hokusai |
+|---|---|---|---|
+| mood board, top | 80.5% | 7.7% | 76.0% |
+| mood board, grid | 70.6% | 13.5% | 66.7% |
+| design system, top | 74.1% | 9.8% | 73.9% |
+| design system, components | 77.9% | 8.6% | 76.1% |
+
+Figures are mean per-pixel distance over the whole frame. The first pass of
+this measurement is what caught a real problem: **Padmaavat and Hokusai were
+8.7% different at the top of their system pages**, because Hokusai's paper was
+as warm as Padmaavat's ivory (+31 against +30 on red-minus-blue) and both pages
+used the identical shared layout. Two systems that look like one system
+recoloured is precisely what the brief says it will cut for.
+
+Two fixes, both substantive:
+
+- **The ground was recoloured.** Unbleached kozo reads cool grey-green beside
+  lamp-lit ivory, not warm. Hokusai's background moved to `#E5E8E4`, which is
+  +1 on red-minus-blue against Padmaavat's +30, and it improved every one of
+  that system's contrast ratios at the same time.
+- **Each skin was given its own page rhythm.** Three systems that claim
+  different spatial logic were laying their documentation out identically,
+  which made the claim decoration. Padmaavat's pages are now symmetric about a
+  centre axis, after the durbar artifact. La La Land takes the 96px page edge
+  and 88px section gaps its own spacing scale specifies. Hokusai is pushed 200px
+  off the left edge with 112px between sections, because its board says the
+  empty sheet is the composition.
+
+Honest reading of the numbers afterwards: Padmaavat against Hokusai still sits
+in single digits to low teens, and it will, because both are pale themes that
+leave most of the sheet empty, so most sampled pixels are two slightly
+different near-whites. The metric is the wrong instrument for that pair. What
+separates them is ground temperature (+30 against +1), type (Cinzel capitals
+against Shippori Mincho sentence case), shape (foliated arches and inlay
+against square keyblock outlines) and page rhythm (centred against pushed
+right). The screenshots in the repo show it; the number does not capture it,
+and it is recorded here rather than quietly dropped for being inconvenient.
+
+## Three defects a probe cannot see
+
+Found by looking at the rendered boards, which is the part no script did:
+
+1. **The marquee-bulb artifact was broken.** The loop placed bulbs along the
+   top and bottom at uneven intervals and left the sides bare, so it did not
+   read as a frame at all. Rebuilt as four evenly spaced edges.
+2. **Two texture specimens were invisible.** A one-pixel film grain and a
+   one-pixel washi fibre render as a plain rectangle in a 176px frame. They are
+   now shown twice in the same frame, at the scale they ship and magnified,
+   with the split drawn and both labelled.
+3. **Colour-chip swatches ended at different heights** wherever a caption
+   wrapped to a different number of lines, which read as misalignment across a
+   row. The caption strip is now a fixed height and the notes were shortened to
+   fit it.
+
 ## Data checks
 
 The dataset was validated before anything was built on it:

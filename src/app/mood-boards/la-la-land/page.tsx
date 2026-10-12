@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BoardShell, Chip, type Artifact, type Skin } from "@/components/board";
+import { BoardShell, Chip, Magnified, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
   title: "Mood board 02 · Four Seasons, One Magic Hour",
@@ -26,6 +26,7 @@ const skin: Skin = {
   cardTitle: "font-lll-display text-[19px] leading-snug tracking-[0.01em]",
   take: "font-lll-body text-[13.5px] font-light leading-[1.6] text-lll-muted",
   rule: "border-lll-line",
+  shell: "skin-lll",
 };
 
 /* ------------------------------- drawn scenes ------------------------------ */
@@ -277,7 +278,7 @@ const ARTIFACTS: Artifact[] = [
           <Chip hex="#1a1440" name="field" tone="dark" />
           <Chip hex="#432560" name="band" tone="dark" />
           <Chip hex="#8d3a6a" name="horizon" tone="dark" />
-          <Chip hex="#c86a6a" name="last light" tone="dark" />
+          <Chip hex="#c86a6a" name="last" tone="dark" />
         </div>
       </div>
     ),
@@ -412,8 +413,8 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "TEXTURE",
     title: "35mm grain",
-    take: "A one-pixel noise at about 4% over everything. It stops the large dark areas banding, and it is the only texture the interface inherits.",
-    visual: <div className="h-full w-full bg-lll-surface tex-grain" />,
+    take: "A one-pixel noise at about 4% over everything. It stops the large dark areas banding, and it is the only texture the interface inherits. Shown at its own scale and magnified, because at its own scale it is meant to be invisible.",
+    visual: <Magnified ship="bg-lll-surface tex-grain" zoom="bg-lll-surface tex-grain-4x" dark />,
   },
   {
     kind: "TEXTURE",
@@ -434,9 +435,9 @@ const ARTIFACTS: Artifact[] = [
     take: "Nothing in this film goes to neutral grey or to true black. The muted role is therefore a violet, which is why captions here never look like a default stylesheet.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#7a7a7a" name="neutral grey" note="never used" tone="dark" />
+        <Chip hex="#7a7a7a" name="grey" note="never used" tone="dark" />
         <Chip hex="#b3a8d2" name="muted" note="8.26:1" tone="dark" />
-        <Chip hex="#3f3074" name="border" note="1.65:1 — decorative" tone="dark" />
+        <Chip hex="#3f3074" name="border" note="1.65:1" tone="dark" />
       </div>
     ),
   },
@@ -445,24 +446,29 @@ const ARTIFACTS: Artifact[] = [
     title: "Marquee bulbs",
     take: "An 18px repeat of amber points around a frame. Used once, around the open detail panel, so the panel reads as something lit rather than something layered.",
     visual: (
-      <div className="relative h-full w-full bg-[#0b0720]">
-        <div className="absolute inset-4 rounded-[8px] border border-lll-accent/60" />
-        {Array.from({ length: 22 }).map((_, i) => {
-          const per = 22;
-          const t = i / per;
-          const x = 16 + (268 * ((t * 4) % 1));
-          return (
-            <span
-              key={i}
-              className="absolute block h-1.5 w-1.5 rounded-full bg-lll-accent shadow-[0_0_7px_#f2b544]"
-              style={{
-                left: `${(x / 300) * 100}%`,
-                top: t < 0.25 ? "14px" : t < 0.5 ? "auto" : t < 0.75 ? "14px" : "auto",
-                bottom: t >= 0.25 && t < 0.5 ? "14px" : t >= 0.75 ? "14px" : "auto",
-              }}
-            />
-          );
-        })}
+      <div className="relative h-full w-full bg-[#0b0720] p-4">
+        <div className="relative h-full w-full rounded-[8px] border border-lll-accent/50">
+          {(["top-0", "bottom-0"] as const).map((edge) => (
+            <div
+              key={edge}
+              className={`absolute ${edge} left-0 right-0 flex -translate-y-1/2 justify-between px-1 ${edge === "bottom-0" ? "translate-y-1/2" : ""}`}
+            >
+              {Array.from({ length: 9 }).map((_, i) => (
+                <span key={i} className="block h-[7px] w-[7px] rounded-full bg-lll-accent shadow-[0_0_7px_#f2b544]" />
+              ))}
+            </div>
+          ))}
+          {(["left-0", "right-0"] as const).map((edge) => (
+            <div
+              key={edge}
+              className={`absolute ${edge} inset-y-0 flex w-0 flex-col justify-between py-1 ${edge === "left-0" ? "-translate-x-1/2" : "translate-x-1/2"}`}
+            >
+              {Array.from({ length: 4 }).map((_, i) => (
+                <span key={i} className="block h-[7px] w-[7px] rounded-full bg-lll-accent shadow-[0_0_7px_#f2b544]" />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     ),
   },

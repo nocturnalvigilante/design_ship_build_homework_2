@@ -42,8 +42,8 @@
   --color-lll-flare: #6fd3f2;
 
   /* 03 Hokusai */
-  --color-hok-bg: #ede4ce;
-  --color-hok-surface: #f7f0de;
+  --color-hok-bg: #e5e8e4;
+  --color-hok-surface: #f2f4f0;
   --color-hok-ink: #141e2e;
   --color-hok-muted: #44576f;
   --color-hok-line: #aebcc8;
@@ -133,6 +133,14 @@ summary:focus-visible, [tabindex]:focus-visible {
     repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(255,255,255,.022) 0 1px, transparent 1px 4px);
 }
+/* The same grain at four times the pitch. A 1px noise is invisible in a
+   176px specimen frame, so the boards show it beside the shipping version
+   rather than showing a rectangle and calling it a texture. */
+.tex-grain-4x {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.16) 0 2px, transparent 2px 12px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.09) 0 2px, transparent 2px 16px);
+}
 .glow-lamp { box-shadow: 0 0 0 1px rgba(242,181,68,.22), 0 18px 60px -28px rgba(242,181,68,.6); }
 /* The anamorphic streak: a flat horizontal cyan bar through a lit element. */
 .flare { position: relative; }
@@ -151,8 +159,15 @@ summary:focus-visible, [tabindex]:focus-visible {
     repeating-linear-gradient(94deg, rgba(20,30,46,.035) 0 1px, transparent 1px 7px),
     repeating-linear-gradient(2deg, rgba(20,30,46,.022) 0 1px, transparent 1px 11px);
 }
+/* Same fibre, four times the pitch, for the specimen frame. */
+.tex-washi-4x {
+  background-color: var(--color-hok-bg);
+  background-image:
+    repeating-linear-gradient(94deg, rgba(20,30,46,.14) 0 2px, transparent 2px 28px),
+    repeating-linear-gradient(2deg, rgba(20,30,46,.09) 0 2px, transparent 2px 44px);
+}
 /* The one gradient this system allows: a wiped sky, dark at the top. */
-.tex-bokashi { background-image: linear-gradient(180deg, #1c4c86 0%, #6b93bd 42%, #c4cfdb 74%, #ede4ce 100%); }
+.tex-bokashi { background-image: linear-gradient(180deg, #1c4c86 0%, #6b93bd 42%, #c4cfdb 74%, #e5e8e4 100%); }
 .tex-seigaiha {
   background-color: var(--color-hok-bg);
   background-image:

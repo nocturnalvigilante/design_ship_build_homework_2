@@ -28,6 +28,7 @@ const skin: Skin = {
     "font-pad-display text-[14px] font-semibold uppercase leading-snug tracking-[0.08em]",
   take: "font-pad-body text-[14px] leading-[1.55] text-pad-muted",
   rule: "border-pad-line",
+  shell: "skin-pad",
 };
 
 /* ------------------------------- drawn scenes ------------------------------ */
@@ -293,7 +294,7 @@ const ARTIFACTS: Artifact[] = [
     take: "The opposing palette, and the single most useful thing on this board: it gives the system a built-in way to say 'this figure falls short' without inventing a new colour.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#1c2a22" name="green-black" note="below benchmark" tone="dark" stripBg="#fffaf0" />
+        <Chip hex="#1c2a22" name="green-black" note="below bench." tone="dark" stripBg="#fffaf0" />
         <Chip hex="#41523f" name="moss" note="second series" tone="dark" stripBg="#fffaf0" />
       </div>
     ),
@@ -325,8 +326,8 @@ const ARTIFACTS: Artifact[] = [
     take: "The obvious choice for a film this gilded, and it reads 3.89:1 on the page. That is below the bar for body text, so gold is demoted to ornament and rules.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#9a6b1e" name="gota gold" note="3.89:1 — ornament only" tone="dark" stripBg="#fffaf0" />
-        <Chip hex="#e0893a" name="flame" note="2.17:1 — glow only" stripBg="#fffaf0" />
+        <Chip hex="#9a6b1e" name="gota gold" note="3.89:1 ornament" tone="dark" stripBg="#fffaf0" />
+        <Chip hex="#e0893a" name="flame" note="2.17:1 glow only" stripBg="#fffaf0" />
       </div>
     ),
   },

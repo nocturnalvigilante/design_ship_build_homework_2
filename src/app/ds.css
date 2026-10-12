@@ -61,15 +61,15 @@
 }
 /* --------------------------------------------------------- skin: 03 Hokusai */
 .ds-hok {
-  --bg: #ede4ce;
-  --surface: #f7f0de;
+  --bg: #e5e8e4;
+  --surface: #f2f4f0;
   --ink: #141e2e;
   --muted: #44576f;
   --line: #aebcc8;
   --accent: #1c4c86;
   --accent-hi: #12325a;
-  --accent-ink: #f7f0de;
-  --sunk: #e0d5ba;
+  --accent-ink: #f2f4f0;
+  --sunk: #d7dcd6;
   --cold: #b4452f;
   --ok: #6e8360;
   --r: 0px;
@@ -450,3 +450,42 @@
 
 .ds .ds-foot { border-top: 1px solid var(--line); }
 .ds-hok .ds-foot { border-top-width: 1.5px; border-top-color: var(--ink); }
+
+/* =========================================================================
+   Page rhythm per skin.
+
+   Three systems that claim different spatial logic should lay their own
+   documentation out differently, otherwise the claim is just a sentence. The
+   .skin-* classes are the same rules applied to the mood boards, which do not
+   carry the .ds skin.
+   ========================================================================= */
+
+/* Padmaavat is symmetric, after the durbar: the title sits on the axis and
+   the reading column is centred under it, but the prose stays left-aligned. */
+.ds-pad .ds-shell { max-width: 1060px; }
+.ds-pad .ds-head, .skin-pad .ds-head { text-align: center; }
+.ds-pad .ds-head > p, .ds-pad .ds-head > div,
+.skin-pad .ds-head > div > p, .skin-pad .ds-head > div > div { margin-left: auto; margin-right: auto; }
+.ds-pad .ds-head .ds-lede, .ds-pad .ds-head .ds-sub { text-align: left; }
+.ds-pad .ds-head nav { justify-content: center; }
+.ds-pad .ds-sec { margin-top: 40px; }
+.skin-pad .ds-head { text-align: left; }
+.skin-pad .ds-head > div:first-child { text-align: center; }
+.skin-pad .ds-head > div:first-child > div, .skin-pad .ds-head > div:first-child > p.mt-5 { text-align: left; }
+
+/* La La Land needs the air its own spacing scale asks for: 96px at the page
+   edge, 88px between sections. */
+.ds-lll .ds-shell, .skin-lll { padding-top: 72px; padding-bottom: 96px; }
+@media (min-width: 640px) { .ds-lll .ds-shell, .skin-lll { padding-top: 96px; } }
+.ds-lll .ds-sec { margin-top: 88px; }
+
+/* Hokusai is asymmetric and mostly empty, so the content is pushed off the
+   left edge of the sheet and the sections are 112px apart. */
+.ds-hok .ds-sec { margin-top: 112px; }
+@media (min-width: 1200px) {
+  .ds-hok .ds-shell, .skin-hok {
+    max-width: 1240px;
+    padding-left: 200px;
+    padding-right: 40px;
+  }
+}

@@ -54,6 +54,8 @@ export interface Skin {
   take: string;
   /** Horizontal rule between sections. */
   rule: string;
+  /** Extra classes on the page shell, so a skin can own its own rhythm. */
+  shell?: string;
 }
 
 export interface Artifact {
@@ -92,12 +94,12 @@ export function BoardShell({
   const used = KINDS.filter((k) => artifacts.some((a) => a.kind === k.kind));
   return (
     <div className={skin.page}>
-      <div className="mx-auto w-full max-w-[1180px] px-5 py-12 sm:px-8 sm:py-16">
+      <div className={`ds-shell mx-auto w-full max-w-[1180px] px-5 py-12 sm:px-8 sm:py-16 ${skin.shell ?? ""}`}>
         <Link href="/" className={skin.back}>
           &larr; Back to the hub
         </Link>
 
-        <header className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14">
+        <header className="ds-head mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14">
           <div className="max-w-[62ch]">
             <p className={skin.eyebrow}>Mood board {subtitle}</p>
             <h1 className={`mt-3 ${skin.title}`}>{name}</h1>
@@ -233,7 +235,7 @@ export function Chip({
     <div className="flex h-full flex-col">
       <div className="flex-1" style={{ background: hex }} />
       <div
-        className="min-h-[38px] px-2 pt-2 pb-1 leading-tight"
+        className="h-[42px] shrink-0 overflow-hidden px-2 pt-2 leading-tight"
         style={{ background: bg }}
       >
         <p className="font-mono text-[10px] tracking-wider" style={{ color: ink }}>
@@ -244,6 +246,45 @@ export function Chip({
           {note ? ` \u00b7 ${note}` : ""}
         </p>
       </div>
+    </div>
+  );
+}
+
+/** A texture shown twice: at the scale it ships, and magnified, because a
+    one-pixel repeat is invisible in a 176px frame and a specimen that cannot
+    be seen is not a specimen. */
+export function Magnified({
+  ship,
+  zoom,
+  label = "as it ships",
+  zoomLabel = "4×",
+  dark,
+}: {
+  ship: string;
+  zoom: string;
+  label?: string;
+  zoomLabel?: string;
+  dark?: boolean;
+}) {
+  const ink = dark ? "#f7f0e8" : "#141e2e";
+  const rule = dark ? "rgba(247,240,232,.45)" : "rgba(20,30,46,.45)";
+  return (
+    <div className="relative flex h-full w-full">
+      <div className={`h-full w-1/2 ${ship}`} />
+      <div className={`h-full w-1/2 ${zoom}`} />
+      <span className="absolute inset-y-0 left-1/2 w-px" style={{ background: rule }} />
+      <span
+        className="absolute bottom-1.5 left-2 font-mono text-[9px] tracking-wider"
+        style={{ color: ink }}
+      >
+        {label}
+      </span>
+      <span
+        className="absolute bottom-1.5 right-2 font-mono text-[9px] tracking-wider"
+        style={{ color: ink }}
+      >
+        {zoomLabel}
+      </span>
     </div>
   );
 }
