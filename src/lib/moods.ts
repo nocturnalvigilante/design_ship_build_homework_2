@@ -1,7 +1,8 @@
-// Three moods, three different worlds. They are deliberately unrelated so the
-// set shows range: a warm ornamental one, a dark cinematic one, and a dry
-// institutional one. Each carries its own SHAPE language, not just a palette,
-// because three recolours of the same components would read as one system.
+// Three moods picked to disagree about one question: how do you separate two
+// things? Padmaavat separates with ornament and with an opposing palette;
+// La La Land separates with darkness and distance; Hokusai separates with a
+// drawn outline and with empty paper. Because they answer differently, the
+// three design systems differ structurally and not only in colour.
 
 import { PALETTES, type Palette } from "./palette";
 export type { MoodId } from "./palette";
@@ -9,68 +10,65 @@ import type { MoodId } from "./palette";
 
 export interface Mood {
   id: MoodId;
+  /** The mood's own name, which is not the film's name. */
   name: string;
-  subtitle: string;
+  /** Where it comes from. */
+  source: string;
   blurb: string;
-  /** Six colour roles, in the order the design system presents them. */
-  palette: Palette;
-  /** Extra hues the mood boards use. Never used as UI accents. */
-  secondary: string[];
   /** What keeps the three design systems from being recolours. */
   shape: { corners: string; rules: string; density: string };
-  typeNote: string;
+  palette: Palette;
+  /** Four hexes for the hub card. */
   swatch: string[];
 }
 
 export const MOODS: Record<MoodId, Mood> = {
-  rajasthan: {
-    id: "rajasthan",
-    name: "Rajasthan",
-    subtitle: "Pink, Blue and White Cities",
+  padmaavat: {
+    id: "padmaavat",
+    name: "Chittor and Khilji",
+    source: "Padmaavat",
     blurb:
-      "Lime-washed walls, vermilion and gold, jali lattice repeated until it becomes a grid. Ornament used as structure rather than decoration.",
-    palette: PALETTES.rajasthan,
-    secondary: ["#1e3a5f", "#d4932a", "#2c6e72", "#e0a24a"],
+      "Two palettes at war in one film. The fort is ivory, gold and candlelight; the siege outside it is green-black and smoke. Ornament is dense, symmetry is absolute, and every light source is a flame.",
     shape: {
-      corners: "scalloped and cusped arches",
-      rules: "ornamental, repeated as pattern",
-      density: "rhythmic",
+      corners: "foliated and mirrored",
+      rules: "ornamental, inlaid",
+      density: "dense, layered",
     },
-    typeNote: "Devanagari-flavoured display over a quiet serif",
-    swatch: ["#fdf4ea", "#e0c6ae", "#a8291f", "#1e3a5f"],
+    palette: PALETTES.padmaavat,
+    swatch: ["#f4e9d6", "#d9be92", "#8c1c21", "#1c2a22"],
   },
   "la-la-land": {
     id: "la-la-land",
-    name: "La La Land",
-    subtitle: "Twilight and Streetlight",
+    name: "Four Seasons, One Magic Hour",
+    source: "La La Land",
     blurb:
-      "Warm light against cool dusk, which is the whole trick of the film. Indigo sky, amber lamps, magenta neon, and a great deal of air.",
+      "Not one palette but four, announced by a title card each time it changes, all hung on the same fifteen minutes of dusk: cyan above, magenta at the horizon, the lamps already lit. Shadows are violet, never black.",
+    shape: {
+      corners: "soft, wide, anamorphic",
+      rules: "replaced by glow and by distance",
+      density: "airy, 2.55:1",
+    },
     palette: PALETTES["la-la-land"],
-    secondary: ["#e0609a", "#4ec5d4", "#7b5ea7", "#ffd9a0"],
-    shape: {
-      corners: "soft, wide, letterboxed",
-      rules: "faint, often replaced by glow",
-      density: "airy",
-    },
-    typeNote: "High-contrast cinematic display, wide tracking, geometric sans",
-    swatch: ["#171033", "#3f3074", "#f2b544", "#e0609a"],
+    swatch: ["#14102e", "#b9497e", "#f2b544", "#6fd3f2"],
   },
-  loki: {
-    id: "loki",
-    name: "Loki",
-    subtitle: "Time Variance Authority",
+  hokusai: {
+    id: "hokusai",
+    name: "Prussian Blue on Mulberry Paper",
+    source: "Hokusai and the aizuri-e print",
     blurb:
-      "Nineteen-seventies institutional. Manila, mustard and burnt orange, rubber stamps and carbon forms. Bureaucracy is made of components already.",
-    palette: PALETTES.loki,
-    secondary: ["#8a7f2e", "#d4a62a", "#5e4b32", "#9c3b17"],
+      "Flat colour with no modelled light anywhere. A black keyblock line does all the work, one wiped bokashi gradient carries the sky, and the composition is pushed hard off-centre so that most of the sheet is empty.",
     shape: {
-      corners: "chamfered, squared off",
-      rules: "heavy, load-bearing",
-      density: "tight, form-like",
+      corners: "square, cut by a block",
+      rules: "a drawn keyblock outline",
+      density: "sparse, asymmetric",
     },
-    typeNote: "Chunky institutional sans with typewriter mono for anything official",
-    swatch: ["#e5dcc5", "#9a8a66", "#b4441a", "#8a7f2e"],
+    palette: PALETTES.hokusai,
+    swatch: ["#ede4ce", "#aebcc8", "#1c4c86", "#b4452f"],
   },
 };
 
-export const MOOD_ORDER: MoodId[] = ["rajasthan", "la-la-land", "loki"];
+export const MOOD_ORDER: MoodId[] = ["padmaavat", "la-la-land", "hokusai"];
+
+export function moodIndex(id: MoodId) {
+  return String(MOOD_ORDER.indexOf(id) + 1).padStart(2, "0");
+}

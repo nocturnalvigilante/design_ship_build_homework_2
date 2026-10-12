@@ -1,17 +1,15 @@
 import { PALETTES } from "./palette";
 import type { MoodId } from "./palette";
 
-// The full token set behind each design system. The mood boards decide these;
-// the systems publish them; the Rajasthan site consumes the Rajasthan set.
-// Every colour has a job written next to it, because an unexplained colour is
-// the thing that gets cut.
+// The full token set behind each design system. The mood boards decide these,
+// the systems publish them, and the India census site consumes the Padmaavat
+// set. Every colour has a job written next to it, because an unexplained
+// colour is the first thing a reviewer cuts.
 
 export interface ColourRole {
   role: "background" | "surface" | "text" | "muted" | "border" | "accent";
   hex: string;
   job: string;
-  /** What this colour is read against when it carries text. */
-  against?: string;
 }
 
 export interface TypeRole {
@@ -30,111 +28,111 @@ export interface SystemTokens {
   mood: MoodId;
   colours: ColourRole[];
   type: TypeRole[];
-  /** Base step in px; the scale is these multiples. */
   spacing: { name: string; px: number; use: string }[];
   radii: { name: string; css: string; use: string }[];
   borders: { name: string; css: string; use: string }[];
   shadows: { name: string; css: string; use: string }[];
-  /** One sentence on why the shape language is what it is. */
   shapeRationale: string;
 }
 
 export const TOKENS: Record<MoodId, SystemTokens> = {
-  rajasthan: {
-    mood: "rajasthan",
+  /* ------------------------------------------------------------ 01 Padmaavat */
+  padmaavat: {
+    mood: "padmaavat",
     colours: [
-      { role: "background", hex: PALETTES["rajasthan"].background, job: "Lime-washed wall. Every page sits on it; nothing else is this light." },
-      { role: "surface", hex: PALETTES["rajasthan"].surface, job: "Raised plaster panel. Cards and the detail drawer, so grouped things lift off the wall." },
-      { role: "text", hex: PALETTES["rajasthan"].text, job: "Ink. All reading text and every number." },
-      { role: "muted", hex: PALETTES["rajasthan"].muted, job: "Second rank only: units, captions, the source line. Never a whole sentence.", against: "#fdf4ea" },
-      { role: "border", hex: PALETTES["rajasthan"].border, job: "Hairline and jali lattice. Separates, never shouts." },
-      { role: "accent", hex: PALETTES["rajasthan"].accent, job: "Vermilion. Reserved: the primary action, the selected district, and nothing else.", against: "#fdf4ea" },
+      { role: "background", hex: PALETTES.padmaavat.background, job: "Lamp-lit ivory. The hall the whole page stands in." },
+      { role: "surface", hex: PALETTES.padmaavat.surface, job: "A lit panel inside it. Cards and the record drawer only." },
+      { role: "text", hex: PALETTES.padmaavat.text, job: "Sepia black. All reading text and every figure." },
+      { role: "muted", hex: PALETTES.padmaavat.muted, job: "Second rank: units, derivations, the source line. Never a whole paragraph." },
+      { role: "border", hex: PALETTES.padmaavat.border, job: "Sandstone hairline, and the inlay pattern on section rules." },
+      { role: "accent", hex: PALETTES.padmaavat.accent, job: "Chittor crimson. The primary action and the open record, nothing else." },
     ],
     type: [
       {
-        role: "display", family: "Rozha One", cssVar: "var(--f-raj-display)", size: "clamp(38px, 6vw, 62px)",
-        weight: 400, tracking: "-0.01em", leading: "1.04",
-        use: "One per page. The page title and nothing else.",
-        sample: "Rajasthan, 2011",
+        role: "display", family: "Cinzel", cssVar: "var(--f-pad-display)",
+        size: "clamp(36px, 5.4vw, 58px)", weight: 600, tracking: "0.03em", leading: "1.08",
+        use: "Once per page. Carved caps, because the titles in this world are cut into stone.",
+        sample: "CHITTORGARH",
       },
       {
-        role: "heading", family: "Rozha One", cssVar: "var(--f-raj-display)", size: "22px",
-        weight: 400, tracking: "0", leading: "1.2",
-        use: "Section and card titles. Same face as display so the page reads as one voice.",
-        sample: "Jodhpur district",
+        role: "heading", family: "Cinzel", cssVar: "var(--f-pad-display)",
+        size: "20px", weight: 600, tracking: "0.07em", leading: "1.25",
+        use: "Section and card titles, uppercase, always above a rule.",
+        sample: "DISTRICTS OF KERALA",
       },
       {
-        role: "body", family: "Spectral", cssVar: "var(--f-raj-body)", size: "17px",
-        weight: 400, tracking: "0", leading: "1.62",
+        role: "body", family: "Cormorant Garamond", cssVar: "var(--f-pad-body)",
+        size: "17.5px", weight: 400, tracking: "0", leading: "1.6",
         use: "Running prose, held to about 68 characters a line.",
-        sample: "Jaisalmer covers 38,401 square kilometres and holds seventeen people in each one of them.",
+        sample: "Of the 640 districts counted in 2011, Thane held the most people and Dibang Valley the fewest.",
       },
       {
-        role: "label", family: "Spectral", cssVar: "var(--f-raj-body)", size: "11px",
-        weight: 600, tracking: "0.14em", leading: "1.1",
-        use: "Field labels, units, table headers. Uppercase, always short.",
+        role: "label", family: "Cormorant Garamond", cssVar: "var(--f-pad-body)",
+        size: "11.5px", weight: 600, tracking: "0.18em", leading: "1.1",
+        use: "Field labels, units, column heads. Uppercase, always short.",
         sample: "FEMALES PER 1,000 MALES",
       },
     ],
     spacing: [
-      { name: "xs", px: 4, use: "Gap inside a chip, between an icon and its word." },
+      { name: "xs", px: 4, use: "Gap inside a chip." },
       { name: "sm", px: 8, use: "Label to value." },
-      { name: "md", px: 16, use: "Padding inside a control; gap between list rows." },
+      { name: "md", px: 16, use: "Padding inside a control." },
       { name: "lg", px: 24, use: "Card padding." },
       { name: "xl", px: 40, use: "Between sections." },
       { name: "2xl", px: 64, use: "Page top and bottom." },
     ],
     radii: [
-      { name: "none", css: "0", use: "Table cells and the data bars; a measured length should not look soft." },
-      { name: "sm", css: "3px", use: "Inputs, chips, buttons." },
-      { name: "cusped", css: "999px 999px 4px 4px", use: "The arch. Card heads and the detail drawer, taken straight from a jharokha opening." },
+      { name: "none", css: "0", use: "Anything holding a number. A measured length should never look soft." },
+      { name: "sm", css: "2px", use: "Inputs, chips, buttons." },
+      { name: "foliated", css: "999px 999px 2px 2px", use: "The arch. Only on things that open, taken from the fort's doorways." },
     ],
     borders: [
-      { name: "hair", css: "1px solid #e0c6ae", use: "Default separator." },
-      { name: "ink", css: "1.5px solid #2d1b18", use: "Focus and the selected row." },
-      { name: "jali", css: "repeating lattice, 8px pitch", use: "Section rules and the empty state, drawn as a pattern not a line." },
+      { name: "hair", css: "1px solid #d9be92", use: "Default separator." },
+      { name: "ink", css: "1.5px solid #221410", use: "Hover, and the selected row." },
+      { name: "inlay", css: "repeating diamond, 10px pitch", use: "Section rules, drawn as inlay rather than as a line." },
     ],
     shadows: [
-      { name: "none", css: "none", use: "Default. Flat plaster." },
-      { name: "lift", css: "0 1px 0 #e0c6ae, 0 10px 24px -18px rgba(45,27,24,.5)", use: "Hovered card, open drawer." },
+      { name: "none", css: "none", use: "Default." },
+      { name: "lamp", css: "0 1px 0 #d9be92, 0 14px 30px -22px rgba(34,20,16,.65)", use: "Hovered card and the open drawer. One source, from above." },
     ],
     shapeRationale:
-      "Ornament is doing structural work here: the cusped arch marks what opens, the jali lattice marks what separates. Corners are near-square everywhere a number is read, so precision still looks like precision.",
+      "The film's whole grammar is two palettes in opposition, so this system is too: warm for what a figure is, cold for where it falls short of its benchmark. Ornament is allowed to be dense, but only on the frame; everything that holds a number stays square and plain.",
   },
 
+  /* ---------------------------------------------------------- 02 La La Land */
   "la-la-land": {
     mood: "la-la-land",
     colours: [
-      { role: "background", hex: PALETTES["la-la-land"].background, job: "The sky twenty minutes after sunset. The whole page is this." },
+      { role: "background", hex: PALETTES["la-la-land"].background, job: "The top of the magic-hour sky. Carries a gradient down to magenta." },
       { role: "surface", hex: PALETTES["la-la-land"].surface, job: "A lit window in that sky. Cards and panels only." },
-      { role: "text", hex: PALETTES["la-la-land"].text, job: "Warm white, not pure white, so it reads as lamplight." },
-      { role: "muted", hex: PALETTES["la-la-land"].muted, job: "Captions, timestamps, the second line of a card.", against: "#171033" },
-      { role: "border", hex: PALETTES["la-la-land"].border, job: "Barely-there edge. Most separation is done with space and glow instead." },
-      { role: "accent", hex: PALETTES["la-la-land"].accent, job: "Streetlamp amber. Primary action and the current item, nothing else.", against: "#171033" },
+      { role: "text", hex: PALETTES["la-la-land"].text, job: "Warm white, not pure white, so it reads as lamplight rather than as a screen." },
+      { role: "muted", hex: PALETTES["la-la-land"].muted, job: "Captions and second lines. Violet, because shadow in this film is never grey." },
+      { role: "border", hex: PALETTES["la-la-land"].border, job: "Barely there. This system separates with distance and glow instead." },
+      { role: "accent", hex: PALETTES["la-la-land"].accent, job: "Streetlamp amber. Primary action, current item, focus ring. The only light source." },
     ],
     type: [
       {
-        role: "display", family: "Bodoni Moda", cssVar: "var(--f-lll-display)", size: "clamp(40px, 7vw, 76px)",
-        weight: 500, tracking: "0.04em", leading: "1.0",
-        use: "Title card. Once per page, centred, with air above and below.",
-        sample: "A Season in Jaipur",
+        role: "display", family: "Bodoni Moda", cssVar: "var(--f-lll-display)",
+        size: "clamp(40px, 7vw, 76px)", weight: 500, tracking: "0.04em", leading: "1.0",
+        use: "The title card. Once per page, centred, with a season above it.",
+        sample: "Summer",
       },
       {
-        role: "heading", family: "Bodoni Moda", cssVar: "var(--f-lll-display)", size: "24px",
-        weight: 500, tracking: "0.02em", leading: "1.25",
-        use: "Act and section headings.",
+        role: "heading", family: "Bodoni Moda", cssVar: "var(--f-lll-display)",
+        size: "24px", weight: 500, tracking: "0.02em", leading: "1.25",
+        use: "Section headings, which in this system are chapters.",
         sample: "Winter — the count begins",
       },
       {
-        role: "body", family: "Jost", cssVar: "var(--f-lll-body)", size: "16.5px",
-        weight: 300, tracking: "0.01em", leading: "1.7",
-        use: "Running prose. Light weight, generous leading: the mood is air.",
-        sample: "The lamps come on over the old city and the street keeps its colour for about an hour.",
+        role: "body", family: "Jost", cssVar: "var(--f-lll-body)",
+        size: "16.5px", weight: 300, tracking: "0.01em", leading: "1.7",
+        use: "Running prose. Light weight and generous leading, because the mood is air.",
+        sample: "At magic hour the sky runs cyan at the top and magenta at the horizon, and the lamps are already on.",
       },
       {
-        role: "label", family: "Jost", cssVar: "var(--f-lll-body)", size: "11px",
-        weight: 500, tracking: "0.26em", leading: "1.1",
-        use: "Marquee lettering: credits, field labels, the small print under a poster.",
+        role: "label", family: "Jost", cssVar: "var(--f-lll-body)",
+        size: "11px", weight: 500, tracking: "0.26em", leading: "1.1",
+        use: "Credits and field labels. Tracked wide enough to read as a marquee.",
         sample: "D I R E C T E D   B Y",
       },
     ],
@@ -144,84 +142,84 @@ export const TOKENS: Record<MoodId, SystemTokens> = {
       { name: "md", px: 20, use: "Control padding." },
       { name: "lg", px: 32, use: "Card padding." },
       { name: "xl", px: 56, use: "Between sections. The mood needs the air." },
-      { name: "2xl", px: 96, use: "Page top and bottom, so the first thing feels like a title card." },
+      { name: "2xl", px: 96, use: "Page top and bottom, so the first thing reads as a title card." },
     ],
     radii: [
-      { name: "sm", css: "6px", use: "Inputs and chips." },
-      { name: "pill", css: "999px", use: "Buttons and filters. Everything that is pressed is round." },
-      { name: "frame", css: "14px", use: "Cards and the panel: a soft letterbox." },
+      { name: "sm", css: "6px", use: "Inputs." },
+      { name: "pill", css: "999px", use: "Everything pressable. If it is round, you can press it." },
+      { name: "frame", css: "14px", use: "Cards and panels: a soft 2.55:1 letterbox." },
     ],
     borders: [
-      { name: "faint", css: "1px solid #3f3074", use: "Default, and usually it is enough." },
+      { name: "none", css: "0", use: "Preferred. Glow and distance separate most things." },
+      { name: "faint", css: "1px solid #3f3074", use: "When an edge is genuinely needed." },
       { name: "lamp", css: "1px solid #f2b544", use: "Focus and the current item." },
-      { name: "none", css: "0", use: "Preferred. Glow and space separate most things." },
     ],
     shadows: [
-      { name: "glow", css: "0 0 0 1px rgba(242,181,68,.22), 0 18px 60px -28px rgba(242,181,68,.55)", use: "Hover and the open panel." },
-      { name: "deep", css: "0 30px 70px -40px rgba(0,0,0,.9)", use: "The panel over the page." },
+      { name: "glow", css: "0 0 0 1px rgba(242,181,68,.22), 0 18px 60px -28px rgba(242,181,68,.6)", use: "Hover and the open panel." },
+      { name: "flare", css: "a 1px horizontal cyan streak across a lit element", use: "The anamorphic lens flare, on the primary action only." },
     ],
     shapeRationale:
-      "Nothing is cornered sharply, because nothing in the film is. Separation comes from darkness and distance rather than lines, which is why the border role is the least-used colour in the set.",
+      "Nothing is cornered sharply, because nothing in the film is, and the border role is the least-used colour in the set. The one hard-edged device is the horizontal flare, which is the only thing in the system that is allowed to cross a boundary.",
   },
 
-  loki: {
-    mood: "loki",
+  /* ------------------------------------------------------------- 03 Hokusai */
+  hokusai: {
+    mood: "hokusai",
     colours: [
-      { role: "background", hex: PALETTES["loki"].background, job: "Manila. The desk the form is lying on." },
-      { role: "surface", hex: PALETTES["loki"].surface, job: "The form itself. Every panel is a sheet of paper." },
-      { role: "text", hex: PALETTES["loki"].text, job: "Typewriter black. All copy and all figures." },
-      { role: "muted", hex: PALETTES["loki"].muted, job: "Carbon copy: field numbers, footnotes, the stamp date.", against: "#e5dcc5" },
-      { role: "border", hex: PALETTES["loki"].border, job: "Ruled line. This system separates with rules, so it is used constantly." },
-      { role: "accent", hex: PALETTES["loki"].accent, job: "Stamp-pad orange, darkened until it clears 4.5:1. Primary action and active record only, never decorative.", against: "#e5dcc5" },
+      { role: "background", hex: PALETTES.hokusai.background, job: "Mulberry paper. Most of the page is this, and that is the point." },
+      { role: "surface", hex: PALETTES.hokusai.surface, job: "A fresh sheet laid on it. Half a tone lighter, never more." },
+      { role: "text", hex: PALETTES.hokusai.text, job: "Sumi ink, which is blue-black rather than black." },
+      { role: "muted", hex: PALETTES.hokusai.muted, job: "The lighter pass of the same ink: captions, derivations, scale marks." },
+      { role: "border", hex: PALETTES.hokusai.border, job: "The keyblock outline. Used on everything, because the line is the drawing." },
+      { role: "accent", hex: PALETTES.hokusai.accent, job: "Prussian blue, the pigment that made these prints. Primary action and current item only." },
     ],
     type: [
       {
-        role: "display", family: "Archivo", cssVar: "var(--f-loki-display)", size: "clamp(30px, 4.6vw, 46px)",
-        weight: 800, tracking: "-0.02em", leading: "1.0",
-        use: "Department heading at the top of the sheet. Uppercase.",
-        sample: "DISTRICT RECORDS",
+        role: "display", family: "Shippori Mincho", cssVar: "var(--f-hok-display)",
+        size: "clamp(34px, 5vw, 54px)", weight: 600, tracking: "0.02em", leading: "1.15",
+        use: "Once per page, and deliberately not centred. The title sits where the composition leaves room.",
+        sample: "Thirty-six Views",
       },
       {
-        role: "heading", family: "Archivo", cssVar: "var(--f-loki-display)", size: "15px",
-        weight: 700, tracking: "0.08em", leading: "1.2",
-        use: "Section bars. Small, loud, uppercase, always on a ruled bar.",
-        sample: "SECTION 3 — ENUMERATION",
+        role: "heading", family: "Shippori Mincho", cssVar: "var(--f-hok-display)",
+        size: "21px", weight: 600, tracking: "0.02em", leading: "1.3",
+        use: "Section and card titles.",
+        sample: "Districts of Maharashtra",
       },
       {
-        role: "body", family: "Courier Prime", cssVar: "var(--f-loki-body)", size: "15px",
-        weight: 400, tracking: "0", leading: "1.6",
-        use: "Everything typed into the form, including prose. Monospace is the point.",
-        sample: "Variant file opened 2011-03-01. Count verified. No anomaly recorded.",
+        role: "body", family: "Zen Kaku Gothic New", cssVar: "var(--f-hok-body)",
+        size: "16px", weight: 400, tracking: "0.005em", leading: "1.78",
+        use: "Running prose. A plain gothic against the mincho display, and very open leading.",
+        sample: "Three districts in India recorded no urban households at all in 2011: Lahul and Spiti, Kinnaur, and the Nicobars.",
       },
       {
-        role: "label", family: "Archivo", cssVar: "var(--f-loki-display)", size: "10px",
-        weight: 700, tracking: "0.18em", leading: "1.1",
-        use: "Field numbers and column heads. Uppercase, under a rule.",
-        sample: "FIELD 04 / SEX RATIO",
+        role: "label", family: "Zen Kaku Gothic New", cssVar: "var(--f-hok-body)",
+        size: "11px", weight: 500, tracking: "0.2em", leading: "1.1",
+        use: "Field labels and column heads, set small and wide against all that empty paper.",
+        sample: "HOUSEHOLDS WITH INTERNET",
       },
     ],
     spacing: [
-      { name: "xs", px: 4, use: "Inside a field box." },
-      { name: "sm", px: 8, use: "Label to field." },
-      { name: "md", px: 12, use: "Control padding. Tight: this is a form." },
-      { name: "lg", px: 18, use: "Panel padding." },
-      { name: "xl", px: 28, use: "Between sections." },
-      { name: "2xl", px: 44, use: "Page top and bottom." },
+      { name: "xs", px: 4, use: "Inside a chip." },
+      { name: "sm", px: 10, use: "Label to value." },
+      { name: "md", px: 18, use: "Control padding." },
+      { name: "lg", px: 30, use: "Card padding." },
+      { name: "xl", px: 72, use: "Between sections. The empty paper is the composition." },
+      { name: "2xl", px: 112, use: "Page top and bottom." },
     ],
     radii: [
-      { name: "none", css: "0", use: "Default and nearly universal. Paper does not have rounded corners." },
-      { name: "chamfer", css: "clipped 8px corner", use: "The one exception: file tabs and the active record, cut not rounded." },
+      { name: "none", css: "0", use: "Everything. A block print has no curve a knife could not cut." },
     ],
     borders: [
-      { name: "rule", css: "1px solid #9a8a66", use: "Everywhere. The grid is visible on purpose." },
-      { name: "heavy", css: "2px solid #241c13", use: "Section bars and the selected row." },
-      { name: "stamp", css: "2px solid #b4441a", use: "Focus, and the approved state." },
+      { name: "keyblock", css: "1.5px solid #141e2e", use: "The outline, on every component. This is the system's main structural device." },
+      { name: "faint", css: "1px solid #aebcc8", use: "Interior divisions inside an already-outlined block." },
+      { name: "accent", css: "1.5px solid #1c4c86", use: "Focus and the current item." },
     ],
     shadows: [
-      { name: "none", css: "none", use: "Default. Paper on a desk casts almost nothing." },
-      { name: "sheet", css: "2px 2px 0 #9a8a66", use: "Hover: the sheet shifts a couple of millimetres." },
+      { name: "none", css: "none", use: "Everywhere. A print is flat, and depth is faked with the outline instead." },
+      { name: "bokashi", css: "a wiped vertical gradient, used once per page", use: "The sky. It is a background, never an elevation." },
     ],
     shapeRationale:
-      "Every corner is square and every edge is a drawn rule, because the whole system is pretending to be a printed form. The single chamfer is reserved for the active file, so the one cut corner means something.",
+      "No shadow and no rounding anywhere, so the outline is carrying all of the structure. Layout is deliberately asymmetric and the spacing scale jumps from 30px to 72px with nothing in between, because the empty sheet is the composition rather than what is left over after it.",
   },
 };

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { MOODS, type MoodId } from "@/lib/moods";
+import { MOODS, moodIndex, type MoodId } from "@/lib/moods";
 import { TOKENS } from "@/lib/tokens";
-import { PALETTES } from "@/lib/palette";
+import { PALETTES, SECONDARY } from "@/lib/palette";
 import { contrast, grade } from "@/lib/contrast";
-import { DISTRICTS, METRICS } from "@/lib/census";
+import { DISTRICTS, METRICS, METRIC_BY_KEY } from "@/lib/census";
 
 /* ---------------------------------------------------------------------------
    One page shell for all three design systems.
@@ -20,9 +20,16 @@ import { DISTRICTS, METRICS } from "@/lib/census";
 --------------------------------------------------------------------------- */
 
 const SKIN: Record<MoodId, string> = {
-  rajasthan: "ds ds-raj",
+  padmaavat: "ds ds-pad",
   "la-la-land": "ds ds-lll",
-  loki: "ds ds-loki",
+  hokusai: "ds ds-hok",
+};
+
+/** The district each system uses for its "card with a real item". */
+const DEMO: Record<MoodId, string> = {
+  padmaavat: "Udaipur",
+  "la-la-land": "Mumbai Suburban",
+  hokusai: "Thiruvananthapuram",
 };
 
 export const STATES = [
@@ -131,12 +138,11 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
   const p = PALETTES[mood];
   // Text that sits on top of an accent fill: white on vermilion, the page
   // background on amber, the paper colour on stamp orange.
-  const accentInk =
-    mood === "rajasthan" ? "#ffffff" : mood === "la-la-land" ? p.background : p.surface;
+  const accentInk = mood === "la-la-land" ? p.background : p.surface;
 
   // Live state for the interactive copies.
   const [tab, setTab] = useState(0);
-  const [chips, setChips] = useState<string[]>(["Jaipur"]);
+  const [chips, setChips] = useState<string[]>(["Kerala"]);
   const [checked, setChecked] = useState(true);
   const [radio, setRadio] = useState("literacy");
   const [on, setOn] = useState(true);
@@ -145,6 +151,8 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
   const [text, setText] = useState("");
   const closeRef = useRef<HTMLButtonElement>(null);
   const uid = useId();
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -154,21 +162,24 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const demo = DISTRICTS.find((d) => d.name === (mood === "loki" ? "Jaisalmer" : mood === "la-la-land" ? "Kota" : "Jodhpur"))!;
-  const topRows = [...DISTRICTS].sort((a, b) => b.literacy - a.literacy).slice(0, 4);
+  const demo = DISTRICTS.find((d) => d.name === DEMO[mood]) ?? DISTRICTS[0];
+  const litMetric = METRIC_BY_KEY.literateShare;
+  const topRows = [...DISTRICTS]
+    .sort((a, b) => litMetric.value(b) - litMetric.value(a))
+    .slice(0, 4);
 
   const toggleChip = (c: string) =>
     setChips((x) => (x.includes(c) ? x.filter((y) => y !== c) : [...x, c]));
 
   return (
-    <div className={`${SKIN[mood]} min-h-screen`}>
+    <div className={`${SKIN[mood]} min-h-screen`} data-hydrated={ready ? "true" : "false"}>
       <div className="mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16">
         <Link href="/" className="lnk ds-cap">
           &larr; Back to the hub
         </Link>
 
         <header className="mt-8">
-          <p className="ds-eyebrow">Design system {indexOf(mood)} &middot; {m.subtitle}</p>
+          <p className="ds-eyebrow">Design system {moodIndex(mood)} &middot; after {m.source}</p>
           <h1 className="ds-h1 mt-3">{m.name}</h1>
           <p className="ds-lede mt-5 max-w-[66ch]">{m.blurb}</p>
           <p className="ds-sub mt-4 max-w-[66ch]">{t.shapeRationale}</p>
@@ -176,8 +187,8 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
             <Link href={`/mood-boards/${mood}`} className="lnk ds-cap">
               The mood board this came from
             </Link>
-            {mood === "rajasthan" && (
-              <Link href="/rajasthan-census" className="lnk ds-cap">
+            {mood === "padmaavat" && (
+              <Link href="/india-census" className="lnk ds-cap">
                 The site built with it
               </Link>
             )}
@@ -263,6 +274,35 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               rather than as a word. It is listed so the gap is on the record
               rather than hidden.
             </p>
+
+          <div className="mt-8">
+            <p className="ds-lab">The second palette, and what it may not do</p>
+            <p className="ds-cap mt-2 max-w-[66ch]">
+              These are not accents. They fill charts, chapters and ornament,
+              and each one carries its measured ratio against the page so that
+              the ones which cannot hold text are marked as such rather than
+              quietly used anyway.
+            </p>
+            <ul className="mt-4 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+              {SECONDARY[mood].map((c) => {
+                const r = contrast(c.hex, p.background);
+                return (
+                  <li key={c.hex}>
+                    <div className="sw-chip" style={{ background: c.hex }} />
+                    <div className="mt-2 flex items-baseline justify-between gap-3">
+                      <p className="ds-h4">{c.name}</p>
+                      <p className="ds-mono">{c.hex.toUpperCase()}</p>
+                    </div>
+                    <p className="ds-cap mt-1">{c.job}</p>
+                    <p className="ds-mono mt-1.5">
+                      {r.toFixed(2)}:1 on the background &middot;{" "}
+                      {r >= 4.5 ? "may carry text" : r >= 3 ? "large text only" : "fill only, never text"}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
           </div>
         </Section>
 
@@ -467,13 +507,13 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               job="Navigation inside running text. Underlined, always."
               live={
                 <p className="ds-body max-w-[60ch]">
-                  Rajasthan returned {Math.round(68548437 / 1e6)} million people across{" "}
-                  <a className="lnk" href="#s5">thirty-three districts</a> in 2011.
+                  India returned 1.21 billion people across{" "}
+                  <a className="lnk" href="#s5">{DISTRICTS.length} districts</a> in 2011.
                 </p>
               }
               render={(c) => (
                 <a className={`lnk ${c}`} href="#s5" tabIndex={-1}>
-                  thirty-three
+                  640 districts
                 </a>
               )}
             />
@@ -487,7 +527,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                   <span className="ds-lab">Find a district</span>
                   <input
                     className="fld mt-2"
-                    placeholder="Jodhpur"
+                    placeholder="Udaipur"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                   />
@@ -496,7 +536,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               render={(c) => (
                 <input
                   className={`fld ${c}`}
-                  defaultValue="Jodhpur"
+                  defaultValue="Udaipur"
                   disabled={c === "is-disabled"}
                   readOnly
                   tabIndex={-1}
@@ -548,7 +588,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                   <span className="box" aria-hidden>
                     <span className="mark">&#10003;</span>
                   </span>
-                  <span>Show the state average on every bar</span>
+                  <span>Show the benchmark tick on every bar</span>
                 </label>
               }
               render={(c) => (
@@ -640,7 +680,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                     ))}
                   </div>
                   <p className="ds-body mt-4">
-                    {["A ranked table of all 33 districts.", "The same numbers as bars against the state average.", "Where the figures come from and what they exclude."][tab]}
+                    {["A ranked table of all 640 districts.", "The same numbers as bars against the state and against India.", "Where the figures come from, and which of them are derived."][tab]}
                   </p>
                 </div>
               }
@@ -657,7 +697,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               job="Many filters, all visible at once, each removable."
               live={
                 <div className="flex flex-wrap gap-2">
-                  {["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bikaner"].map((c) => (
+                  {["Kerala", "Punjab", "Assam", "Goa", "Bihar"].map((c) => (
                     <button
                       key={c}
                       className={`chip ${chips.includes(c) ? "is-selected" : ""}`}
@@ -671,7 +711,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               }
               render={(c) => (
                 <span className={`chip ${c}`} style={{ display: "inline-block" }}>
-                  Jaipur
+                  Kerala
                 </span>
               )}
             />
@@ -684,13 +724,14 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                 <button className="card max-w-xs" onClick={() => setOpen(true)}>
                   <div className="card-head">
                     <p className="ds-h4">{demo.name}</p>
-                    <p className="ds-cap">{demo.division} division</p>
+                    <p className="ds-cap">{demo.state}</p>
                   </div>
                   <div className="card-body">
                     <p className="ds-lab">Population, 2011</p>
                     <p className="ds-figure">{demo.population.toLocaleString("en-IN")}</p>
                     <p className="ds-cap mt-2">
-                      {demo.density} persons per km&sup2; &middot; literacy {demo.literacy}%
+                      {demo.households.toLocaleString("en-IN")} households &middot;{" "}
+                      {litMetric.format(litMetric.value(demo))} literate
                     </p>
                     <span className="badge badge-accent mt-3 inline-block">Open record</span>
                   </div>
@@ -723,7 +764,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                       aria-pressed={row === d.id}
                     >
                       <span>{d.name}</span>
-                      <span className="ds-mono tabular-nums">{d.literacy.toFixed(2)}%</span>
+                      <span className="ds-mono tabular-nums">{litMetric.format(litMetric.value(d))}</span>
                     </button>
                   ))}
                 </div>
@@ -731,8 +772,8 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               render={(c) => (
                 <span className="rows" style={{ display: "block" }}>
                   <span className={`row ${c}`} style={{ display: "grid" }}>
-                    <span>Kota</span>
-                    <span className="ds-mono">76.56%</span>
+                    <span>{topRows[0].name}</span>
+                    <span className="ds-mono">{litMetric.format(litMetric.value(topRows[0]))}</span>
                   </span>
                 </span>
               )}
@@ -744,8 +785,8 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               job="A fact about an item, not an action. Never clickable."
               live={
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="badge">33 districts</span>
-                  <span className="badge badge-accent">Highest literacy</span>
+                  <span className="badge">640 districts</span>
+                  <span className="badge badge-accent">Highest literate share</span>
                   <span className="badge">2011 boundaries</span>
                 </div>
               }
@@ -777,7 +818,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                       >
                         <div className="flex items-start justify-between gap-6">
                           <div>
-                            <p className="ds-lab">{demo.division} division</p>
+                            <p className="ds-lab">{demo.state}</p>
                             <p className="ds-h3 mt-1">{demo.name}</p>
                           </div>
                           <button ref={closeRef} className="btn btn-secondary" onClick={() => setOpen(false)}>
@@ -788,7 +829,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                           {METRICS.map((mm) => (
                             <div key={mm.key}>
                               <dt className="ds-lab">{mm.label}</dt>
-                              <dd className="ds-figure">{mm.format(demo[mm.key])}</dd>
+                              <dd className="ds-figure">{mm.format(mm.value(demo))}</dd>
                             </div>
                           ))}
                         </dl>
@@ -824,8 +865,8 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               <div className="state mt-2">
                 <p className="ds-h4">No districts match</p>
                 <p className="ds-cap mt-2">
-                  Literacy above 80% and density under 50 does not describe any
-                  district in Rajasthan.
+                  No district in India had both an internet share above 20% and
+                  fewer than 50,000 households.
                 </p>
                 <button className="btn btn-secondary mt-4">Clear both filters</button>
               </div>
@@ -839,7 +880,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                 <div className="skel mt-3" style={{ width: "78%", height: 22 }} />
                 <div className="skel mt-3" style={{ width: "62%" }} />
                 <div className="skel mt-3" style={{ width: "88%" }} />
-                <p className="ds-cap mt-4">Reading 33 records&hellip;</p>
+                <p className="ds-cap mt-4">Reading 640 records&hellip;</p>
               </div>
               <p className="ds-cap mt-2">{UI_STATES[1].tells}</p>
             </div>
@@ -848,10 +889,10 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               <p className="ds-lab">{UI_STATES[2].name}</p>
               <div className="state mt-2" style={{ textAlign: "left" }}>
                 <p className="ds-lab">Compare with</p>
-                <input className="fld fld-err mt-2" defaultValue="Rajkot" readOnly />
+                <input className="fld fld-err mt-2" defaultValue="Telangana" readOnly />
                 <p className="ds-err mt-2">
-                  Rajkot is in Gujarat. This explorer only holds the 33 districts
-                  of Rajasthan as they stood in 2011.
+                  Telangana was formed in 2014. This explorer holds the 35 states
+                  and union territories as they stood at the 2011 Census.
                 </p>
               </div>
               <p className="ds-cap mt-2">{UI_STATES[2].tells}</p>
@@ -863,7 +904,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                 <div className="note note-ok">
                   <p className="ds-h4">Comparison saved</p>
                   <p className="ds-cap mt-1">
-                    Jodhpur and Jaisalmer are pinned for this session.
+                    Udaipur and Thiruvananthapuram are pinned for this session.
                   </p>
                 </div>
               </div>
@@ -874,8 +915,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
 
         <footer className="ds-foot mt-16 pt-6">
           <p className="ds-cap">
-            MPCS 51238 &middot; UI/UX &amp; Visual Design &middot; design system{" "}
-            {indexOf(mood)} of 3. Six colour roles, four type roles, fourteen
+            MPCS 51238 &middot; UI/UX &amp; Visual Design &middot; design system {moodIndex(mood)} of 3. Six colour roles, four type roles, fourteen
             components, six control states and four UI states, all on this page.
             Contrast ratios are computed from the token values at build time.
           </p>
@@ -885,6 +925,3 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
   );
 }
 
-function indexOf(mood: MoodId) {
-  return mood === "rajasthan" ? "01" : mood === "la-la-land" ? "02" : "03";
-}

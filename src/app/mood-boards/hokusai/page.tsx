@@ -2,200 +2,183 @@ import type { Metadata } from "next";
 import { BoardShell, Chip, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
-  title: "Mood board 03 · Loki — Time Variance Authority",
+  title: "Mood board 03 · Prussian Blue on Mulberry Paper",
   description:
-    "Twenty-eight artifacts: manila and carbon, rubber stamps, ruled forms, 1970s institutional signage.",
+    "Twenty-eight artifacts: aizuri-e prints, the keyblock line, bokashi gradients, washi grain and a great deal of empty paper.",
 };
 
 const skin: Skin = {
-  page: "min-h-screen bg-loki-bg text-loki-ink font-loki-body",
+  page: "min-h-screen bg-hok-bg text-hok-ink font-hok-body tex-washi",
   back:
-    "inline-block border border-loki-line bg-loki-surface px-2 py-1 font-loki-display text-[10px] font-bold uppercase tracking-[0.18em] text-loki-muted hover:bg-loki-accent hover:text-loki-surface",
+    "inline-block border-[1.5px] border-hok-ink px-3 py-1 font-hok-body text-[11px] font-medium uppercase tracking-[0.2em] text-hok-ink hover:border-hok-accent hover:text-hok-accent",
   eyebrow:
-    "font-loki-display text-[10px] font-bold uppercase tracking-[0.22em] text-loki-accent",
+    "font-hok-body text-[11px] font-medium uppercase tracking-[0.2em] text-hok-accent",
   title:
-    "font-loki-display text-[clamp(30px,4.6vw,46px)] font-extrabold uppercase leading-none -tracking-[0.02em]",
-  lede: "font-loki-body text-[15px] leading-[1.6] text-loki-ink",
-  small: "font-loki-body text-[12.5px] leading-[1.5] text-loki-muted",
-  sectionTitle:
-    "border-b-2 border-loki-ink pb-1 font-loki-display text-[15px] font-bold uppercase tracking-[0.08em]",
-  card: "border border-loki-line bg-loki-surface p-3 transition-shadow hover:shadow-[2px_2px_0_#9a8a66]",
-  tag:
-    "font-loki-display text-[10px] font-bold uppercase tracking-[0.18em] text-loki-muted",
-  frame: "h-44 overflow-hidden border border-loki-line",
-  cardTitle: "font-loki-display text-[14px] font-bold uppercase tracking-[0.04em] leading-snug",
-  take: "font-loki-body text-[12.5px] leading-[1.5] text-loki-muted",
-  rule: "border-loki-line",
+    "font-hok-display text-[clamp(34px,5vw,54px)] font-semibold leading-[1.15] tracking-[0.02em]",
+  lede: "font-hok-body text-[16px] leading-[1.78] text-hok-ink",
+  small: "font-hok-body text-[13px] leading-[1.65] text-hok-muted",
+  sectionTitle: "font-hok-display text-[24px] font-semibold leading-tight",
+  card:
+    "border-[1.5px] border-hok-ink bg-hok-surface p-5 transition-colors hover:border-hok-accent",
+  tag: "font-hok-body text-[10px] font-medium uppercase tracking-[0.2em] text-hok-muted",
+  frame: "h-44 overflow-hidden border-[1.5px] border-hok-ink",
+  cardTitle: "font-hok-display text-[16px] font-semibold leading-snug",
+  take: "font-hok-body text-[13px] leading-[1.65] text-hok-muted",
+  rule: "border-hok-line",
 };
 
-/* ---------- drawn scenes ---------- */
+/* ------------------------------- drawn scenes ------------------------------ */
 
-function Lobby() {
+function GreatWave() {
   return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A vast concrete atrium with a clock high on the wall and small figures below">
-      <rect width="300" height="176" fill="#cbbf9f" />
-      <rect y="126" width="300" height="50" fill="#b3a67f" />
-      <g fill="#bfb290">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <rect key={i} x={10 + i * 50} y="18" width="26" height="108" />
-        ))}
-      </g>
-      <g fill="#a2946e">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <rect key={i} x={36 + i * 50} y="18" width="4" height="108" />
-        ))}
-      </g>
-      <rect x="0" y="6" width="300" height="14" fill="#8d8060" />
-      <circle cx="150" cy="58" r="22" fill="#f4efe0" stroke="#241c13" strokeWidth="2.5" />
-      <line x1="150" y1="58" x2="150" y2="44" stroke="#241c13" strokeWidth="2.5" />
-      <line x1="150" y1="58" x2="160" y2="64" stroke="#973413" strokeWidth="2.5" />
-      <rect x="118" y="88" width="64" height="11" fill="#973413" />
-      <g fill="#4a3f2c">
-        {[44, 72, 96, 206, 232, 258].map((x, i) => (
-          <g key={i}>
-            <rect x={x} y={112} width="7" height="16" />
-            <circle cx={x + 3.5} cy={108} r="3.5" />
-          </g>
-        ))}
-      </g>
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A great breaking wave with clawed foam, a small Fuji in the distance behind it">
+      <defs>
+        <linearGradient id="hok-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8fa6bd" />
+          <stop offset="0.5" stopColor="#d6d3c2" />
+          <stop offset="1" stopColor="#ede4ce" />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="176" fill="url(#hok-sky)" />
+      <path d="M186 132 L222 92 L236 100 L248 88 L262 100 L300 136 Z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.5" />
+      <path d="M222 92 L236 100 L248 88 L240 84 L232 90 Z" fill="#ffffff" />
+      <path
+        d="M0 150 C30 96 72 64 118 82 C150 94 158 126 142 142 C128 156 100 152 92 138 C104 150 126 150 134 138 C144 124 134 100 110 94 C70 84 34 118 10 162 L0 176 Z"
+        fill="#1c4c86" stroke="#141e2e" strokeWidth="1.5"
+      />
+      <path d="M96 86 q10 -12 4 -22 q10 10 18 6 q-6 12 2 20 q-12 -8 -24 -4 z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M58 100 q12 -14 6 -26 q12 12 22 7 q-8 14 1 23 q-14 -10 -29 -4 z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M0 162 C48 140 96 158 148 148 C200 138 252 158 300 148 L300 176 L0 176 Z" fill="#2e6fae" stroke="#141e2e" strokeWidth="1.2" />
     </svg>
   );
 }
 
-function DeskRows() {
+function RedFuji() {
   return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="Rows of identical desks with clerks, seen from above">
-      <rect width="300" height="176" fill="#d6c9a6" />
-      {[0, 1, 2, 3].map((r) => (
-        <g key={r}>
-          {[0, 1, 2, 3, 4].map((c) => {
-            const x = 14 + c * 56;
-            const y = 14 + r * 42;
-            return (
-              <g key={c}>
-                <rect x={x} y={y} width="44" height="26" fill="#9a8a66" />
-                <rect x={x + 2} y={y + 2} width="40" height="22" fill="#b8a87f" />
-                <rect x={x + 5} y={y + 6} width="13" height="14" fill="#f4efe0" />
-                <rect x={x + 22} y={y + 8} width="16" height="10" fill="#7d7430" />
-                <circle cx={x + 22} cy={y + 32} r="5" fill="#4a3f2c" />
-              </g>
-            );
-          })}
-        </g>
-      ))}
-      <rect x="0" y="0" width="300" height="176" fill="none" stroke="#9a8a66" strokeWidth="2" />
-    </svg>
-  );
-}
-
-function TimeDoor() {
-  return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A glowing orange ring standing open in a dim concrete corridor">
-      <rect width="300" height="176" fill="#3a3326" />
-      <rect y="132" width="300" height="44" fill="#2a2419" />
-      <g opacity="0.9">
-        <ellipse cx="150" cy="88" rx="56" ry="56" fill="none" stroke="#973413" strokeWidth="7" />
-        <ellipse cx="150" cy="88" rx="56" ry="56" fill="none" stroke="#f0a04a" strokeWidth="2" />
-        <ellipse cx="150" cy="88" rx="50" ry="50" fill="#1c1812" />
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A conical mountain in red-brown against a banded blue sky, with a dark forest at its foot">
+      <defs>
+        <linearGradient id="hok-bok" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#1c4c86" />
+          <stop offset="0.55" stopColor="#8aaac8" />
+          <stop offset="1" stopColor="#ede4ce" />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="176" fill="url(#hok-bok)" />
+      <g fill="#f7f0de" opacity="0.9">
+        <path d="M24 30 q26 -8 52 0 q-26 8 -52 0 z" />
+        <path d="M212 48 q30 -9 60 0 q-30 9 -60 0 z" />
       </g>
-      <ellipse cx="150" cy="88" rx="70" ry="70" fill="#973413" opacity="0.1" />
-      <ellipse cx="150" cy="148" rx="72" ry="10" fill="#973413" opacity="0.18" />
-      <g fill="#c9a227" opacity="0.5">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <circle key={i} cx={150 + Math.cos(i) * 34} cy={88 + Math.sin(i * 1.7) * 32} r="1.4" />
-        ))}
-      </g>
-    </svg>
-  );
-}
-
-function Archive() {
-  return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="Deep shelves of identical box files receding down a corridor">
-      <rect width="300" height="176" fill="#c7b995" />
-      {[0, 1, 2, 3, 4, 5].map((r) => (
-        <g key={r}>
-          <rect x="0" y={8 + r * 28} width="300" height="22" fill="#b2a173" />
-          {Array.from({ length: 16 }).map((_, c) => (
-            <g key={c}>
-              <rect x={4 + c * 18.6} y={10 + r * 28} width="15" height="18" fill={c % 4 === 0 ? "#d9cba4" : c % 4 === 1 ? "#cbbb90" : c % 4 === 2 ? "#e2d6b4" : "#bfae82"} />
-              <rect x={6 + c * 18.6} y={13 + r * 28} width="11" height="4" fill="#f4efe0" />
-              {(r * 16 + c) % 11 === 0 && (
-                <rect x={6 + c * 18.6} y={20 + r * 28} width="11" height="3" fill="#973413" />
-              )}
-            </g>
-          ))}
-          <rect x="0" y={30 + r * 28} width="300" height="3" fill="#8d7c56" />
-        </g>
+      <path d="M22 150 L150 32 L278 150 Z" fill="#b4452f" stroke="#141e2e" strokeWidth="1.5" />
+      <path d="M118 62 L150 32 L182 62 L170 58 L160 66 L150 56 L138 66 L128 58 Z" fill="#f7f0de" stroke="#141e2e" strokeWidth="1.2" />
+      <path d="M0 150 h300 v26 h-300 z" fill="#3c5a44" />
+      {Array.from({ length: 22 }).map((_, i) => (
+        <path key={i} d={`M${6 + i * 14} 150 l6 -11 l6 11 z`} fill="#24402c" />
       ))}
     </svg>
   );
 }
 
-function DeskTop() {
+function RainBeneath() {
   return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A desk from above with scattered forms, a stamp, a mug and a pen">
-      <rect width="300" height="176" fill="#6b5435" />
-      <g>
-        <rect x="18" y="24" width="112" height="140" fill="#f1ead6" transform="rotate(-4 74 94)" />
-        <rect x="30" y="16" width="112" height="140" fill="#f7f2e2" transform="rotate(3 86 86)" />
-        {Array.from({ length: 9 }).map((_, i) => (
-          <rect key={i} x="42" y={34 + i * 13} width={i % 3 === 0 ? 62 : 84} height="3" fill="#9a8a66" transform="rotate(3 86 86)" />
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A dark mountain under a black sky split by a branching white lightning strike">
+      <rect width="300" height="176" fill="#101d33" />
+      <rect y="0" width="300" height="70" fill="#060d1a" />
+      <path d="M22 158 L150 36 L278 158 Z" fill="#1c3b63" stroke="#0a1322" strokeWidth="1.5" />
+      <path d="M120 66 L150 36 L180 66 L168 62 L158 70 L150 60 L140 70 L130 62 Z" fill="#dfe6ef" />
+      <path
+        d="M66 158 L96 120 L84 118 L112 92 L104 110 L120 104 L96 134 L108 132 Z"
+        fill="#f4efe0" stroke="#141e2e" strokeWidth="1"
+      />
+      <path d="M0 158 h300 v18 h-300 z" fill="#0a1322" />
+      <g stroke="#2e6fae" strokeWidth="1" opacity="0.5">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <line key={i} x1={i * 20 + 4} y1="0" x2={i * 20 - 14} y2="70" />
         ))}
-        <rect x="42" y="26" width="46" height="6" fill="#241c13" transform="rotate(3 86 86)" />
       </g>
-      <g transform="rotate(-10 210 70)">
-        <rect x="170" y="36" width="88" height="62" fill="#fbe7d4" stroke="#973413" strokeWidth="2.5" />
-        <rect x="182" y="52" width="64" height="8" fill="#973413" />
-        <rect x="182" y="68" width="42" height="5" fill="#973413" />
-      </g>
-      <g>
-        <rect x="196" y="112" width="34" height="18" fill="#2f2a20" />
-        <rect x="204" y="100" width="18" height="14" rx="3" fill="#443c2c" />
-        <rect x="196" y="130" width="34" height="5" fill="#973413" />
-      </g>
-      <g>
-        <circle cx="266" cy="138" r="18" fill="#d8cdae" />
-        <circle cx="266" cy="138" r="13" fill="#54432c" />
-        <path d="M284 132 a9 7 0 0 1 0 12" fill="none" stroke="#d8cdae" strokeWidth="4" />
-      </g>
-      <rect x="150" y="150" width="76" height="4" rx="2" fill="#241c13" transform="rotate(-6 188 152)" />
     </svg>
   );
 }
 
-function BranchChart() {
+function BridgeRain() {
   return (
-    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A wall chart of one straight timeline with several branches crossed out in orange">
-      <rect width="300" height="176" fill="#e8dfc6" />
-      <g stroke="#9a8a66" strokeWidth="0.6">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <line key={i} x1="0" y1={i * 16} x2="300" y2={i * 16} />
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="Figures crossing an arched bridge in slanting rain, carrying umbrellas">
+      <rect width="300" height="176" fill="#dcd8c4" />
+      <g stroke="#44576f" strokeWidth="0.9" opacity="0.6">
+        {Array.from({ length: 34 }).map((_, i) => (
+          <line key={i} x1={i * 12 - 30} y1="0" x2={i * 12 - 66} y2="176" />
         ))}
       </g>
-      <line x1="10" y1="88" x2="290" y2="88" stroke="#241c13" strokeWidth="3" />
-      {[[64, -1], [118, 1], [172, -1], [222, 1]].map(([x, dir], i) => (
+      <path d="M0 128 Q150 58 300 128 L300 142 Q150 72 0 142 Z" fill="#8a6a47" stroke="#141e2e" strokeWidth="1.5" />
+      <g stroke="#141e2e" strokeWidth="1.2">
+        {Array.from({ length: 11 }).map((_, i) => {
+          const x = 14 + i * 27;
+          const y = 128 - Math.sin((i / 10) * Math.PI) * 70 + 6;
+          return <line key={i} x1={x} y1={y} x2={x} y2={y + 26} stroke="#6b5234" />;
+        })}
+      </g>
+      {[[78, 96], [126, 80], [184, 84], [228, 100]].map(([x, y], i) => (
         <g key={i}>
-          <path d={`M${x} 88 Q${x + 26} 88 ${x + 46} ${88 + dir * 44}`} stroke="#973413" strokeWidth="2" fill="none" strokeDasharray={i === 2 ? "0" : "5 3"} />
-          {i !== 2 && (
-            <g stroke="#973413" strokeWidth="2.5">
-              <line x1={x + 34} y1={88 + dir * 26} x2={x + 48} y2={88 + dir * 38} />
-              <line x1={x + 48} y1={88 + dir * 26} x2={x + 34} y2={88 + dir * 38} />
-            </g>
-          )}
+          <path d={`M${x - 16} ${y} a16 11 0 0 1 32 0 z`} fill={i % 2 ? "#1c4c86" : "#b4452f"} stroke="#141e2e" strokeWidth="1.2" />
+          <line x1={x} y1={y} x2={x} y2={y + 8} stroke="#141e2e" strokeWidth="1.2" />
+          <path d={`M${x - 6} ${y + 8} q6 18 12 0 z`} fill="#3f4f3c" stroke="#141e2e" strokeWidth="1" />
         </g>
       ))}
-      <text x="12" y="80" fontSize="9" fontFamily="monospace" fill="#241c13">SACRED TIMELINE</text>
-      <text x="214" y="150" fontSize="8" fontFamily="monospace" fill="#973413">VARIANT 2011</text>
+      <rect y="150" width="300" height="26" fill="#9fb0c0" />
+    </svg>
+  );
+}
+
+function Boatmen() {
+  return (
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="A single small boat low in a very large empty expanse of water and sky">
+      <rect width="300" height="176" fill="#ede4ce" />
+      <rect y="112" width="300" height="64" fill="#cfd9e2" />
+      <g stroke="#86a7c6" strokeWidth="1" fill="none">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <path key={i} d={`M0 ${124 + i * 12} q24 -6 48 0 t48 0 t48 0 t48 0 t48 0 t48 0`} />
+        ))}
+      </g>
+      <g transform="translate(206 112)">
+        <path d="M-30 0 q30 14 60 0 q-6 10 -30 10 q-24 0 -30 -10 z" fill="#8a6a47" stroke="#141e2e" strokeWidth="1.5" />
+        <path d="M-14 0 v-14 h4 v14 z" fill="#141e2e" />
+        <circle cx="4" cy="-6" r="4" fill="#1c4c86" />
+        <circle cx="16" cy="-4" r="4" fill="#b4452f" />
+      </g>
+      <g opacity="0.35">
+        <path d="M18 96 q24 -7 48 0 q-24 7 -48 0 z" fill="#9fb0c0" />
+        <path d="M94 74 q30 -8 60 0 q-30 8 -60 0 z" fill="#9fb0c0" />
+      </g>
+    </svg>
+  );
+}
+
+function PineScale() {
+  return (
+    <svg viewBox="0 0 300 176" className="h-full w-full" role="img" aria-label="One enormous pine filling the left of the frame, with a tiny traveller far off to the right">
+      <rect width="300" height="176" fill="#ede4ce" />
+      <rect y="150" width="300" height="26" fill="#d8cdb2" />
+      <g stroke="#141e2e" strokeWidth="1.5" fill="#5e4a30">
+        <path d="M30 150 q-6 -70 10 -110 q6 -16 14 -2 q10 18 4 112 z" />
+      </g>
+      <g fill="#3c5a44" stroke="#141e2e" strokeWidth="1.2">
+        <path d="M44 42 q40 -14 62 6 q-44 -2 -62 10 z" />
+        <path d="M40 72 q46 -12 70 10 q-50 -4 -70 10 z" />
+        <path d="M36 104 q38 -10 58 8 q-42 -2 -58 10 z" />
+        <path d="M10 60 q-32 -10 -48 6 q34 -2 48 8 z" transform="translate(44 0)" />
+      </g>
+      <g fill="#141e2e">
+        <ellipse cx="246" cy="142" rx="3" ry="7" />
+        <circle cx="246" cy="132" r="2.6" />
+        <path d="M240 134 h12 l-6 -5 z" fill="#b4452f" />
+      </g>
+      <line x1="238" y1="150" x2="258" y2="150" stroke="#44576f" strokeWidth="0.8" />
     </svg>
   );
 }
 
 function TypeCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-full w-full flex-col justify-center bg-loki-surface px-4 tex-paper">
-      {children}
-    </div>
+    <div className="flex h-full w-full flex-col justify-center bg-hok-surface px-5 tex-washi">{children}</div>
   );
 }
 
@@ -203,206 +186,178 @@ const ARTIFACTS: Artifact[] = [
   /* IMAGE */
   {
     kind: "IMAGE",
-    title: "The atrium",
-    take: "Enormous, symmetrical, and totally indifferent to you. Sets the tone: the interface is a building you are a visitor in, not a product being friendly at you.",
-    visual: <Lobby />,
+    title: "The great wave",
+    take: "The subject is at the edge and the mountain, which the print is supposedly about, is a thumbnail in the gap. Composition by displacement, which is where the asymmetric layout comes from.",
+    visual: <GreatWave />,
   },
   {
     kind: "IMAGE",
-    title: "Rows of identical desks",
-    take: "Thirty-three districts is a list of identical records. The grid here is literal: same cell, repeated, no cell special until you pick one.",
-    visual: <DeskRows />,
+    title: "Fine wind, clear morning",
+    take: "Three flat colours and an outline. No modelling anywhere, and the mountain still reads as a solid. Proof a system can drop shadow entirely and keep its depth.",
+    visual: <RedFuji />,
   },
   {
     kind: "IMAGE",
-    title: "A time door",
-    take: "The only saturated thing in the building, and it is the thing you walk through. That is the whole argument for reserving the accent.",
-    visual: <TimeDoor />,
+    title: "Rainstorm beneath the summit",
+    take: "The same mountain, inverted into night. One white shape doing all of the work on a dark field, which became the focus treatment.",
+    visual: <RainBeneath />,
   },
   {
     kind: "IMAGE",
-    title: "The archive",
-    take: "Rows of files, a coloured tab every eleventh one. Became the table: quiet rows, with the accent marking only the record in hand.",
-    visual: <Archive />,
+    title: "Travellers on a bridge",
+    take: "Rain drawn as ruled parallel lines over everything, including the figures. The system's loading state borrows it: a pattern laid across the whole block rather than a spinner beside it.",
+    visual: <BridgeRain />,
   },
   {
     kind: "IMAGE",
-    title: "A desk at the end of a shift",
-    take: "Paper overlapping paper. The detail panel sits on top of the table rather than replacing it, so you can still see what you came from.",
-    visual: <DeskTop />,
+    title: "One boat",
+    take: "Nine tenths of the sheet is empty and the subject sits low and right. This is the artifact that set the spacing scale, which jumps from 30px straight to 72px.",
+    visual: <Boatmen />,
   },
   {
     kind: "IMAGE",
-    title: "Wall chart: one line, pruned branches",
-    take: "A diagram doing the job of a sentence. Pushed the site towards charts drawn in the same ink as the text, not in a chart library's colours.",
-    visual: <BranchChart />,
+    title: "A pine and a traveller",
+    take: "Scale stated by putting the two extremes in one frame with nothing between them. The site does the same thing with its largest and smallest district.",
+    visual: <PineScale />,
   },
 
   /* COLOUR */
   {
     kind: "COLOUR",
-    title: "Manila, foolscap, carbon",
-    take: "Three warm neutrals a hair apart. The background is the desk, the surface is the sheet, and that tiny step is all the elevation the system has.",
+    title: "Prussian blue",
+    take: "Imported pigment, chemically stable, and the reason these prints look the way they do. It is the accent at 6.83:1, and the whole board is arranged so nothing competes with it.",
     visual: (
-      <div className="grid h-full grid-cols-3">
-        <Chip hex="#e5dcc5" name="background" note="the desk" stripBg="#f4efe0" />
-        <Chip hex="#f4efe0" name="surface" note="the sheet" stripBg="#f4efe0" />
-        <Chip hex="#9a8a66" name="border" note="the rule" stripBg="#f4efe0" />
-      </div>
-    ),
-  },
-  {
-    kind: "COLOUR",
-    title: "Stamp-pad orange",
-    take: "The accent at 5.46:1 on the background. It means one thing: this is the action, or this is the record you are on.",
-    visual: (
-      <div className="relative h-full bg-loki-bg">
+      <div className="relative h-full bg-hok-bg">
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="stamp px-4 py-2">
-            <p className="font-loki-display text-[16px] font-bold uppercase tracking-[0.14em]">
-              Approved
-            </p>
-          </div>
+          <div className="h-20 w-20 border-[1.5px] border-hok-ink bg-hok-accent" />
         </div>
-        <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-loki-muted">
-          #973413 · 5.46:1 ON #E5DCC5
+        <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-hok-muted">
+          #1C4C86 · 6.83:1 ON #EDE4CE
         </p>
       </div>
     ),
   },
   {
     kind: "COLOUR",
-    title: "Olive and mustard",
-    take: "The institution's own colours. Kept for charts, where a second and third series are needed and must not look clickable.",
+    title: "Mulberry paper",
+    take: "The ground is warm, slightly uneven and never white. Surface is half a tone lighter than background and no more, because a print has no elevation to speak of.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#7d7430" name="olive" note="series 2" stripBg="#f4efe0" />
-        <Chip hex="#c9a227" name="mustard" note="series 3" stripBg="#f4efe0" />
-        <Chip hex="#54432c" name="brown" note="series 4" stripBg="#f4efe0" />
+        <Chip hex="#ede4ce" name="background" note="washi" stripBg="#f7f0de" />
+        <Chip hex="#f7f0de" name="surface" note="fresh sheet" stripBg="#f7f0de" />
+        <Chip hex="#aebcc8" name="border" note="1.53:1" stripBg="#f7f0de" />
       </div>
     ),
   },
   {
     kind: "COLOUR",
-    title: "Uniform teal",
-    take: "One cool colour in an entirely warm set, which is exactly how it is used in the show. Reserved for the success state.",
+    title: "Sumi ink is blue-black",
+    take: "Never true black. The text role is #141E2E, which keeps the page in one temperature and is why the dark areas feel like ink rather than like a hole.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#3f5e55" name="teal" note="success" stripBg="#f4efe0" />
-        <Chip hex="#8f2f1b" name="brick" note="error" stripBg="#f4efe0" />
+        <Chip hex="#000000" name="true black" note="never used" tone="dark" stripBg="#f7f0de" />
+        <Chip hex="#141e2e" name="sumi" note="13.22:1" tone="dark" stripBg="#f7f0de" />
       </div>
     ),
   },
   {
     kind: "COLOUR",
-    title: "The yellow that did not make it",
-    take: "The cartoon-mascot yellow is 1.10:1 on manila, which is the sample above: the word is there and you cannot read it. Unusable for text, and as a fill it would have made the page cheerful, which it is not.",
+    title: "Beni red, the single warm note",
+    take: "One warm colour in an entirely cool set, used sparingly and always small. In the system it marks a figure that falls below its benchmark.",
     visual: (
-      <div className="flex h-full flex-col items-center justify-center gap-3 bg-loki-bg px-5">
-        <div className="relative h-16 w-40 bg-[#f2d13c]">
-          <span aria-hidden className="absolute inset-0 grid place-items-center text-[22px] font-bold text-[#f2d13c]">
-            Aa
-          </span>
-          <span className="absolute inset-x-0 top-1/2 h-0.5 bg-loki-accent" />
-        </div>
-        <p className="font-mono text-[10px] tracking-wider text-loki-ink">
-          #F2D13C ON #E5DCC5 &middot; 1.10:1 &middot; FAIL
-        </p>
+      <div className="grid h-full grid-cols-3">
+        <Chip hex="#b4452f" name="beni" note="4.33:1" tone="dark" stripBg="#f7f0de" />
+        <Chip hex="#6e8360" name="sage" note="3.27:1 — fill only" tone="dark" stripBg="#f7f0de" />
+        <Chip hex="#c08a3e" name="ochre" note="2.39:1 — fill only" stripBg="#f7f0de" />
       </div>
     ),
+  },
+  {
+    kind: "COLOUR",
+    title: "Bokashi",
+    take: "The gradient is wiped onto the block by hand before each pull, so it is always vertical and always one colour fading to paper. This system allows exactly one gradient, and this is it.",
+    visual: <div className="h-full w-full tex-bokashi" />,
   },
 
   /* TYPE */
   {
     kind: "TYPE",
-    title: "Display: Archivo Extra Bold",
-    take: "A grotesque squeezed tight and set in caps. Institutional signage uses one weight very loudly, which is why there is no second display size.",
+    title: "Display: Shippori Mincho",
+    take: "A mincho serif with a brush entry stroke and a heavy horizontal. It is the display role, and it is deliberately never centred.",
     visual: (
       <TypeCard>
-        <p className="font-loki-display text-[34px] font-extrabold uppercase leading-none -tracking-[0.02em]">
-          Variance
+        <p className="font-hok-display text-[36px] font-semibold leading-tight">
+          Thirty-six Views
         </p>
-        <p className="mt-2 font-loki-display text-[10px] font-bold uppercase tracking-[0.18em] text-loki-muted">
-          Archivo · 800 · −0.02em
+        <p className="mt-2 font-hok-body text-[10px] font-medium uppercase tracking-[0.2em] text-hok-muted">
+          Shippori Mincho · 600 · +0.02em
         </p>
       </TypeCard>
     ),
   },
   {
     kind: "TYPE",
-    title: "Typed, not set",
-    take: "Monospace is the body face here, including for prose. It is slower to read and that is the point: this is a document, not a feed.",
+    title: "Body: Zen Kaku Gothic New",
+    take: "A plain gothic set against the mincho, with 1.78 leading. The open leading is the only way a 16px paragraph survives this much surrounding emptiness.",
     visual: (
       <TypeCard>
-        <p className="font-loki-body text-[13px] leading-[1.6]">
-          DISTRICT ...... JAISALMER
-          <br />
-          PERSONS ....... 669,919
-          <br />
-          DENSITY ....... 17 / KM2
-          <br />
-          REMARKS ....... LOWEST IN STATE
+        <p className="font-hok-body text-[15px] leading-[1.78]">
+          Three districts recorded no urban households at all in 2011: Lahul and
+          Spiti, Kinnaur, and the Nicobars.
         </p>
       </TypeCard>
     ),
   },
   {
     kind: "TYPE",
-    title: "Rubber stamp",
-    take: "Rotated, outlined, slightly broken. The success and error states are stamps, so a result looks adjudicated rather than announced.",
+    title: "The title slip",
+    take: "A print carries its title in a bordered cartouche in one corner, not across the top. The page header sits in the corner of its grid for the same reason.",
     visual: (
-      <div className="flex h-full items-center justify-center bg-loki-surface tex-paper">
-        <div className="stamp px-5 py-2.5">
-          <p className="font-loki-display text-[15px] font-bold uppercase tracking-[0.2em]">
-            Filed 2011
+      <div className="relative h-full bg-hok-bg p-3">
+        <div className="absolute left-3 top-3 border-[1.5px] border-hok-ink bg-hok-surface px-3 py-2">
+          <p className="font-hok-display text-[13px] font-semibold leading-tight">
+            Districts of
+            <br />
+            Maharashtra
           </p>
-          <p className="mt-0.5 text-center font-loki-body text-[9px] tracking-wider">
-            CENSUS OF INDIA
+          <p className="mt-1 font-hok-body text-[9px] uppercase tracking-[0.2em] text-hok-muted">
+            no. 35 of 640
           </p>
+        </div>
+        <div className="absolute bottom-3 right-3 h-16 w-28 border-[1.5px] border-hok-line" />
+      </div>
+    ),
+  },
+  {
+    kind: "TYPE",
+    title: "The seal",
+    take: "A small red square is the only warm thing on most prints, and it means the maker signed it. Became the badge: small, square, and it never does anything when you press it.",
+    visual: (
+      <div className="flex h-full items-center justify-center bg-hok-bg">
+        <div className="flex h-20 w-20 flex-col items-center justify-center gap-0.5 bg-hok-beni p-1.5">
+          {["北", "斎"].map((g) => (
+            <span key={g} className="font-hok-display text-[26px] leading-none text-hok-surface">
+              {g}
+            </span>
+          ))}
         </div>
       </div>
     ),
   },
   {
     kind: "TYPE",
-    title: "Wayfinding plate",
-    take: "White caps on a solid bar with a thick rule under it. This is the section heading, almost unchanged.",
+    title: "Numerals against empty paper",
+    take: "A figure set small with a great deal of nothing around it reads as more important than the same figure set large. The site's headline numbers are sized from this.",
     visual: (
-      <div className="flex h-full flex-col items-center justify-center bg-loki-bg px-5">
-        <div className="w-full bg-loki-ink px-3 py-2">
-          <p className="font-loki-display text-[13px] font-bold uppercase tracking-[0.14em] text-loki-surface">
-            Section 3 &mdash; Enumeration
+      <div className="relative h-full bg-hok-bg">
+        <div className="absolute bottom-5 right-5 text-right">
+          <p className="font-hok-display text-[26px] font-semibold tabular-nums leading-none">
+            1,21,08,54,977
+          </p>
+          <p className="mt-1.5 font-hok-body text-[10px] uppercase tracking-[0.2em] text-hok-muted">
+            persons, 2011
           </p>
         </div>
-        <div className="mt-1 h-0.5 w-full bg-loki-accent" />
-        <p className="mt-2 w-full font-loki-body text-[11px] text-loki-muted">
-          Levels 2&ndash;4 &middot; Records retained 100 yr
-        </p>
-      </div>
-    ),
-  },
-  {
-    kind: "TYPE",
-    title: "Field numbers",
-    take: "Every field has a number printed above it in 10px caps. Copied directly: in the system, the label role is always numbered.",
-    visual: (
-      <div className="grid h-full grid-cols-2 gap-px bg-loki-line">
-        {[
-          ["FIELD 01", "DISTRICT", "Jodhpur"],
-          ["FIELD 02", "PERSONS", "3,687,165"],
-          ["FIELD 03", "LITERACY", "65.94%"],
-          ["FIELD 04", "SEX RATIO", "916"],
-        ].map(([f, l, v]) => (
-          <div key={f} className="bg-loki-surface p-2.5">
-            <p className="font-loki-display text-[8px] font-bold tracking-[0.18em] text-loki-accent">
-              {f}
-            </p>
-            <p className="font-loki-display text-[8px] font-bold tracking-[0.14em] text-loki-muted">
-              {l}
-            </p>
-            <p className="mt-1 font-loki-body text-[13px]">{v}</p>
-          </div>
-        ))}
       </div>
     ),
   },
@@ -410,29 +365,37 @@ const ARTIFACTS: Artifact[] = [
   /* TEXTURE */
   {
     kind: "TEXTURE",
-    title: "Paper grain",
-    take: "A 2px warm noise under every panel. It is the reason the surfaces read as paper rather than as light grey rectangles.",
-    visual: <div className="h-full w-full tex-paper" />,
+    title: "Washi grain",
+    take: "The fibre runs at a slight angle and is never uniform. A one-pixel repeat at 94 degrees keeps the large empty areas from reading as a blank div.",
+    visual: <div className="h-full w-full tex-washi" />,
   },
   {
     kind: "TEXTURE",
-    title: "Ruled ledger",
-    take: "A 22px rule pitch, which is also the row height of the district table. The grid is visible on purpose.",
-    visual: <div className="h-full w-full tex-ruled" />,
+    title: "Seigaiha",
+    take: "Concentric arcs for water, repeated to the edge. Used once, in the empty state, because an empty result here should look like open sea rather than like an error.",
+    visual: <div className="h-full w-full tex-seigaiha" />,
   },
   {
     kind: "TEXTURE",
-    title: "Punch card",
-    take: "Data as holes in a fixed grid. Became the loading skeleton: the shape of the record is there before the record is.",
-    visual: <div className="h-full w-full tex-punch" />,
+    title: "Asanoha",
+    take: "A hemp-leaf lattice at 16px. It is the only patterned rule the system has, and it separates sections without adding a colour.",
+    visual: <div className="h-full w-full tex-asanoha" />,
   },
   {
     kind: "TEXTURE",
-    title: "Carbon and halftone",
-    take: "Everything is a second-generation copy. Shadows are a hard 2px offset in border colour, never a blur, because a photocopy has no soft edges.",
+    title: "The keyblock line",
+    take: "Every shape is bounded by the same weight of black line, and that line is the drawing. The system fixes it at 1.5px and uses it on every single component.",
     visual: (
-      <div className="flex h-full items-center justify-center bg-loki-bg">
-        <div className="h-24 w-40 bg-loki-surface shadow-[2px_2px_0_#9a8a66,4px_4px_0_#c6b795] [background-image:radial-gradient(circle,rgba(36,28,19,.3)_0_1px,transparent_1.4px)] [background-size:4px_4px]" />
+      <div className="flex h-full items-center justify-center gap-4 bg-hok-bg">
+        {[0.5, 1, 1.5, 3].map((w) => (
+          <div key={w} className="text-center">
+            <div
+              className="h-16 w-10 bg-hok-accent"
+              style={{ border: `${w}px solid #141e2e` }}
+            />
+            <p className="mt-1.5 font-mono text-[9px] text-hok-muted">{w}px</p>
+          </div>
+        ))}
       </div>
     ),
   },
@@ -440,56 +403,38 @@ const ARTIFACTS: Artifact[] = [
   /* MATERIAL */
   {
     kind: "MATERIAL",
-    title: "Bakelite and brushed steel",
-    take: "Hardware you press, with a click. Controls here have a pressed state you can see: the sheet moves 2px and the offset shadow disappears.",
+    title: "Cherry wood block",
+    take: "Everything is cut, so no curve exists that a knife could not make. That is the whole reason this system has a single radius value, and the value is zero.",
     visual: (
-      <div className="flex h-full items-center justify-center gap-3 bg-[#4a4334]">
-        {["#973413", "#c9a227", "#7d7430"].map((c, i) => (
-          <div
-            key={c}
-            className="flex h-14 w-14 items-center justify-center rounded-[3px] bg-[#2b2620] shadow-[inset_0_1px_0_#6b6252]"
-          >
-            <div
-              className="h-8 w-8 rounded-full"
-              style={{
-                background: c,
-                boxShadow: i === 1 ? "inset 0 2px 4px rgba(0,0,0,.5)" : "0 2px 0 rgba(0,0,0,.45)",
-              }}
-            />
-          </div>
-        ))}
+      <div className="h-full w-full bg-[linear-gradient(92deg,#c79a63_0%,#b4834a_18%,#d2a771_36%,#a8783f_58%,#cf9f68_70%,#be8d55_84%,#a97a42_100%)]">
+        <div className="h-full w-full bg-[repeating-linear-gradient(90deg,rgba(60,40,20,.18)_0_1px,transparent_1px_6px)]" />
       </div>
     ),
   },
   {
     kind: "MATERIAL",
-    title: "Triplicate",
-    take: "White, pink, yellow: the same form three times at falling contrast. Disabled controls use exactly this idea, dropping to 45% rather than changing hue.",
+    title: "Burnished ink",
+    take: "The pigment is pressed into the paper with a baren, so it sits in the sheet rather than on it. Fills in this system are flat and matte, never a gradient.",
     visual: (
-      <div className="relative h-full bg-loki-bg">
-        {["#f4efe0", "#f0cfd2", "#efe2ac"].map((c, i) => (
-          <div
-            key={c}
-            className="absolute h-28 w-36 border border-loki-line"
-            style={{ background: c, left: 46 + i * 24, top: 26 + i * 12 }}
-          >
-            <div className="m-2 h-1.5 w-20 bg-loki-muted/50" />
-            <div className="m-2 h-1.5 w-24 bg-loki-muted/40" />
-            <div className="m-2 h-1.5 w-16 bg-loki-muted/30" />
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    kind: "MATERIAL",
-    title: "The stamp pad",
-    take: "Ink is uneven and sits proud of the paper. The accent is therefore always a flat fill, never a gradient: it is pigment, not light.",
-    visual: (
-      <div className="flex h-full items-center justify-center bg-loki-bg">
-        <div className="h-24 w-40 border-4 border-[#2b2620] bg-[#8f3514] p-2">
-          <div className="h-full w-full bg-[radial-gradient(circle_at_30%_40%,#c2501f_0_30%,#8f3514_70%),radial-gradient(circle_at_75%_70%,#a73f18_0_25%,transparent_60%)]" />
+      <div className="flex h-full items-center justify-center bg-hok-bg">
+        <div className="h-24 w-44 bg-hok-accent">
+          <div className="h-full w-full bg-[radial-gradient(ellipse_at_35%_40%,rgba(255,255,255,.1)_0_38%,transparent_70%)]" />
         </div>
+      </div>
+    ),
+  },
+  {
+    kind: "MATERIAL",
+    title: "Registration marks",
+    take: "Each colour is a separate block aligned by a notch, and when the alignment slips you see it. The system keeps the alignment visible: every column edge in the site lines up with a rule.",
+    visual: (
+      <div className="relative h-full bg-hok-surface">
+        <div className="absolute left-5 top-5 h-28 w-32 border-[1.5px] border-hok-ink" />
+        <div className="absolute left-8 top-8 h-28 w-32 bg-hok-accent opacity-80" />
+        <div className="absolute left-7 top-7 h-28 w-32 border-[1.5px] border-hok-beni opacity-60" />
+        <svg viewBox="0 0 40 40" className="absolute bottom-4 right-4 h-8 w-8" role="img" aria-label="A right-angled registration notch">
+          <path d="M4 36 V4 h32" stroke="#141e2e" strokeWidth="2.5" fill="none" />
+        </svg>
       </div>
     ),
   },
@@ -497,20 +442,53 @@ const ARTIFACTS: Artifact[] = [
   /* INTERFACE */
   {
     kind: "INTERFACE",
-    title: "A row is a form row",
-    take: "Label above, rule under, value in mono. Every list row in the system is this shape, which is why the table needs no zebra striping.",
+    title: "A card is a cut block",
+    take: "Square, outlined in the keyblock weight, with a solid blue head. Depth is faked entirely by the line, and there is no shadow anywhere in the system.",
     visual: (
-      <div className="flex h-full flex-col justify-center gap-0 bg-loki-surface px-4 tex-paper">
+      <div className="flex h-full items-center justify-center bg-hok-bg p-4">
+        <div className="w-44 border-[1.5px] border-hok-ink bg-hok-surface">
+          <div className="bg-hok-accent px-3 py-1.5">
+            <p className="font-hok-display text-[13px] font-semibold text-hok-surface">
+              Thiruvananthapuram
+            </p>
+          </div>
+          <div className="px-3 py-3">
+            <p className="font-hok-body text-[9px] uppercase tracking-[0.2em] text-hok-muted">
+              Population
+            </p>
+            <p className="font-hok-display text-[19px] font-semibold tabular-nums">
+              33,01,427
+            </p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    kind: "INTERFACE",
+    title: "A bar is a wave profile",
+    take: "Outlined, flat-filled, with the comparison drawn as a notch in the outline rather than as a second colour. Two inks and no legend.",
+    visual: (
+      <div className="flex h-full flex-col justify-center gap-3.5 bg-hok-bg px-5">
         {[
-          ["01", "DISTRICT", "Kota"],
-          ["02", "LITERACY", "76.56%"],
-          ["03", "RANK", "1 of 33"],
-        ].map(([n, l, v]) => (
-          <div key={n} className="flex items-baseline justify-between border-b border-loki-line py-2">
-            <span className="font-loki-display text-[9px] font-bold tracking-[0.18em] text-loki-muted">
-              {n} &middot; {l}
-            </span>
-            <span className="font-loki-body text-[13px]">{v}</span>
+          ["Kerala", 0.92, true],
+          ["Goa", 0.78, true],
+          ["Bihar", 0.42, false],
+        ].map(([n, f, up]) => (
+          <div key={n as string}>
+            <div className="flex items-baseline justify-between">
+              <span className="font-hok-body text-[12px]">{n as string}</span>
+              <span className="font-hok-body text-[10px] uppercase tracking-[0.16em] text-hok-muted">
+                {up ? "above" : "below"}
+              </span>
+            </div>
+            <div className="relative mt-1 h-3 border-[1.5px] border-hok-ink">
+              <div
+                className="h-full"
+                style={{ width: `${(f as number) * 100}%`, background: up ? "#1c4c86" : "#b4452f" }}
+              />
+              <span className="absolute -top-1 bottom-[-4px] w-[2px] bg-hok-ink" style={{ left: "66%" }} />
+            </div>
           </div>
         ))}
       </div>
@@ -518,78 +496,34 @@ const ARTIFACTS: Artifact[] = [
   },
   {
     kind: "INTERFACE",
-    title: "Tabs as file dividers",
-    take: "The active tab is the one with the corner cut off. That chamfer is the only non-square shape the system allows, so it carries meaning.",
+    title: "Chips cut square",
+    take: "No rounding and no fill until selected, at which point the chip becomes a solid blue block. The outline never changes weight, so nothing shifts when you choose.",
     visual: (
-      <div className="flex h-full items-end bg-loki-bg p-4">
-        <div className="flex w-full items-end">
-          {["TABLE", "CHART", "NOTES"].map((t, i) => (
-            <span
-              key={t}
-              className={
-                i === 1
-                  ? "chamfer -mb-px border border-b-0 border-loki-ink bg-loki-surface px-4 py-2 font-loki-display text-[11px] font-bold tracking-[0.14em]"
-                  : "border border-b-0 border-loki-line bg-loki-bg px-4 py-1.5 font-loki-display text-[11px] font-bold tracking-[0.14em] text-loki-muted"
-              }
-            >
-              {t}
-            </span>
-          ))}
-          <span className="flex-1 border-b border-loki-ink" />
-        </div>
+      <div className="flex h-full flex-wrap content-center items-center justify-center gap-2 bg-hok-bg px-4">
+        {["All", "Kerala", "Goa", "Assam"].map((d, i) => (
+          <span
+            key={d}
+            className={
+              i === 1
+                ? "border-[1.5px] border-hok-accent bg-hok-accent px-3.5 py-1.5 font-hok-body text-[12px] text-hok-surface"
+                : "border-[1.5px] border-hok-ink bg-hok-surface px-3.5 py-1.5 font-hok-body text-[12px] text-hok-ink"
+            }
+          >
+            {d}
+          </span>
+        ))}
       </div>
     ),
   },
   {
     kind: "INTERFACE",
-    title: "The ledger",
-    take: "Rules on all four sides, tabular figures, nothing centred. Numbers right-aligned so the decimal points stack.",
+    title: "Empty state as open sea",
+    take: "Nothing found is drawn as water going to the edge with one line of type low in the frame. It is the one state this system can express better than the other two.",
     visual: (
-      <div className="flex h-full items-center bg-loki-bg p-3">
-        <table className="w-full border border-loki-ink bg-loki-surface font-loki-body text-[11px]">
-          <thead>
-            <tr className="border-b-2 border-loki-ink">
-              <th className="border-r border-loki-line px-2 py-1 text-left font-loki-display text-[8px] font-bold tracking-[0.16em]">
-                DISTRICT
-              </th>
-              <th className="px-2 py-1 text-right font-loki-display text-[8px] font-bold tracking-[0.16em]">
-                LIT %
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {[["Kota", "76.56"], ["Jaipur", "75.51"], ["Jhunjhunu", "74.13"], ["Jalore", "54.86"]].map(
-              ([d, v]) => (
-                <tr key={d} className="border-b border-loki-line">
-                  <td className="border-r border-loki-line px-2 py-1">{d}</td>
-                  <td className="px-2 py-1 text-right tabular-nums">{v}</td>
-                </tr>
-              ),
-            )}
-          </tbody>
-        </table>
-      </div>
-    ),
-  },
-  {
-    kind: "INTERFACE",
-    title: "Error as a rejection",
-    take: "The form comes back with a stamp on it and the offending field ruled in orange. The error is attached to the thing, not floated in a toast.",
-    visual: (
-      <div className="relative flex h-full items-center justify-center bg-loki-surface p-4 tex-paper">
-        <div className="w-full border border-loki-line p-3">
-          <p className="font-loki-display text-[9px] font-bold tracking-[0.18em] text-loki-muted">
-            FIELD 02 · PERSONS
-          </p>
-          <div className="mt-1 border-2 border-loki-accent bg-loki-bg px-2 py-1.5 font-loki-body text-[13px]">
-            &mdash;
-          </div>
-          <p className="mt-1.5 font-loki-body text-[11px] text-loki-accent">
-            No value on file for this district.
-          </p>
-        </div>
-        <div className="stamp absolute right-4 top-4 px-3 py-1">
-          <p className="font-loki-display text-[11px] font-bold tracking-[0.18em]">RETURNED</p>
+      <div className="relative h-full tex-seigaiha">
+        <div className="absolute bottom-5 left-5 border-[1.5px] border-hok-ink bg-hok-bg px-3 py-2">
+          <p className="font-hok-display text-[14px] font-semibold">No districts match</p>
+          <p className="mt-0.5 font-hok-body text-[11px] text-hok-muted">Clear a filter</p>
         </div>
       </div>
     ),
@@ -598,16 +532,16 @@ const ARTIFACTS: Artifact[] = [
   /* MOTION */
   {
     kind: "MOTION",
-    title: "Nothing eases",
-    take: "A stamp lands or it does not. Transitions are 90ms linear or absent, which makes this system feel mechanical next to the other two.",
+    title: "A print does not move",
+    take: "There is no easing anywhere in this world, so state changes are a 90ms swap and the loading pattern does not pulse. It is the stillest of the three systems on purpose.",
     visual: (
-      <div className="flex h-full flex-col items-center justify-center gap-3 bg-loki-bg">
+      <div className="flex h-full flex-col items-center justify-center gap-3 bg-hok-bg">
         <div className="flex items-center gap-4">
-          <div className="h-10 w-20 border border-loki-line bg-loki-surface" />
-          <span className="font-loki-body text-[16px] text-loki-muted">&rarr;</span>
-          <div className="h-10 w-20 border-2 border-loki-ink bg-loki-surface shadow-[2px_2px_0_#9a8a66]" />
+          <div className="h-10 w-20 border-[1.5px] border-hok-ink bg-hok-surface" />
+          <span className="font-hok-body text-[15px] text-hok-muted">&rarr;</span>
+          <div className="h-10 w-20 border-[1.5px] border-hok-accent bg-hok-accent" />
         </div>
-        <p className="font-loki-display text-[10px] font-bold uppercase tracking-[0.18em] text-loki-muted">
+        <p className="font-hok-body text-[10px] uppercase tracking-[0.2em] text-hok-muted">
           90ms · linear · no fade
         </p>
       </div>
@@ -619,35 +553,37 @@ export default function Page() {
   return (
     <BoardShell
       skin={skin}
-      mood="loki"
-      name="Time Variance Authority"
-      subtitle="03 · Loki"
+      mood="hokusai"
+      name="Prussian Blue on Mulberry Paper"
+      subtitle="03 · Hokusai"
       lede={
         <>
           <p>
-            A bureaucracy from about 1974 that happens to police the timeline.
-            Manila folders, carbon copies, rubber stamps, signage in one very
-            loud weight, and a single saturated orange that only appears on the
-            things that actually do something.
+            The <em>aizuri-e</em> prints are made of four things: warm paper, a
+            black keyblock line, one imported blue, and a great deal of nothing.
+            There is no modelled light anywhere in them. A mountain reads as
+            solid because the outline says so, not because one side of it is
+            darker than the other.
           </p>
           <p className="mt-3">
-            I chose it as the opposite pole to the other two boards. Rajasthan
-            separates with ornament and La La Land separates with darkness; this
-            one separates with drawn rules, and it is unembarrassed about showing
-            you the grid. It is also the only board where the body face is
-            monospace, because here the content is a record, not prose.
+            I picked it as the third mood because it disagrees with the other
+            two about the same question. Padmaavat separates things with
+            ornament and with an opposing palette; La La Land separates them
+            with darkness and distance; this one separates them with a drawn
+            line and with empty paper. It is the only one of the three with no
+            shadow, no gradient except one, and no curve at all.
           </p>
         </>
       }
-      sourcing="Every artifact is drawn in SVG or built from CSS gradients and repeating patterns; there are no stills or stock images, so nothing here is borrowed. Figures quoted are the real 2011 Census figures for Rajasthan."
+      sourcing="Every scene is drawn here in SVG after the compositions of the prints, and every texture is CSS, so nothing on the board is a scan or a reproduction. Figures quoted are the real 2011 Census figures."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Stamp orange #973413 at 5.14:1 on manila. Primary action and active record only, always a flat fill, never a gradient." },
-        { label: "Separation", detail: "Drawn rules everywhere. This system uses its border colour more than any other token, which is what makes it unmistakable next to La La Land." },
-        { label: "Shape", detail: "Square corners throughout, with one exception: the active file tab is chamfered. One cut corner, one meaning." },
-        { label: "Shadow", detail: "A hard 2px offset in border colour. No blur anywhere, because a photocopy has no soft edges." },
-        { label: "Labels", detail: "Every field label is numbered, from artifact 16. It is why the forms look adjudicated rather than designed." },
-        { label: "Rejected", detail: "The mascot yellow (1.60:1, fails outright) and any easing curve softer than linear." },
+        { label: "Accent", detail: "Prussian blue #1C4C86 at 6.83:1. Primary action and current item only." },
+        { label: "Separation", detail: "A 1.5px keyblock outline on every component. This system uses its line more than any other token, which is the opposite of La La Land." },
+        { label: "Shape", detail: "One radius value, and the value is zero. A block print has no curve a knife could not cut." },
+        { label: "Shadow", detail: "None at all. Depth comes from the outline, which is why hover changes the line colour rather than lifting anything." },
+        { label: "Space", detail: "The scale jumps from 30px to 72px with nothing between, from artifact 05. The empty sheet is the composition." },
+        { label: "Rejected", detail: "Sage at 3.27:1 and ochre at 2.39:1, both measured, both confined to chart fills well away from text." },
       ]}
     />
   );

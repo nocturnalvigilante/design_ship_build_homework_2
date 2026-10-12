@@ -207,9 +207,9 @@ function Glance({ mood, skin, count }: { mood: MoodId; skin: Skin; count: number
   );
 }
 
-/** A labelled colour chip. The label strip carries its own background so the
-    caption contrast is fixed by the component rather than by whatever card it
-    happens to be dropped into. */
+/** A labelled colour chip. The caption strip carries its own background AND
+    derives its text colour from that background, so the two can never
+    contradict each other the way a separate light/dark prop could. */
 export function Chip({
   hex,
   name,
@@ -220,19 +220,22 @@ export function Chip({
   hex: string;
   name: string;
   note?: string;
-  /** Whether the caption strip under the swatch is light or dark. */
+  /** Used only when stripBg is not given. */
   tone?: "light" | "dark";
-  /** Override the strip colour to match the board it sits on. */
+  /** The colour of the caption strip, usually the card it sits on. */
   stripBg?: string;
 }) {
-  const dark = tone === "dark";
-  const bg = stripBg ?? (dark ? "#241a4b" : "#ffffff");
-  const ink = dark ? "#f7f0e8" : "#241c13";
-  const mut = dark ? "#b3a8d2" : "#63523a";
+  const bg = stripBg ?? (tone === "dark" ? "#241a46" : "#ffffff");
+  const dark = isDark(bg);
+  const ink = dark ? "#f7f0e8" : "#1a140f";
+  const mut = dark ? "#c3bada" : "#5d483a";
   return (
     <div className="flex h-full flex-col">
       <div className="flex-1" style={{ background: hex }} />
-      <div className="min-h-[38px] px-2 pt-2 pb-1 leading-tight" style={{ background: bg }}>
+      <div
+        className="min-h-[38px] px-2 pt-2 pb-1 leading-tight"
+        style={{ background: bg }}
+      >
         <p className="font-mono text-[10px] tracking-wider" style={{ color: ink }}>
           {hex.toUpperCase()}
         </p>
@@ -243,4 +246,14 @@ export function Chip({
       </div>
     </div>
   );
+}
+
+/** Relative luminance, enough to decide which way round the caption goes. */
+function isDark(hex: string) {
+  const h = hex.replace("#", "");
+  const f =
+    h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(f.slice(i, i + 2), 16) / 255);
+  const lin = (c: number) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b) < 0.4;
 }
