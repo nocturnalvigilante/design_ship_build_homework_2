@@ -105,11 +105,22 @@ was rebuilt on all 640 districts instead of one state's 33.
     every subsequent load is 1.2 seconds. There was no performance bug, only a
     measurement that could not tell the two apart.
 
-11. **The probe was flagging SVG children as overflowing.** A `<line>` drawn
+11. **The probe read the previous page after a navigation.** It polled for the
+    hydration marker as soon as `Page.navigate` returned, and for about a
+    second after that the *previous* document is still the one answering, which
+    on a suite that walks several pages is usually a page already marked
+    hydrated. Against a local server that window is too short to notice;
+    against the deployed site it is not, and three assertions failed because
+    the clicks were landing on a page about to be replaced. The probe now waits
+    for `location.pathname` to be the page it asked for before it looks for the
+    marker. Third harness bug of the project, and the third time the checker
+    rather than the site was the thing at fault.
+
+12. **The probe was flagging SVG children as overflowing.** A `<line>` drawn
     past its own viewBox is clipped by it, so its unclipped geometry is not a
     page overflow. The probe now skips elements inside an `<svg>`.
 
-12. **Stale copy survived the mood swap.** Several string replacements failed
+13. **Stale copy survived the mood swap.** Several string replacements failed
     silently and left district names from the old scope inside the design-system
     pages. Caught by driving the page and reading back what it actually
     rendered, not by reading the diff.
