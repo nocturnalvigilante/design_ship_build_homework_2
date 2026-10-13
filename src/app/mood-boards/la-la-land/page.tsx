@@ -445,7 +445,7 @@ const ARTIFACTS: Artifact[] = [
       <div className="grid h-full grid-cols-3">
         <Chip hex="#7a7a7a" name="grey" note="never used" tone="dark" />
         <Chip hex="#b3a8d2" name="muted" note={RATIO("#b3a8d2")} tone="dark" />
-        <Chip hex="#3f3074" name="border" note="1.65:1" tone="dark" />
+        <Chip hex="#3f3074" name="border" note={RATIO("#3f3074")} tone="dark" />
       </div>
     ),
   },
