@@ -111,3 +111,10 @@ Next.js 15 (App Router) · React 19 · Tailwind CSS 4 · deployed on Vercel.
 `VERIFICATION.md` records what was checked in a real browser at 390px and
 1440px and what it found. `CHECKLIST.md` is the assignment brief turned into a
 line-by-line checklist.
+
+One thing stated plainly there and repeated here: the brief suggests verifying
+with Playwright MCP or the Claude in Chrome extension, and I used neither. I
+drove real Chrome over the Chrome DevTools Protocol, which is the same channel
+Playwright itself uses to control Chrome. Same browser, same clicks, same
+screenshots, one layer lower, chosen so the checks could assert on measured
+contrast ratios and layout overflow rather than only capture images.

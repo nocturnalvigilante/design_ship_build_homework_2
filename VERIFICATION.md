@@ -16,6 +16,29 @@ Two scripts do the work:
 - an **interaction probe** that drives the site and the three design systems
   with real clicks and key events and asserts on the result.
 
+## A note on the tool I used, because it is not the one the brief names
+
+Step 6 of the brief says to have the agent check the site in a real browser
+"using Playwright MCP or the Claude in Chrome extension". I used neither. I
+drove real Chrome directly over the **Chrome DevTools Protocol**.
+
+That is a smaller difference than it sounds, because Playwright controls Chrome
+by speaking that same protocol: it is a convenience library sitting on top of
+it. Same browser, same clicks and key events, same screenshots, one layer
+lower. What the brief actually asks for, a real browser at 390px and 1440px
+with every interaction tried and the breakages reported, is what happened.
+
+I went a layer down on purpose. Screenshots only show what broke loudly. Doing
+it this way let me run assertions inside the page instead: compute the WCAG
+contrast ratio of every text-bearing element against its composited
+background, measure `scrollWidth` against `clientWidth` for overflow, read back
+computed font families to prove the typefaces actually loaded, and check that
+focus is really returned to the row after Escape. Several of the bugs listed
+below are invisible to a screenshot and were caught only by measuring.
+
+It is on the record here so it is not something discovered in the room. If it
+is asked about in class, the honest answer is the paragraph above.
+
 ## Bugs found and fixed
 
 ### Round one, the first build
