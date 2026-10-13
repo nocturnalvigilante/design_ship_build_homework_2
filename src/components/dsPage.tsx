@@ -354,7 +354,30 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
               </div>
             ))}
           </div>
-          <p className="ds-cap mt-4">
+          <div className="mt-7">
+            <p className="ds-lab">Figures</p>
+            <p className="ds-cap mt-2 max-w-[66ch]">
+              Numbers get two sizes and no more, both in the display face with
+              tabular numerals so columns of them line up. Anything else on a
+              page using a third size is a bug, not a decision.
+            </p>
+            <div className="mt-3 flex flex-wrap items-end gap-x-10 gap-y-3">
+              <div>
+                <p className="ds-figure" style={{ fontSize: 25 }}>
+                  {DISTRICTS.length}
+                </p>
+                <p className="ds-mono mt-1">summary · 25px</p>
+              </div>
+              <div>
+                <p className="ds-figure" style={{ fontSize: 18 }}>
+                  {litMetric.format(litMetric.value(topRows[0]))}
+                </p>
+                <p className="ds-mono mt-1">in a row, panel or card · 18px</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="ds-cap mt-6">
             Body copy is held to about 68 characters a line everywhere on this
             page. The measure is the one type rule that is easiest to break and
             hardest to notice.
@@ -481,9 +504,11 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
           title="Components"
           sub={
             <>
-              Fourteen components. Each is live &mdash; hover it, tab to it,
-              press it &mdash; and then repeated six times with its state
-              forced, so a screenshot shows what a pointer would.
+              Sixteen components: the fourteen the brief names, plus the
+              comparison bar and the data row the site needs. Each is live
+              &mdash; hover it, tab to it, press it &mdash; and then repeated
+              six times with its state forced, so a screenshot shows what a
+              pointer would.
             </>
           }
         >
@@ -854,6 +879,72 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
                 </div>
               }
               note="Shown live only. Its six states are the states of the buttons inside it, which are already on this page."
+            />
+            <Component
+              n={15}
+              name="Comparison bar"
+              job="A measured value against a benchmark. The fill colour is the verdict."
+              live={
+                <div className="max-w-md space-y-3.5">
+                  {topRows.slice(0, 3).map((d, i) => {
+                    const v = litMetric.value(d);
+                    const above = i < 2;
+                    return (
+                      <div key={d.id}>
+                        <div className="flex items-baseline justify-between gap-3">
+                          <span className="ds-cap">{d.name}</span>
+                          <span className="ds-mono tabular-nums">{litMetric.format(v)}</span>
+                        </div>
+                        <div className="bar mt-1.5">
+                          <i className={above ? "" : "below"} style={{ width: `${40 + i * 24}%` }} />
+                          <span className="tick" style={{ left: "62%" }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              }
+              note="The tick is the benchmark, and the fill says at-or-above against below. That is why this system has no separate success green or error red: the comparison carries the verdict, so the second palette does the work."
+            />
+
+            <Component
+              n={16}
+              name="Data row"
+              job="The dense row the site lists with: rank, name, bar, figure."
+              live={
+                <div className="rows max-w-2xl">
+                  {topRows.map((d, i) => (
+                    <button
+                      key={d.id}
+                      className="drow"
+                      aria-current={i === 1}
+                      onClick={() => setRow(d.id)}
+                    >
+                      <span className="ds-mono tabular-nums sm:text-right">{i + 1}</span>
+                      <span>
+                        <span className="ds-h4 block">{d.name}</span>
+                        <span className="ds-cap block">{d.state}</span>
+                      </span>
+                      <span className="bar" aria-hidden>
+                        <i className={i < 3 ? "" : "below"} style={{ width: `${92 - i * 9}%` }} />
+                        <span className="tick" style={{ left: "70%" }} />
+                      </span>
+                      <span className="ds-figure block text-[16px] sm:text-right">
+                        {litMetric.format(litMetric.value(d))}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              }
+              render={(c) => (
+                <span className="rows" style={{ display: "block" }}>
+                  <span className={`drow ${c}`} style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+                    <span className="ds-cap">Kerala</span>
+                    <span className="ds-mono">88.7%</span>
+                  </span>
+                </span>
+              )}
+              note="It is a list row carrying a measurement, so it keeps every list-row state and introduces none of its own. The site uses this exact component."
             />
           </div>
         </Section>

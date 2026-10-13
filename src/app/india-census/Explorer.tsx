@@ -147,7 +147,7 @@ export default function Explorer() {
               ].map(([k, v]) => (
                 <div key={k}>
                   <dt className="t-label">{k}</dt>
-                  <dd className="t-figure mt-1 text-[22px]">{v}</dd>
+                  <dd className="t-figure-lg mt-1">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -215,7 +215,7 @@ export default function Explorer() {
                     <span className="dot" aria-hidden>
                       <span className="mark" />
                     </span>
-                    <span className="text-[14px]">{mm.short}</span>
+                    <span className="t-body">{mm.short}</span>
                   </label>
                 ))}
               </div>
@@ -328,7 +328,7 @@ export default function Explorer() {
                             style={{ left: `${Math.min((bench.value / max) * 100, 99.6)}%` }}
                           />
                         </span>
-                        <span className="t-figure block text-[16px] sm:text-right">
+                        <span className="t-figure block sm:text-right">
                           {m.format(v)}
                         </span>
                       </button>
@@ -379,7 +379,7 @@ export default function Explorer() {
                           return (
                             <div key={mm.key}>
                               <dt className="t-label">{mm.short}</dt>
-                              <dd className="t-figure mt-1 text-[19px]">
+                              <dd className="t-figure mt-1">
                                 {mm.format(mm.value(open))}
                               </dd>
                               <dd className="t-small mt-0.5">

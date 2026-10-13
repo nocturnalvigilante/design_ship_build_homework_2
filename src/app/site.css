@@ -19,9 +19,19 @@
 .site .t-heading { font-family: var(--display); font-size: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; line-height: 1.25; }
 .site .t-h3 { font-family: var(--display); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; line-height: 1.3; }
 .site .t-body { font-size: 17.5px; line-height: 1.6; }
+.site .pick .t-body { font-size: 15.5px; }
 .site .t-small { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
 .site .t-label { font-size: 11.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); line-height: 1.1; }
-.site .t-figure { font-family: var(--display); font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: .01em; line-height: 1.08; }
+/* Two figure sizes and no more: the summary number at the top of the page,
+   and every other figure in a row, a panel or a card. Both are the display
+   face with tabular numerals, and both are published in section 02 of the
+   design system alongside the four type roles. */
+.site .t-figure, .site .t-figure-lg {
+  font-family: var(--display); font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: .01em; line-height: 1.08;
+}
+.site .t-figure { font-size: 18px; }
+.site .t-figure-lg { font-size: 25px; }
 .site .t-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; letter-spacing: .02em; color: var(--muted); }
 
 /* ---- the inlay rule, from artifact 20 of the mood board ---- */
@@ -38,31 +48,6 @@
 @media (min-width: 1024px) {
   .site .controls { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(6px); }
 }
-
-/* ---- a district row ---- */
-.site .drow {
-  display: grid; grid-template-columns: 1fr; gap: 6px;
-  width: 100%; text-align: left; padding: 11px 14px;
-  background: transparent; border: 0; border-bottom: 1px solid var(--line);
-  cursor: pointer; color: inherit;
-  transition: background-color .12s, box-shadow .12s;
-}
-@media (min-width: 680px) {
-  .site .drow { grid-template-columns: 34px 200px 1fr 108px; align-items: center; gap: 14px; }
-}
-.site .drow:last-child { border-bottom: 0; }
-.site .drow:hover { background: var(--sunk); }
-.site .drow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.site .drow[aria-current="true"] { background: var(--sunk); box-shadow: inset 4px 0 0 var(--accent); }
-
-/* ---- the warm-and-cold bar, which is the whole point of mood board 01 ----
-   Above its benchmark the fill is Chittor crimson; below it, Khilji
-   green-black. The upright tick is the benchmark itself. No legend, no third
-   colour, and no success-green or error-red invented for the purpose. */
-.site .bar { position: relative; height: 12px; background: #e6d4b4; box-shadow: inset 0 1px 2px rgba(34,20,16,.3); }
-.site .bar > i { display: block; height: 100%; background: var(--accent); }
-.site .bar > i.below { background: var(--cold); }
-.site .bar .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .9; }
 
 /* ---- the record panel ---- */
 .site .detail { background: var(--surface); border: 1px solid var(--line); border-radius: 26px 26px 2px 2px; overflow: hidden; box-shadow: 0 1px 0 var(--line), 0 22px 44px -34px rgba(34,20,16,.8); }

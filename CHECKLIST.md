@@ -44,15 +44,16 @@ ends with the six decisions that crossed into its design system.
 | D1 | Colour roles + contrast ratios printed | ☑ 6 roles plus a second palette, every ratio computed from the hexes at build time and each colour marked for what it may carry |
 | D2 | Type roles with sizes and weights, in my own content | ☑ 4 roles, specimens set in district names and real 2011 figures |
 | D3 | Spacing scale, corners, borders, shadow | ☑ 6-step scale, 2–3 radii, 3 border weights, 2 shadows, each with its use |
-| D4 | 14 components | ☑ primary button, secondary button, link, text input, select, checkbox, radio, toggle, tabs, chips, card with a real item, list rows, badge, detail panel |
-| D5 | 6 control states | ☑ rest, hover, focus, pressed, selected, disabled — live *and* forced, on 13 of 14 |
+| D4 | The components the brief names, plus anything the site needs | ☑ 16: the 14 named (primary button, secondary button, link, text input, select, checkbox, radio, toggle, tabs, chips, card with a real item, list rows, badge, detail panel) plus the comparison bar and the data row the site lists with |
+| D5 | 6 control states | ☑ rest, hover, focus, pressed, selected, disabled, live *and* forced, on 14 of 16 |
 | D6 | 4 UI states | ☑ empty, loading, error, success, each drawn in the system's own style |
 
 Per system: 6 + 4 + 14 + 6 + 4. Across three: 18 colour roles, 12 type roles,
 42 components, 18 control states, 12 UI states.
 
-The detail panel is the one component shown live only; its control states are
-the states of the buttons inside it, and the page says so.
+Two components are shown live only: the detail panel, whose control states are
+the states of the buttons inside it, and the comparison bar, which is a readout
+rather than a control. The page says so in both cases.
 
 ## E. The site
 
@@ -69,7 +70,7 @@ the states of the buttons inside it, and the page says so.
 | # | Requirement | How it is answered |
 |---|---|---|
 | F1 | Visual hierarchy | four type roles only, one display per page |
-| F2 | Type | one scale, measure held to ~68 characters |
+| F2 | Type | four published roles plus two published figure sizes; the site renders 11 size/weight pairs and every one has a stated job; measure held to ~68 characters |
 | F3 | Colour | six roles, each with a written job; a second palette with every ratio stated; colours that fail are marked fill-only rather than quietly used |
 | F4 | Accessibility | zero elements below their WCAG threshold on any page at either width |
 | F5 | Layout | 0px horizontal overflow at 390px and 1440px |

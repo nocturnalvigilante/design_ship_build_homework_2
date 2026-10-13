@@ -490,3 +490,49 @@
    water at the foot, so no line of text is ever read through the drawing. */
 .ds-hok .ds-shell, .skin-hok { padding-top: 210px; padding-bottom: 150px; }
 @media (min-width: 640px) { .ds-hok .ds-shell, .skin-hok { padding-top: 272px; padding-bottom: 170px; } }
+
+/* ======================================================= 15. comparison bar
+   A measured value against a benchmark. Not decoration: the fill colour is
+   the system's way of saying "at or above" versus "below", which is why none
+   of the three needs a separate success or error colour, and the upright tick
+   is the benchmark itself rather than a legend. */
+.ds .bar { position: relative; height: 12px; background: var(--sunk); }
+.ds .bar > i { display: block; height: 100%; background: var(--accent); }
+.ds .bar > i.below { background: var(--cold); }
+.ds .bar .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); opacity: .9; }
+/* Padmaavat insets the colour into the surface, after the inlay artifact. */
+.ds-pad .bar { box-shadow: inset 0 1px 2px rgba(34,20,16,.3); }
+/* La La Land rounds it and lights the fill. */
+.ds-lll .bar { height: 10px; border-radius: 999px; background: #1b1540; }
+.ds-lll .bar > i { border-radius: 999px; box-shadow: 0 0 14px -2px var(--accent); }
+.ds-lll .bar > i.below { box-shadow: none; }
+.ds-lll .bar .tick { background: var(--ink); width: 1.5px; }
+/* Hokusai outlines it like everything else, and the tick is a notch. */
+.ds-hok .bar { height: 13px; border: 1.5px solid var(--ink); background: transparent; }
+.ds-hok .bar .tick { background: var(--ink); width: 2px; top: -4px; bottom: -4px; }
+
+/* ============================================================ 16. data row
+   The dense row the site actually lists with: rank, name and place, the
+   comparison bar, and the figure. It is a list row carrying a measurement,
+   so it keeps every list-row state and adds nothing new. */
+.ds .drow {
+  display: grid; grid-template-columns: 1fr; gap: 6px;
+  width: 100%; text-align: left; padding: 11px 14px;
+  background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  cursor: pointer; color: inherit;
+  transition: background-color .12s, box-shadow .12s;
+  font-family: var(--body);
+}
+@media (min-width: 680px) {
+  .ds .drow { grid-template-columns: 34px 200px 1fr 108px; align-items: center; gap: 14px; }
+}
+.ds .drow:last-child { border-bottom: 0; }
+.ds .drow:hover, .ds .drow.is-hover { background: var(--sunk); }
+.ds .drow:active, .ds .drow.is-pressed { background: var(--sunk); }
+.ds .drow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.ds .drow[aria-current="true"], .ds .drow.is-selected { background: var(--sunk); box-shadow: inset 4px 0 0 var(--accent); }
+.ds .drow.is-disabled { opacity: .45; cursor: not-allowed; }
+.ds-hok .drow[aria-current="true"], .ds-hok .drow.is-selected {
+  box-shadow: inset 0 0 0 1.5px var(--accent); background: var(--surface);
+}
+.ds-lll .drow[aria-current="true"], .ds-lll .drow.is-selected { box-shadow: inset 2px 0 0 var(--accent); }
