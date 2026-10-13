@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { contrast } from "@/lib/contrast";
+import { PALETTES } from "@/lib/palette";
 import { BoardShell, Chip, Magnified, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
@@ -6,6 +8,12 @@ export const metadata: Metadata = {
   description:
     "Twenty-eight artifacts: the four seasonal palettes, the magic-hour gradient, anamorphic flare, 35mm grain and the flat epilogue.",
 };
+
+// Every ratio quoted on this page is computed from the token values at build
+// time. They were hard-coded once, the ground colour later changed, and the
+// page went on claiming numbers that were no longer true. Never again.
+const BG = PALETTES["la-la-land"].background;
+const RATIO = (hex: string) => `${contrast(hex, BG).toFixed(2)}:1`;
 
 const skin: Skin = {
   page: "min-h-screen bg-lll-bg text-lll-ink font-lll-body tex-magichour",
@@ -288,30 +296,30 @@ const ARTIFACTS: Artifact[] = [
     kind: "COLOUR",
     title: "Winter",
     take: "Chapter one is cool and green-blue. A title card announces it, which means the palette change is a stated event rather than a drift.",
-    visual: <Season cls="tex-winter" name="Winter" hex="#4E7F8C" note="4.14:1 — large text and fills" />,
+    visual: <Season cls="tex-winter" name="Winter" hex="#4E7F8C" note={`${RATIO("#4e7f8c")} — large text and fills`} />,
   },
   {
     kind: "COLOUR",
     title: "Spring",
-    take: "Pastel pink against the same dark field. The lightest of the four, and the only one that can carry small text at 9.51:1.",
-    visual: <Season cls="tex-spring" name="Spring" hex="#E7A9C4" note="9.51:1 — may carry text" />,
+    take: `Pastel pink against the same dark field. The lightest of the four, and the only one that can carry small text at ${RATIO("#e7a9c4")}.`,
+    visual: <Season cls="tex-spring" name="Spring" hex="#E7A9C4" note={`${RATIO("#e7a9c4")} — may carry text`} />,
   },
   {
     kind: "COLOUR",
     title: "Summer",
     take: "The season where the chapter colour and the accent are the same amber. That collision is the point: summer is when the film is at its most lit.",
-    visual: <Season cls="tex-summer" name="Summer" hex="#F2B544" note="10.03:1 — the accent itself" />,
+    visual: <Season cls="tex-summer" name="Summer" hex="#F2B544" note={`${RATIO("#f2b544")} — the accent itself`} />,
   },
   {
     kind: "COLOUR",
     title: "Fall",
     take: "Drained, brick-brown, the lowest-contrast of the four. The system uses it for anything historical or superseded.",
-    visual: <Season cls="tex-fall" name="Fall" hex="#B5705A" note="4.75:1 — may carry large text" />,
+    visual: <Season cls="tex-fall" name="Fall" hex="#B5705A" note={`${RATIO("#b5705a")} — may carry large text`} />,
   },
   {
     kind: "COLOUR",
     title: "Lamp amber, and why the text is cream",
-    take: "The accent reads 10.03:1 on the page. Pure white would read 17.8:1 and look like a screen; the cream reads 16.3:1 and looks like light. Both pass, so the choice is about the mood, not the maths.",
+    take: `The accent reads ${RATIO("#f2b544")} on the page. Pure white would read ${RATIO("#ffffff")} and look like a screen; the cream reads ${RATIO("#f7f0e8")} and looks like light. Both pass, so the choice is about the mood, not the maths.`,
     visual: (
       <div className="grid h-full grid-cols-3">
         <div className="flex flex-col items-center justify-center bg-lll-bg">
@@ -436,7 +444,7 @@ const ARTIFACTS: Artifact[] = [
     visual: (
       <div className="grid h-full grid-cols-3">
         <Chip hex="#7a7a7a" name="grey" note="never used" tone="dark" />
-        <Chip hex="#b3a8d2" name="muted" note="8.26:1" tone="dark" />
+        <Chip hex="#b3a8d2" name="muted" note={RATIO("#b3a8d2")} tone="dark" />
         <Chip hex="#3f3074" name="border" note="1.65:1" tone="dark" />
       </div>
     ),
@@ -624,11 +632,11 @@ export default function Page() {
       sourcing="No stills and no stock photography. Every scene is redrawn in SVG from the film's staging, and every gradient and texture is CSS, so the board carries no licence and ships inside the repo. Figures quoted are the real 2011 Census figures."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Amber #F2B544 at 10.03:1. The only light source in the system: primary action, current item, focus ring." },
+        { label: "Accent", detail: `Amber #F2B544 at ${RATIO("#f2b544")}. The only light source in the system: primary action, current item, focus ring.` },
         { label: "Background", detail: "A five-stop magic-hour gradient with a magenta band, not a two-stop fade. The single biggest correction on this board." },
         { label: "Chapters", detail: "Four seasonal colours for sections, announced rather than drifted into. None of them is ever a control." },
         { label: "Flare", detail: "A 1.5px cyan streak across the primary action on hover and focus, from artifact 19. The one hard edge in the system." },
-        { label: "Separation", detail: "Glow and distance. The border role is the least-used colour here, which is the opposite of Hokusai." },
+        { label: "Separation", detail: `Glow and distance. The border role reads ${RATIO("#3f3074")} and is the least-used colour here, which is the opposite of Hokusai.` },
         { label: "Second register", detail: "The epilogue's flat paint, used for anything static, so not every surface has to glow." },
       ]}
     />

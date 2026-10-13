@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { contrast } from "@/lib/contrast";
+import { PALETTES } from "@/lib/palette";
 import { BoardShell, Chip, Magnified, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
@@ -6,6 +8,12 @@ export const metadata: Metadata = {
   description:
     "Twenty-eight artifacts: aizuri-e prints, the keyblock line, bokashi gradients, washi grain and a great deal of empty paper.",
 };
+
+// Every ratio quoted on this page is computed from the token values at build
+// time. They were hard-coded once, the ground colour later changed, and the
+// page went on claiming numbers that were no longer true. Never again.
+const BG = PALETTES["hokusai"].background;
+const RATIO = (hex: string) => `${contrast(hex, BG).toFixed(2)}:1`;
 
 const skin: Skin = {
   page: "min-h-screen bg-hok-bg text-hok-ink font-hok-body tex-washi",
@@ -226,14 +234,14 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Prussian blue",
-    take: "Imported pigment, chemically stable, and the reason these prints look the way they do. It is the accent at 7.00:1, and the whole board is arranged so nothing competes with it.",
+    take: `Imported pigment, chemically stable, and the reason these prints look the way they do. It is the accent at ${RATIO("#1c4c86")}, and the whole board is arranged so nothing competes with it.`,
     visual: (
       <div className="relative h-full bg-hok-bg">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-20 w-20 border-[1.5px] border-hok-ink bg-hok-accent" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-hok-muted">
-          #1C4C86 · 7.00:1 ON #D9E0DC
+          {`#1C4C86 · ${RATIO("#1c4c86")} ON ${BG.toUpperCase()}`}
         </p>
       </div>
     ),
@@ -246,7 +254,7 @@ const ARTIFACTS: Artifact[] = [
       <div className="grid h-full grid-cols-3">
         <Chip hex="#d9e0dc" name="background" note="kozo paper" stripBg="#eef2ee" />
         <Chip hex="#eef2ee" name="surface" note="fresh sheet" stripBg="#eef2ee" />
-        <Chip hex="#aebcc8" name="border" note="1.53:1" stripBg="#eef2ee" />
+        <Chip hex="#aebcc8" name="border" note={RATIO("#aebcc8")} stripBg="#eef2ee" />
       </div>
     ),
   },
@@ -257,7 +265,7 @@ const ARTIFACTS: Artifact[] = [
     visual: (
       <div className="grid h-full grid-cols-2">
         <Chip hex="#000000" name="true black" note="never used" tone="dark" stripBg="#eef2ee" />
-        <Chip hex="#141e2e" name="sumi" note="13.54:1" tone="dark" stripBg="#eef2ee" />
+        <Chip hex="#141e2e" name="sumi" note={RATIO("#141e2e")} tone="dark" stripBg="#eef2ee" />
       </div>
     ),
   },
@@ -267,9 +275,9 @@ const ARTIFACTS: Artifact[] = [
     take: "One warm colour in an entirely cool set, used sparingly and always small. In the system it marks a figure that falls below its benchmark.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#b4452f" name="beni" note="4.46:1" tone="dark" stripBg="#eef2ee" />
-        <Chip hex="#6e8360" name="sage" note="3.37:1 fill" tone="dark" stripBg="#eef2ee" />
-        <Chip hex="#c08a3e" name="ochre" note="2.46:1 fill" stripBg="#eef2ee" />
+        <Chip hex="#b4452f" name="beni" note={RATIO("#b4452f")} tone="dark" stripBg="#eef2ee" />
+        <Chip hex="#6e8360" name="sage" note={`${RATIO("#6e8360")} fill`} tone="dark" stripBg="#eef2ee" />
+        <Chip hex="#c08a3e" name="ochre" note={`${RATIO("#c08a3e")} fill`} stripBg="#eef2ee" />
       </div>
     ),
   },
@@ -579,12 +587,12 @@ export default function Page() {
       sourcing="Every scene is drawn here in SVG after the compositions of the prints, and every texture is CSS, so nothing on the board is a scan or a reproduction. Figures quoted are the real 2011 Census figures."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Prussian blue #1C4C86 at 7.00:1. Primary action and current item only." },
+        { label: "Accent", detail: `Prussian blue #1C4C86 at ${RATIO("#1c4c86")}. Primary action and current item only.` },
         { label: "Separation", detail: "A 1.5px keyblock outline on every component. This system uses its line more than any other token, which is the opposite of La La Land." },
         { label: "Shape", detail: "One radius value, and the value is zero. A block print has no curve a knife could not cut." },
         { label: "Shadow", detail: "None at all. Depth comes from the outline, which is why hover changes the line colour rather than lifting anything." },
         { label: "Space", detail: "The scale jumps from 30px to 72px with nothing between, from artifact 05. The empty sheet is the composition." },
-        { label: "Rejected", detail: "Sage at 3.27:1 and ochre at 2.39:1, both measured, both confined to chart fills well away from text." },
+        { label: "Rejected", detail: `Sage at ${RATIO("#6e8360")} and ochre at ${RATIO("#c08a3e")}, both measured, both confined to chart fills well away from text.` },
       ]}
     />
   );

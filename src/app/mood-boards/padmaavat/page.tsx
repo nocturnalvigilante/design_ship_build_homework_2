@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { contrast } from "@/lib/contrast";
+import { PALETTES } from "@/lib/palette";
 import { BoardShell, Chip, type Artifact, type Skin } from "@/components/board";
 
 export const metadata: Metadata = {
@@ -6,6 +8,12 @@ export const metadata: Metadata = {
   description:
     "Twenty-eight artifacts: candlelight ivory, mirror work, jali shadow, and the cold green-black palette laid against it.",
 };
+
+// Every ratio quoted on this page is computed from the token values at build
+// time. They were hard-coded once, the ground colour later changed, and the
+// page went on claiming numbers that were no longer true. Never again.
+const BG = PALETTES["padmaavat"].background;
+const RATIO = (hex: string) => `${contrast(hex, BG).toFixed(2)}:1`;
 
 const skin: Skin = {
   page: "min-h-screen bg-pad-bg text-pad-ink font-pad-body",
@@ -302,14 +310,14 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Chittor crimson",
-    take: "The accent at 7.59:1 on the page. It marks the primary action and the open record, and the board spends the rest of its colour budget avoiding anything that competes with it.",
+    take: `The accent at ${RATIO("#8c1c21")} on the page. It marks the primary action and the open record, and the board spends the rest of its colour budget avoiding anything that competes with it.`,
     visual: (
       <div className="relative h-full bg-pad-bg">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="h-20 w-20 bg-pad-accent" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-pad-muted">
-          #8C1C21 · 7.59:1 ON #E8D3B4
+          {`#8C1C21 · ${RATIO("#8c1c21")} ON ${BG.toUpperCase()}`}
         </p>
       </div>
     ),
@@ -323,11 +331,11 @@ const ARTIFACTS: Artifact[] = [
   {
     kind: "COLOUR",
     title: "Gota gold, measured and refused",
-    take: "The obvious choice for a film this gilded, and it reads 3.89:1 on the page. That is below the bar for body text, so gold is demoted to ornament and rules.",
+    take: `The obvious choice for a film this gilded, and it reads ${RATIO("#9a6b1e")} on the page. That is below the bar for body text, so gold is demoted to ornament and rules.`,
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#9a6b1e" name="gota gold" note="3.89:1 ornament" tone="dark" stripBg="#fdf6e8" />
-        <Chip hex="#e0893a" name="flame" note="2.17:1 glow only" stripBg="#fdf6e8" />
+        <Chip hex="#9a6b1e" name="gota gold" note={`${RATIO("#9a6b1e")} ornament`} tone="dark" stripBg="#fdf6e8" />
+        <Chip hex="#e0893a" name="flame" note={`${RATIO("#e0893a")} glow only`} stripBg="#fdf6e8" />
       </div>
     ),
   },
@@ -642,12 +650,12 @@ export default function Page() {
       sourcing="Nothing here is a film still or a photograph. Every scene, texture and specimen is drawn in SVG or built from CSS gradients, so the board carries no licence and renders identically on any checkout. Where a figure appears it is the real 2011 Census figure."
       artifacts={ARTIFACTS}
       crossed={[
-        { label: "Accent", detail: "Chittor crimson #8C1C21 at 7.59:1 on the page. Primary action and open record only." },
+        { label: "Accent", detail: `Chittor crimson #8C1C21 at ${RATIO("#8c1c21")} on the page. Primary action and open record only.` },
         { label: "Second palette", detail: "The Khilji greens, used for anything below its benchmark. It is why this system needs no separate error colour." },
         { label: "Shape", detail: "The foliated arch is reserved for what opens. Anything holding a number is square, so precision keeps looking like precision." },
         { label: "Rule", detail: "Section dividers are a 10px inlay repeat, from artifact 20, never a plain line." },
         { label: "Shadow", detail: "One source from above, a single pixel of highlight, from the mirror work in artifact 19." },
-        { label: "Rejected", detail: "Gota gold as the accent at 3.89:1, and the flame orange at 2.17:1. Both measured, both demoted to ornament." },
+        { label: "Rejected", detail: `Gota gold as the accent at ${RATIO("#9a6b1e")}, and the flame orange at ${RATIO("#e0893a")}. Both measured, both demoted to ornament.` },
       ]}
     />
   );
