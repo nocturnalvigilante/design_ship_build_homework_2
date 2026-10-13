@@ -246,6 +246,10 @@ export default function Home() {
                 "The first La La Land board was amber on navy, which is the poster and not the film; it was rebuilt around the four seasonal palettes, the magenta magic-hour band and the anamorphic flare. The site was also scoped to one state at first, which threw away most of the dataset, so it was rebuilt on all 640 districts.",
               ],
               [
+                "How it was checked",
+                "The brief suggests Playwright MCP or the Claude in Chrome extension. I used neither: I drove real Chrome over the Chrome DevTools Protocol, which is the same channel Playwright uses to control Chrome. Same browser, same clicks, one layer lower, chosen so the checks could assert on composited contrast ratios and layout overflow rather than only take screenshots. Several of the bugs it caught are invisible in a screenshot.",
+              ],
+              [
                 "What is deliberately missing",
                 "No stock photography, no film stills, no icon font, no chart library, no component library. Every pixel on these eight pages is drawn here. Four colours were measured, failed their contrast threshold and were cut or demoted, and each one is recorded on its board as cut.",
               ],
