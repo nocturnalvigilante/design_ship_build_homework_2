@@ -7,6 +7,7 @@ import { TOKENS } from "@/lib/tokens";
 import { PALETTES, SECONDARY } from "@/lib/palette";
 import { contrast, grade } from "@/lib/contrast";
 import { DISTRICTS, METRICS, METRIC_BY_KEY } from "@/lib/census";
+import { PadChrome, PadRule, HokChrome } from "@/components/chrome";
 
 /* ---------------------------------------------------------------------------
    One page shell for all three design systems.
@@ -67,15 +68,18 @@ function Section({
   n,
   title,
   sub,
+  ornate,
   children,
 }: {
   n: number;
   title: string;
   sub: ReactNode;
+  ornate?: boolean;
   children: ReactNode;
 }) {
   return (
     <section className="ds-sec mt-14 scroll-mt-6" id={`s${n}`}>
+      {ornate && <PadRule />}
       <H2 n={n}>{title}</H2>
       <Sub>{sub}</Sub>
       <div className="mt-7">{children}</div>
@@ -172,8 +176,10 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
     setChips((x) => (x.includes(c) ? x.filter((y) => y !== c) : [...x, c]));
 
   return (
-    <div className={`${SKIN[mood]} min-h-screen`} data-hydrated={ready ? "true" : "false"}>
-      <div className="ds-shell mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16">
+    <div className={`${SKIN[mood]} relative min-h-screen`} data-hydrated={ready ? "true" : "false"}>
+      {mood === "padmaavat" && <PadChrome />}
+      {mood === "hokusai" && <HokChrome />}
+      <div className="ds-shell relative z-10 mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 sm:py-16">
         <Link href="/" className="lnk ds-cap">
           &larr; Back to the hub
         </Link>
@@ -198,6 +204,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* ------------------------------------------------ 01 colour roles */}
         <Section
           n={1}
+          ornate={mood === "padmaavat" && 1 > 1}
           title="Colour roles"
           sub={
             <>
@@ -309,6 +316,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* -------------------------------------------------- 02 type roles */}
         <Section
           n={2}
+          ornate={mood === "padmaavat" && 2 > 1}
           title="Type roles"
           sub={
             <>
@@ -356,6 +364,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* -------------------------------------------- 03 spacing and shape */}
         <Section
           n={3}
+          ornate={mood === "padmaavat" && 3 > 1}
           title="Spacing and shape"
           sub={
             <>
@@ -445,6 +454,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* -------------------------------------------- 04 what a state means */}
         <Section
           n={4}
+          ornate={mood === "padmaavat" && 4 > 1}
           title="What each state means"
           sub={
             <>
@@ -467,6 +477,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* ------------------------------------------------- 05 components */}
         <Section
           n={5}
+          ornate={mood === "padmaavat" && 5 > 1}
           title="Components"
           sub={
             <>
@@ -850,6 +861,7 @@ export default function DesignSystemPage({ mood }: { mood: MoodId }) {
         {/* -------------------------------------------------- 06 UI states */}
         <Section
           n={6}
+          ornate={mood === "padmaavat" && 6 > 1}
           title="The four UI states"
           sub={
             <>

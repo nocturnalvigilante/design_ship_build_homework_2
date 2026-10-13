@@ -9,10 +9,8 @@
    =========================================================================== */
 
 .site {
-  background-image:
-    radial-gradient(120% 70% at 50% 0%, #fff8ea 0%, transparent 52%),
-    radial-gradient(90% 60% at 8% 100%, #ead5b1 0%, transparent 58%);
-  background-attachment: fixed;
+  /* The lamp and the block-print ground are drawn by PadChrome, so the page
+     itself only needs to be the right colour under them. */
   min-height: 100vh;
 }
 

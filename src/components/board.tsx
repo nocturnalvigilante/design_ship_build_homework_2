@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { MOODS, type MoodId } from "@/lib/moods";
 import { TOKENS } from "@/lib/tokens";
 import { ROLE_ORDER } from "@/lib/palette";
+import { PadChrome, PadHero, PadRule, HokChrome } from "@/components/chrome";
 
 // Shared scaffolding for the three mood boards. The shell is identical so the
 // three are comparable; every visible surface is styled by the `skin` the page
@@ -92,26 +93,53 @@ export function BoardShell({
   children?: ReactNode;
 }) {
   const used = KINDS.filter((k) => artifacts.some((a) => a.kind === k.kind));
+  const titleBlock = (
+    <>
+      <p className={skin.eyebrow}>Mood board {subtitle}</p>
+      <h1 className={`mt-3 ${skin.title}`}>{name}</h1>
+    </>
+  );
+
+  const bodyBlock = (
+    <header className="ds-head mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14">
+      <div className="max-w-[62ch]">
+        {mood !== "padmaavat" && titleBlock}
+        <div className={`${mood === "padmaavat" ? "" : "mt-5"} ${skin.lede}`}>{lede}</div>
+        <p className={`mt-5 max-w-[58ch] ${skin.small}`}>{sourcing}</p>
+      </div>
+      <Glance mood={mood} skin={skin} count={artifacts.length} />
+    </header>
+  );
+
   return (
-    <div className={skin.page}>
-      <div className={`ds-shell mx-auto w-full max-w-[1180px] px-5 py-12 sm:px-8 sm:py-16 ${skin.shell ?? ""}`}>
+    <div className={`relative ${skin.page}`}>
+      {mood === "padmaavat" && <PadChrome />}
+      {mood === "hokusai" && <HokChrome />}
+      <div className={`ds-shell relative z-10 mx-auto w-full max-w-[1180px] px-5 py-12 sm:px-8 sm:py-16 ${skin.shell ?? ""}`}>
         <Link href="/" className={skin.back}>
           &larr; Back to the hub
         </Link>
 
-        <header className="ds-head mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14">
-          <div className="max-w-[62ch]">
-            <p className={skin.eyebrow}>Mood board {subtitle}</p>
-            <h1 className={`mt-3 ${skin.title}`}>{name}</h1>
-            <div className={`mt-5 ${skin.lede}`}>{lede}</div>
-            <p className={`mt-5 max-w-[58ch] ${skin.small}`}>{sourcing}</p>
+        {mood === "padmaavat" ? (
+          <div className="mt-7">
+            <PadHero>
+              {/* A lit cartouche over the painted scene, which is both how a
+                  folio carries its title and the only way the type is
+                  guaranteed its contrast over a gradient. */}
+              <div className="flex min-h-[230px] items-end justify-center px-4 pb-7 pt-24 sm:min-h-[300px] sm:pb-10 sm:pt-32">
+                <div className="pad-cartouche max-w-[34rem] px-6 py-5 text-center sm:px-10 sm:py-7">
+                  {titleBlock}
+                </div>
+              </div>
+            </PadHero>
           </div>
-          <Glance mood={mood} skin={skin} count={artifacts.length} />
-        </header>
+        ) : null}
+
+        {bodyBlock}
 
         {children}
 
-        <hr className={`my-12 ${skin.rule}`} />
+        {mood === "padmaavat" ? <PadRule /> : <hr className={`my-12 ${skin.rule}`} />}
 
         <section>
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
@@ -145,7 +173,7 @@ export function BoardShell({
           </ol>
         </section>
 
-        <hr className={`my-12 ${skin.rule}`} />
+        {mood === "padmaavat" ? <PadRule /> : <hr className={`my-12 ${skin.rule}`} />}
 
         <section>
           <h2 className={skin.sectionTitle}>What crossed into the design system</h2>
@@ -177,8 +205,14 @@ export function BoardShell({
 function Glance({ mood, skin, count }: { mood: MoodId; skin: Skin; count: number }) {
   const m = MOODS[mood];
   const t = TOKENS[mood];
+  const panel =
+    mood === "padmaavat"
+      ? "border border-pad-line bg-pad-surface/85 p-5 shadow-[0_1px_0_#d9be92]"
+      : mood === "hokusai"
+        ? "border-[1.5px] border-hok-ink bg-hok-surface/85 p-5"
+        : "";
   return (
-    <aside className="lg:pt-10">
+    <aside className={`lg:mt-10 ${panel}`}>
       <p className={skin.tag}>At a glance</p>
       <div className="mt-3 flex overflow-hidden" aria-hidden>
         {ROLE_ORDER.map((r) => (

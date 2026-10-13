@@ -190,7 +190,7 @@ export default function Home() {
               <div
                 className="hidden min-h-[190px] md:block"
                 style={{
-                  backgroundColor: "#f4e9d6",
+                  backgroundColor: "#e8d3b4",
                   backgroundImage:
                     "radial-gradient(120% 80% at 50% 0%, #fff8ea 0%, transparent 56%)",
                 }}

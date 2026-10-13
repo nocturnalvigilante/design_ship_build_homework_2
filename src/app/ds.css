@@ -23,15 +23,15 @@
 
 /* ------------------------------------------------------- skin: 01 Padmaavat */
 .ds-pad {
-  --bg: #f4e9d6;
-  --surface: #fffaf0;
+  --bg: #e8d3b4;
+  --surface: #fdf6e8;
   --ink: #221410;
   --muted: #6a4a35;
   --line: #d9be92;
   --accent: #8c1c21;
   --accent-hi: #6d1317;
-  --accent-ink: #fffaf0;
-  --sunk: #ebdcc2;
+  --accent-ink: #fdf6e8;
+  --sunk: #dfc6a0;
   --cold: #1c2a22;
   --ok: #41523f;
   --r: 2px;
@@ -61,15 +61,15 @@
 }
 /* --------------------------------------------------------- skin: 03 Hokusai */
 .ds-hok {
-  --bg: #e5e8e4;
-  --surface: #f2f4f0;
+  --bg: #d9e0dc;
+  --surface: #eef2ee;
   --ink: #141e2e;
   --muted: #44576f;
   --line: #aebcc8;
   --accent: #1c4c86;
   --accent-hi: #12325a;
-  --accent-ink: #f2f4f0;
-  --sunk: #d7dcd6;
+  --accent-ink: #eef2ee;
+  --sunk: #cad3cd;
   --cold: #b4452f;
   --ok: #6e8360;
   --r: 0px;
@@ -463,15 +463,11 @@
 /* Padmaavat is symmetric, after the durbar: the title sits on the axis and
    the reading column is centred under it, but the prose stays left-aligned. */
 .ds-pad .ds-shell { max-width: 1060px; }
-.ds-pad .ds-head, .skin-pad .ds-head { text-align: center; }
-.ds-pad .ds-head > p, .ds-pad .ds-head > div,
-.skin-pad .ds-head > div > p, .skin-pad .ds-head > div > div { margin-left: auto; margin-right: auto; }
+.ds-pad .ds-head { text-align: center; }
+.ds-pad .ds-head > p, .ds-pad .ds-head > div { margin-left: auto; margin-right: auto; }
 .ds-pad .ds-head .ds-lede, .ds-pad .ds-head .ds-sub { text-align: left; }
 .ds-pad .ds-head nav { justify-content: center; }
 .ds-pad .ds-sec { margin-top: 40px; }
-.skin-pad .ds-head { text-align: left; }
-.skin-pad .ds-head > div:first-child { text-align: center; }
-.skin-pad .ds-head > div:first-child > div, .skin-pad .ds-head > div:first-child > p.mt-5 { text-align: left; }
 
 /* La La Land needs the air its own spacing scale asks for: 96px at the page
    edge, 88px between sections. */
@@ -489,3 +485,8 @@
     padding-right: 40px;
   }
 }
+
+/* The Hokusai pages pad themselves clear of the sky band at the top and the
+   water at the foot, so no line of text is ever read through the drawing. */
+.ds-hok .ds-shell, .skin-hok { padding-top: 210px; padding-bottom: 150px; }
+@media (min-width: 640px) { .ds-hok .ds-shell, .skin-hok { padding-top: 272px; padding-bottom: 170px; } }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const skin: Skin = {
-  page: "min-h-screen bg-pad-bg text-pad-ink font-pad-body tex-lamp",
+  page: "min-h-screen bg-pad-bg text-pad-ink font-pad-body",
   back:
     "inline-block font-pad-display text-[11px] font-semibold uppercase tracking-[0.16em] text-pad-muted underline decoration-pad-line decoration-2 underline-offset-4 hover:text-pad-accent hover:decoration-pad-accent",
   eyebrow:
@@ -228,7 +228,7 @@ function Durbar() {
   );
 }
 
-function TypeCard({ children, bg = "#f4e9d6" }: { children: React.ReactNode; bg?: string }) {
+function TypeCard({ children, bg = "#e8d3b4" }: { children: React.ReactNode; bg?: string }) {
   return (
     <div className="flex h-full w-full flex-col justify-center px-4" style={{ background: bg }}>
       {children}
@@ -282,9 +282,9 @@ const ARTIFACTS: Artifact[] = [
     take: "Ivory, sandstone and one crimson. These are the three lightest roles and they are warm, never white, so true white can mean 'this is a panel'.",
     visual: (
       <div className="grid h-full grid-cols-3">
-        <Chip hex="#f4e9d6" name="background" note="the hall" stripBg="#fffaf0" />
-        <Chip hex="#fffaf0" name="surface" note="a lit panel" stripBg="#fffaf0" />
-        <Chip hex="#d9be92" name="border" note="sandstone" stripBg="#fffaf0" />
+        <Chip hex="#e8d3b4" name="background" note="the hall" stripBg="#fdf6e8" />
+        <Chip hex="#fdf6e8" name="surface" note="a lit panel" stripBg="#fdf6e8" />
+        <Chip hex="#d9be92" name="border" note="sandstone" stripBg="#fdf6e8" />
       </div>
     ),
   },
@@ -294,8 +294,8 @@ const ARTIFACTS: Artifact[] = [
     take: "The opposing palette, and the single most useful thing on this board: it gives the system a built-in way to say 'this figure falls short' without inventing a new colour.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#1c2a22" name="green-black" note="below bench." tone="dark" stripBg="#fffaf0" />
-        <Chip hex="#41523f" name="moss" note="second series" tone="dark" stripBg="#fffaf0" />
+        <Chip hex="#1c2a22" name="green-black" note="below bench." tone="dark" stripBg="#fdf6e8" />
+        <Chip hex="#41523f" name="moss" note="second series" tone="dark" stripBg="#fdf6e8" />
       </div>
     ),
   },
@@ -309,7 +309,7 @@ const ARTIFACTS: Artifact[] = [
           <div className="h-20 w-20 bg-pad-accent" />
         </div>
         <p className="absolute bottom-2 left-0 right-0 text-center font-mono text-[10px] tracking-widest text-pad-muted">
-          #8C1C21 · 7.59:1 ON #F4E9D6
+          #8C1C21 · 7.59:1 ON #E8D3B4
         </p>
       </div>
     ),
@@ -326,8 +326,8 @@ const ARTIFACTS: Artifact[] = [
     take: "The obvious choice for a film this gilded, and it reads 3.89:1 on the page. That is below the bar for body text, so gold is demoted to ornament and rules.",
     visual: (
       <div className="grid h-full grid-cols-2">
-        <Chip hex="#9a6b1e" name="gota gold" note="3.89:1 ornament" tone="dark" stripBg="#fffaf0" />
-        <Chip hex="#e0893a" name="flame" note="2.17:1 glow only" stripBg="#fffaf0" />
+        <Chip hex="#9a6b1e" name="gota gold" note="3.89:1 ornament" tone="dark" stripBg="#fdf6e8" />
+        <Chip hex="#e0893a" name="flame" note="2.17:1 glow only" stripBg="#fdf6e8" />
       </div>
     ),
   },
@@ -353,7 +353,7 @@ const ARTIFACTS: Artifact[] = [
     title: "Body: Cormorant Garamond",
     take: "High stroke contrast, a small x-height and a lot of air inside the letter. It is the only face here that can hold a paragraph without the page feeling heavy.",
     visual: (
-      <TypeCard bg="#fffaf0">
+      <TypeCard bg="#fdf6e8">
         <p className="font-pad-body text-[17px] leading-[1.6]">
           Of the 640 districts counted in 2011, Thane held the most people and
           Dibang Valley the fewest.

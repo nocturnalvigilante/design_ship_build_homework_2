@@ -17,8 +17,8 @@
   --color-hub-muted: #9c968c;
 
   /* 01 Padmaavat */
-  --color-pad-bg: #f4e9d6;
-  --color-pad-surface: #fffaf0;
+  --color-pad-bg: #e8d3b4;
+  --color-pad-surface: #fdf6e8;
   --color-pad-ink: #221410;
   --color-pad-muted: #6a4a35;
   --color-pad-line: #d9be92;
@@ -42,8 +42,8 @@
   --color-lll-flare: #6fd3f2;
 
   /* 03 Hokusai */
-  --color-hok-bg: #e5e8e4;
-  --color-hok-surface: #f2f4f0;
+  --color-hok-bg: #d9e0dc;
+  --color-hok-surface: #eef2ee;
   --color-hok-ink: #141e2e;
   --color-hok-muted: #44576f;
   --color-hok-line: #aebcc8;
@@ -167,7 +167,7 @@ summary:focus-visible, [tabindex]:focus-visible {
     repeating-linear-gradient(2deg, rgba(20,30,46,.09) 0 2px, transparent 2px 44px);
 }
 /* The one gradient this system allows: a wiped sky, dark at the top. */
-.tex-bokashi { background-image: linear-gradient(180deg, #1c4c86 0%, #6b93bd 42%, #c4cfdb 74%, #e5e8e4 100%); }
+.tex-bokashi { background-image: linear-gradient(180deg, #1c4c86 0%, #6b93bd 42%, #c4cfdb 74%, #d9e0dc 100%); }
 .tex-seigaiha {
   background-color: var(--color-hok-bg);
   background-image:
@@ -185,3 +185,73 @@ summary:focus-visible, [tabindex]:focus-visible {
 
 /* Forced-state helper shared by all three systems. */
 .is-disabled { opacity: .45; cursor: not-allowed; }
+
+/* ===========================================================================
+   Page ornament, used by src/components/chrome.tsx. Everything here sits
+   behind the content and is kept under about 8% ink, so no text ever reads
+   off a patterned area dark enough to move its contrast ratio.
+   =========================================================================== */
+
+/* -- 01 Padmaavat -- */
+/* A stamped block-print repeat: a rosette on a 78px grid with a smaller
+   bud offset between, the way a hand block alternates its two blocks. The
+   fine crosshatch the first version used read as graph paper. */
+.pad-print {
+  background-color: var(--color-pad-bg);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(140,28,33,.13) 0 4.5px, transparent 5.4px),
+    radial-gradient(circle at 50% 50%, transparent 0 9px, rgba(140,28,33,.09) 9px 10.5px, transparent 11px),
+    radial-gradient(circle at 0 0, rgba(30,58,95,.10) 0 3px, transparent 3.8px),
+    radial-gradient(circle at 100% 0, rgba(30,58,95,.10) 0 3px, transparent 3.8px),
+    radial-gradient(circle at 0 100%, rgba(30,58,95,.10) 0 3px, transparent 3.8px),
+    radial-gradient(circle at 100% 100%, rgba(30,58,95,.10) 0 3px, transparent 3.8px);
+  background-size: 78px 78px;
+}
+.pad-lamp {
+  background-image:
+    radial-gradient(90% 55% at 50% -6%, rgba(255,246,226,.85) 0%, transparent 62%),
+    radial-gradient(120% 90% at 50% 120%, rgba(74,44,34,.22) 0%, transparent 60%);
+}
+.pad-jali {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(34,20,16,.2) 0 1.6px, transparent 1.6px 21px),
+    repeating-linear-gradient(-45deg, rgba(34,20,16,.2) 0 1.6px, transparent 1.6px 21px),
+    radial-gradient(circle at 50% 50%, rgba(154,107,30,.3) 0 3px, transparent 3.8px);
+  background-size: auto, auto, 42px 42px;
+  mask-image: linear-gradient(90deg, #000 0%, #000 55%, transparent 100%);
+}
+.pad-jali:last-of-type { mask-image: linear-gradient(270deg, #000 0%, #000 55%, transparent 100%); }
+.pad-inlay-band {
+  background-image:
+    repeating-linear-gradient(45deg, var(--color-pad-gold) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, var(--color-pad-accent) 0 1px, transparent 1px 9px);
+  opacity: .55;
+}
+
+/* -- 03 Hokusai -- */
+.hok-asanoha {
+  background-image:
+    repeating-linear-gradient(60deg, rgba(28,76,134,.3) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(-60deg, rgba(28,76,134,.3) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(0deg, rgba(28,76,134,.3) 0 1px, transparent 1px 22px);
+  mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.35) 70%, transparent 100%);
+}
+.hok-seigaiha {
+  background-image:
+    radial-gradient(circle at 50% 100%, transparent 0 13px, rgba(28,76,134,.45) 13px 15px,
+      transparent 15px 23px, rgba(28,76,134,.45) 23px 25px, transparent 25px 33px,
+      rgba(28,76,134,.45) 33px 35px, transparent 35px);
+  background-size: 66px 33px;
+  mask-image: linear-gradient(0deg, #000 0%, transparent 100%);
+}
+
+/* The title cartouche over the Padmaavat hero. Opaque enough that the type
+   inside it is read against a known colour rather than against a gradient. */
+.pad-cartouche {
+  background: rgba(32,16,12,.82);
+  border: 1px solid rgba(154,107,30,.75);
+  box-shadow: inset 0 0 0 4px rgba(32,16,12,.82), inset 0 0 0 5px rgba(140,28,33,.55);
+}
+.pad-cartouche .font-pad-display,
+.pad-cartouche h1 { color: #fdf6e8; }
+.pad-cartouche p:first-child { color: #e8b964; }

@@ -17,8 +17,8 @@ export interface Palette {
 export const PALETTES: Record<MoodId, Palette> = {
   // Chittor by candlelight: ivory, sandstone, and one crimson.
   padmaavat: {
-    background: "#f4e9d6",
-    surface: "#fffaf0",
+    background: "#e8d3b4",
+    surface: "#fdf6e8",
     text: "#221410",
     muted: "#6a4a35",
     border: "#d9be92",
@@ -35,8 +35,8 @@ export const PALETTES: Record<MoodId, Palette> = {
   },
   // Aizuri-e: unbleached kozo paper, cool grey-green, and Prussian blue.
   hokusai: {
-    background: "#e5e8e4",
-    surface: "#f2f4f0",
+    background: "#d9e0dc",
+    surface: "#eef2ee",
     text: "#141e2e",
     muted: "#44576f",
     border: "#aebcc8",

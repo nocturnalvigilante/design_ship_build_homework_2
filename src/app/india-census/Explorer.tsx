@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { PadChrome, PadHero, PadRule } from "@/components/chrome";
 import {
   DISTRICTS,
   STATES,
@@ -104,21 +105,31 @@ export default function Explorer() {
   };
 
   return (
-    <div className="ds ds-pad site" data-hydrated={ready ? "true" : "false"}>
+    <div className="ds ds-pad site relative" data-hydrated={ready ? "true" : "false"}>
+      <PadChrome />
       {/* ------------------------------------------------------- masthead */}
-      <header className="mast">
-        <div className="mx-auto w-full max-w-[1220px] px-5 py-10 sm:px-8 sm:py-14">
+      <header className="mast relative z-10">
+        <div className="mx-auto w-full max-w-[1220px] px-5 pt-10 sm:px-8 sm:pt-12">
           <Link href="/" className="lnk t-small">
             &larr; Back to the hub
           </Link>
+        </div>
 
-          <div className="mt-7 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-end">
+        <div className="mx-auto mt-6 w-full max-w-[1220px] px-5 sm:px-8">
+          <PadHero>
+            <div className="flex min-h-[230px] items-end justify-center px-4 pb-7 pt-24 sm:min-h-[290px] sm:pb-10 sm:pt-32">
+              <div className="pad-cartouche max-w-[34rem] px-6 py-5 text-center sm:px-10 sm:py-7">
+                <p className="t-label">Census of India &middot; 2011</p>
+                <h1 className="t-display mt-2">India, district by district</h1>
+              </div>
+            </div>
+          </PadHero>
+        </div>
+
+        <div className="mx-auto w-full max-w-[1220px] px-5 pb-10 pt-8 sm:px-8 sm:pb-14">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-end">
             <div>
-              <p className="t-label" style={{ color: "var(--accent)" }}>
-                Census of India &middot; 2011
-              </p>
-              <h1 className="t-display mt-2">India, district by district</h1>
-              <p className="t-body mt-4 max-w-[64ch]">
+              <p className="t-body max-w-[64ch]">
                 Every one of the {DISTRICTS.length} districts counted in 2011,
                 across the {STATES.length} states and union territories that
                 existed then. Choose a state, choose what you want to measure,
@@ -146,7 +157,7 @@ export default function Explorer() {
       </header>
 
       {/* ------------------------------------------------------- controls */}
-      <section className="controls" aria-label="Filter and sort">
+      <section className="controls relative z-10" aria-label="Filter and sort">
         <div className="mx-auto w-full max-w-[1220px] px-5 py-4 sm:px-8">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[260px_280px_minmax(0,1fr)] lg:items-start">
             <label className="block">
@@ -247,7 +258,7 @@ export default function Explorer() {
       </section>
 
       {/* --------------------------------------------------------- results */}
-      <main className="mx-auto w-full max-w-[1220px] px-5 pb-24 pt-8 sm:px-8">
+      <main className="relative z-10 mx-auto w-full max-w-[1220px] px-5 pb-24 pt-8 sm:px-8">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
           <div>
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">

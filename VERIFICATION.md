@@ -211,6 +211,42 @@ Found by looking at the rendered boards, which is the part no script did:
    row. The caption strip is now a fixed height and the notes were shortened to
    fit it.
 
+## The pages were too plain, and that was a decision, not a constraint
+
+The first build put all the ornament inside the artifact cards and left the
+pages themselves flat fields of one colour, which made two of the three look
+empty beside La La Land's dusk gradient. Nothing forced that; it was a
+conservative call and it undersold both.
+
+What the two light systems have now, all drawn and all inert:
+
+- **Chittor and Khilji** is on a deeper sandstone (`#E8D3B4`) carrying a
+  hand-block repeat on a 78px grid, framed by a double gold rule with a cut
+  rosette at each corner, with jali screens down both margins on a wide screen
+  and lamplight falling from the top of the page. Its hero is a drawn dusk over
+  the fort and the lake, with the title in a lit cartouche on top of it.
+  Sections are divided by an inlay band with a rosette at its centre.
+- **Prussian Blue on Mulberry Paper** opens on a wiped bokashi sky with Fuji
+  and a breaking wave in it, runs a hemp-leaf ground down the left margin with
+  a second wave in it, and closes on a band of seigaiha water at the foot.
+
+Two rules kept the ornament from costing anything:
+
+1. **No text is ever read through a drawing.** The Hokusai pages pad themselves
+   clear of the sky band and the water, and the ornament that remains lives in
+   the margin the asymmetric layout already leaves empty. The title over the
+   Padmaavat hero sits in an opaque cartouche, which is both how a folio
+   carries its title and the only way type over a gradient can be given a
+   ratio: measured at 11.38:1 for the title and 6.74:1 for the eyebrow against
+   the lightest part of the sky behind it.
+2. **Patterned ground stays under about 8% ink**, and anything carrying a
+   figure sits on a surface panel rather than on the pattern.
+
+The probe cannot see this class of problem, because it resolves a background by
+walking the DOM and the ornament is a sibling layer rather than an ancestor. It
+was caught by looking: the first pass had Fuji behind the summary block and a
+wave behind the page title.
+
 ## Data checks
 
 The dataset was validated before anything was built on it:
